@@ -5,7 +5,7 @@ namespace TwentyOneCardGame
     /// <summary>
     /// A Card struct with suit, rank and changeble Ace-value.
     /// </summary>
-    struct Card
+    public struct Card
     {
         int? _aceValue;
         public readonly Suit Suit;

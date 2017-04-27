@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace TwentyOneCardGame
 {
@@ -12,31 +13,35 @@ namespace TwentyOneCardGame
         /// </summary>
         public static void Run()
         {
-            Card card = new Card(Suit.Clubs, Rank.Jack);
-            Card card2 = new Card(Suit.Diamonds, Rank.Ace);
-            card2.AceValue = 1;
-            Card[] array = {card, card2};
 
             try
             {
-                Console.WriteLine("Hi! Yes it works.");
-                Console.WriteLine(card);
-                Console.WriteLine(card2);
-                Console.WriteLine("comparing");
-                Console.WriteLine(card.CompareTo(card2));
-                Console.WriteLine(card.Equals(card2));
-                Card[] array2 = (Card[])array.Clone();
-                Console.WriteLine("comparing acevalues");
-                Console.WriteLine(array[1].AceValue);
-                Console.WriteLine(array2[1].AceValue);
-                Console.WriteLine(array[1].Equals(array2[1]));
-                Console.WriteLine("change acevalue");
-                array[1].AceValue = 14;
-                Console.WriteLine("comparing acevalues");
-                Console.WriteLine(array[1].AceValue);
-                Console.WriteLine(array2[1].AceValue);
-                Console.WriteLine(array[1].Equals(array2[1]));
-                
+                List<Card> hand = new List<Card>();
+                List<Card> badHand = new List<Card>();
+                Deck deck = new Deck();
+                Card card = new Card(Suit.Clubs, Rank.Ace);
+                badHand.Add(card);
+
+
+
+                Console.WriteLine(deck);
+                deck.Shuffle();
+                Console.WriteLine(deck);
+                hand.Add(deck.Deal());
+                hand.Add(deck.Deal());
+                hand.Add(deck.Deal());
+                hand.Add(deck.Deal());
+                hand.Add(deck.Deal());
+                Console.WriteLine(deck);
+                foreach(Card c in hand)
+                {
+                    Console.Write(c);
+                }
+                Console.WriteLine();
+                deck.ReturnToDeck(hand);
+                deck.Shuffle();
+                Console.WriteLine(deck);
+                deck.ReturnToDeck(badHand);
             }
             catch(Exception e)
             {
