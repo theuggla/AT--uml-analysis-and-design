@@ -5,12 +5,15 @@ namespace TwentyOneCardGame
     /// <summary>
     /// A Card struct with suit, rank and changeble Ace-value.
     /// </summary>
-    public struct Card : IModifiableAceValue
+    public struct Card : IModifiableAceValue, IEquatable<Card>
     {
         private int? _aceValue;
         public readonly Suit Suit;
         public readonly Rank Rank;
 
+        /// <summary>
+        /// Returns the value of the card.
+        /// </summary>
         public int Value 
         {
             get
@@ -79,27 +82,20 @@ namespace TwentyOneCardGame
         ///<returns>Rank and suit as a string.</returns>
         public override string ToString()
         {
-            string rank = (int)this.Rank > 10 ? this.Rank.ToString() : ((int)this.Rank).ToString();
+            string rank = (int)this.Rank > 10 ? this.Rank.ToString()[0].ToString() : ((int)this.Rank).ToString();
             char suit = (char)this.Suit;
 
-            return $"{rank[0]}{suit}";
+            return $"{rank}{suit}";
         }
 
         ///<summary>
-        ///Checks if this card equals another object.
+        ///Checks if this card equals another card.
         ///</summary>
-        ///<param name="obj"> The object to compare to.</param>
-        ///<returns>True if the other object is a Card with the same suit, rank and acevalue.</returns>
-        public override bool Equals(object obj)
-        {
-             if (obj.GetType().Equals(typeof(Card)))
-             {
-                 Card other = (Card) obj;
-                 
-                 return this.Rank == other.Rank && this.AceValue == other.AceValue && this.Suit == other.Suit;
-             }
-             
-             return false;
+        ///<param name="card"> The card to compare to.</param>
+        ///<returns>True if the other card has the same suit and rank.</returns>
+        public bool Equals(Card card)
+        {    
+            return this.Rank == card.Rank && this.Suit == card.Suit;
         }
     }
 }

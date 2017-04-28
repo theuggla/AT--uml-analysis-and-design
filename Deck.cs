@@ -15,6 +15,18 @@ namespace TwentyOneCardGame
         private Stack<Card> _unusedCards = new Stack<Card>();
 
         /// <summary>
+        /// How many unused cards are left in the deck.
+        /// </summary>
+        /// <returns>The number of unused cards left.</returns>
+        public int CardsLeft
+        {
+            get
+            {
+                return this._unusedCards.Count();
+            }
+        }
+
+        /// <summary>
         /// Initates a Deck with 52 cards.
         /// </summary>
         public Deck()
@@ -110,7 +122,7 @@ namespace TwentyOneCardGame
                         this._usedCards.Add(card);
                     }
                     else
-                    {
+                    {   
                         throw new InvalidOperationException("Trying to return cards that are already in the deck.");
                     }
                 }

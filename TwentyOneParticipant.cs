@@ -94,6 +94,28 @@ namespace TwentyOneCardGame
         }
 
         /// <summary>
+        /// Adds a Card to the hand.
+        /// </summary>
+        /// <returns>This.</returns>
+        public TwentyOneParticipant AddToHand(Card card)
+        {
+            this._hand.Add(card);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Resets the participant by emptying the hand.
+        /// </summary>
+        /// <returns>This.</returns>
+        public virtual TwentyOneParticipant Reset()
+        {
+            this._hand.Clear();
+
+            return this;
+        }
+
+        /// <summary>
         /// A string representation of the participant.
         /// </summary>
         /// <returns>The participant's name, hand and points.</returns>
@@ -105,7 +127,7 @@ namespace TwentyOneCardGame
                     .Select(x => x.ToString())
                     .ToArray());
 
-            string busted = this.InPlay ? "" : "BUSTED!";
+            string busted = this.Points < 22 ? "" : "BUSTED!";
 
             return $"{this.Name}: {hand} ({this.Points}) {busted}";
         }
@@ -135,7 +157,7 @@ namespace TwentyOneCardGame
                 {
                     card.AceValue = 1;
                     this._hand.RemoveAt(i);
-                    this._hand.Add(card);
+                    this._hand.Insert(i, card);
                 }
             }
         
