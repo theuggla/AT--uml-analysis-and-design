@@ -87,6 +87,7 @@ namespace TwentyOneCardGame
         /// Plays a turn.
         /// </summary>
         /// <param name="deck">The deck to play the turn with.</param>
+        /// <returns>True if the player wins the round on this turn.</returns>
         public virtual bool PlayTurn(Deck deck)
         {
             while (this.RequestCard() && !(this.IsWinner())) 
