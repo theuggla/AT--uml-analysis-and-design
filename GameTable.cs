@@ -14,17 +14,6 @@ namespace TwentyOneCardGame
         private Deck _deck;
 
         /// <summary>
-        /// Returns a string-representation of the dealer's hand at any given moment.
-        /// </summary>
-        public string DealerHand
-        {
-            get
-            {
-                return $"{this._dealer}";
-            }
-        }
-
-        /// <summary>
         /// Initiates the table with a dealer and a deck.
         /// </summary>
         public GameTable()
@@ -44,7 +33,7 @@ namespace TwentyOneCardGame
             {
                 if (this._deck.CardsLeft == 1)
                 {
-                    this.ReshuffleDeck();
+                    this._deck.Shuffle();
                 }
                     
                 players.ElementAt(i).AddToHand((Card)this._deck.Deal());
@@ -57,11 +46,10 @@ namespace TwentyOneCardGame
         /// Plays a round with a player and the dealer.
         /// </summary>
         /// <param name="player">The player to play the round with.</param>
-        /// <returns>The winner's name.</returns>
+        /// <returns>A strinf representation of the round's result.</returns>
         public string PlayRound(Player player)
         {
-            // Make sure the dealer's and the player's hands are empty and reset the dealers limit.
-            this._dealer.Reset();
+            string result;
             string winner;
 
             if (this.WinsTurn(player))
@@ -86,13 +74,20 @@ namespace TwentyOneCardGame
                 }
             }
 
-            // Return cards to used-pile.
-            this._usedCards = this._usedCards
-            .Concat(player.Hand)
-            .Concat(this._dealer.Hand)
-            .ToList();
+            // Record result.
+            result = $"{player} \n{this._dealer} \n{winner} won!";
 
-            return winner;
+            // Return cards to used-pile.
+            this._deck
+            .ReturnToDeck(player.Hand
+            .Concat(this._dealer.Hand)
+            .ToList());
+
+            // Settle turns.
+            player.SettleTurn(winner == player.Name);
+            this._dealer.SettleTurn((winner == this._dealer.Name));
+
+            return result;
         }
 
         /// <summary>
@@ -102,45 +97,7 @@ namespace TwentyOneCardGame
         /// <returns>Returns true if the provided participant wins the round with this turn.</returns>
         private bool WinsTurn(TwentyOneParticipant player)
         {
-            while (player.RequestCard() && !(this.IsWinner(player))) 
-            {
-                if (this._deck.CardsLeft == 1) 
-                {
-                    this.ReshuffleDeck();
-                }
-                
-                player.AddToHand((Card)this._deck.Deal());
-            }
-
-            return (this.IsWinner(player));    
-        }
-
-        /// <summary>
-        /// Checks if a participant has won the round.
-        /// </summary>
-        /// <param name="player">The player to check.</param>
-        private bool IsWinner(TwentyOneParticipant player)
-        {
-            if (player.GetType() == typeof(Player)) 
-            {
-                return (player.Points == 21) || (player.Hand.Count() == 5 && player.Points < 21);
-            } 
-            else
-            {
-                return ((player.Points <= 21 && player.Points >= player.Limit));
-            }
-        }
-
-        /// <summary>
-        /// Returns all the used cards to the deck and reshuffles.
-        /// </summary>
-        /// <returns>This.</returns>
-        private GameTable ReshuffleDeck()
-        {
-            this._deck.ReturnToDeck(this._usedCards);
-            this._deck.Shuffle();
-
-            return this;
+            return player.PlayTurn(this._deck);  
         }
     }
 }

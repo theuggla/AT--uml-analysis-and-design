@@ -1,5 +1,3 @@
-using System;
-
 namespace TwentyOneCardGame
 {
     /// <summary>
@@ -13,6 +11,23 @@ namespace TwentyOneCardGame
         public Dealer(string name = "The Dealer")
         :base(name)
         {}
+
+        /// <summary>
+        /// Checks if the dealer has won the round.
+        /// </summary>
+        protected override bool IsWinner()
+        {
+            return ((this.Points <= 21 && this.Points >= this.Limit));
+        }
+
+        /// <summary>
+        /// Reset the dealer after the turn.
+        /// </summary>
+        /// <param name="won">A boolean to indicade whether the turn was won.</param>
+        public override void SettleTurn(bool won)
+        {
+            this.Reset();
+        }
 
         /// <summary>
         /// Resets the participant by emptying the hand and setting the limit to 21.

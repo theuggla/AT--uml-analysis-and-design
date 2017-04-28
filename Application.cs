@@ -17,33 +17,15 @@ namespace TwentyOneCardGame
             try
             {
                 Player[] players = {
-                    new Player("Karlsson"), 
-                    new Player("Inte Karlsson"), 
-                    new Player("Karlsson #2"), 
-                    new Player("Karlsson #3"), 
-                    new Player("Karlsson #4"), 
-                    new Player("Karlsson #5"),
-                    new Player("Karlsson #6"), 
-                    new Player("Karlsson #7"), 
-                    new Player("Karlsson #8"), 
-                    new Player("Karlsson #9"),
-                    new Player("Karlsson #10"), 
-                    new Player("Karlsson #11"), 
-                    new Player("Karlsson #12")};
+                    new BettingPlayer("Karlsson")
+                };
                 var game = new GameTable();
                 game.DealInitialCards(players);
 
-                for (int i = 0; i < players.Length; i++)
+                while (players[0].InPlay)
                 {
-                    Console.WriteLine(players[i]);
-                }
-
-                for (int i = 0; i < players.Length; i++)
-                {
-                    string winner = game.PlayRound(players[i]);
-                    Console.WriteLine(players[i]);
-                    Console.WriteLine(game.DealerHand);
-                    Console.WriteLine($"{winner} won!");
+                    string result = game.PlayRound(players[0]);
+                    Console.WriteLine(result);
                 }
             }
             catch(Exception e)

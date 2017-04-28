@@ -84,13 +84,39 @@ namespace TwentyOneCardGame
         }
 
         /// <summary>
-        /// Indicates whether or not the particpant
-        /// should request another card.
+        /// Plays a turn.
         /// </summary>
-        /// <returns>True if the player is in play.</returns>
-        public virtual bool RequestCard()
+        /// <param name="deck">The deck to play the turn with.</param>
+        public virtual bool PlayTurn(Deck deck)
         {
-            return this.InPlay && this.Points < this.Limit;
+            while (this.RequestCard() && !(this.IsWinner())) 
+            {
+                if (deck.CardsLeft == 1) 
+                {
+                    deck.Shuffle();
+                }
+                
+                this.AddToHand((Card)deck.Deal());
+            }
+
+            return (this.IsWinner());
+        }
+
+        /// <summary>
+        /// What to do when the turn is won or lost.
+        /// </summary>
+        /// <param name="won">A boolean to indicade whether the turn was won.</param>
+        public abstract void SettleTurn(bool won);
+
+        /// <summary>
+        /// Resets the participant by emptying the hand.
+        /// </summary>
+        /// <returns>This.</returns>
+        public virtual TwentyOneParticipant Reset()
+        {
+            this._hand.Clear();
+
+            return this;
         }
 
         /// <summary>
@@ -100,17 +126,6 @@ namespace TwentyOneCardGame
         public TwentyOneParticipant AddToHand(Card card)
         {
             this._hand.Add(card);
-
-            return this;
-        }
-
-        /// <summary>
-        /// Resets the participant by emptying the hand.
-        /// </summary>
-        /// <returns>This.</returns>
-        public virtual TwentyOneParticipant Reset()
-        {
-            this._hand.Clear();
 
             return this;
         }
@@ -130,6 +145,21 @@ namespace TwentyOneCardGame
             string busted = this.Points < 22 ? "" : "BUSTED!";
 
             return $"{this.Name}: {hand} ({this.Points}) {busted}";
+        }
+
+        /// <summary>
+        /// Checks if the participant has won the round.
+        /// </summary>
+        protected abstract bool IsWinner();
+
+        /// <summary>
+        /// Indicates whether or not the particpant
+        /// should request another card.
+        /// </summary>
+        /// <returns>True if the player is in play.</returns>
+        protected virtual bool RequestCard()
+        {
+            return this.InPlay && this.Points < this.Limit;
         }
 
         /// <summary>
