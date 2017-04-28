@@ -5,11 +5,20 @@ namespace TwentyOneCardGame
     /// <summary>
     /// A Card struct with suit, rank and changeble Ace-value.
     /// </summary>
-    public struct Card
+    public struct Card : IModifiableAceValue
     {
-        int? _aceValue;
+        private int? _aceValue;
         public readonly Suit Suit;
         public readonly Rank Rank;
+
+        public int Value 
+        {
+            get
+            {
+                return this.AceValue ?? (int)this.Rank;
+            }
+        }
+
 
         /// <summary>
         /// Keeps track of wether the ace is counted as 1 or 14. Returns null if the Rank is not Ace.
@@ -44,7 +53,7 @@ namespace TwentyOneCardGame
         public Card(Suit suit, Rank rank)
         {
             this._aceValue = null;
-
+            
             this.Suit = suit;
             this.Rank = rank;
 
@@ -61,10 +70,7 @@ namespace TwentyOneCardGame
         ///<returns>1 if value of other Rank is larger than this Rank, 0 if equal, -1 if this is larger than other.</returns>
         public int CompareTo(Card other)
         {
-            int otherValue = other.AceValue ?? (int)other.Rank;
-            int thisValue = this.AceValue ?? (int)this.Rank;
-
-            return thisValue.CompareTo(otherValue);
+            return this.Value.CompareTo(other.Value);
         }
 
         ///<summary>
