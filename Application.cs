@@ -17,7 +17,7 @@ namespace TwentyOneCardGame
             try
             {
                 var player = new TwentyOneParticipant("Karlsson");
-                Console.WriteLine(player.Points);
+                Console.WriteLine(player);
             }
             catch(Exception e)
             {

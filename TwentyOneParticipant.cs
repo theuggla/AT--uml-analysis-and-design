@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -9,6 +10,7 @@ namespace TwentyOneCardGame
     public abstract class TwentyOneParticipant
     {
         private List<Card> _hand = new List<Card>();
+        private int _limit;
 
         public string Name {get; set;}
         
@@ -36,6 +38,29 @@ namespace TwentyOneCardGame
         }
 
         /// <summary>
+        /// The player's Limit for when to stop requesting cards.
+        /// </summary>
+        public int Limit
+        {
+            get
+            {
+                return this._limit;
+            }
+
+            set
+            {
+                if (value > 0 && value < 22)
+                {
+                    this._limit = value;
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException(nameof(value));
+                }
+            }
+        }
+
+        /// <summary>
         /// Indicates whether or not the particpant
         /// is still in play.
         /// </summary>
@@ -52,9 +77,10 @@ namespace TwentyOneCardGame
         /// Sets the name of the participant.
         /// </summary>
         /// <param name="name">The name of the player.</param>
-        public TwentyOneParticipant(string name)
+        public TwentyOneParticipant(string name, int limit = 21)
         {
             this.Name = name;
+            this.Limit = limit;
         }
 
         /// <summary>
@@ -65,6 +91,23 @@ namespace TwentyOneCardGame
         public virtual bool RequestCard()
         {
             return this.InPlay;
+        }
+
+        /// <summary>
+        /// A string representation of the participant.
+        /// </summary>
+        /// <returns>The participant's name, hand and points.</returns>
+        public override string ToString()
+        {
+            string hand = !(this.Hand.Count > 0) ? "-" :
+                String.Join(" ",
+                    this.Hand
+                    .Select(x => x.ToString())
+                    .ToArray());
+
+            string busted = this.InPlay ? "" : "BUSTED!";
+
+            return $"{this.Name}: {hand} ({this.Points}) {busted}";
         }
 
         /// <summary>
