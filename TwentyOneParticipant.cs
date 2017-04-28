@@ -90,7 +90,7 @@ namespace TwentyOneCardGame
         /// <returns>True if the player is in play.</returns>
         public virtual bool RequestCard()
         {
-            return this.InPlay;
+            return this.InPlay && this.Points < this.Limit;
         }
 
         /// <summary>
