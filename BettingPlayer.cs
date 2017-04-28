@@ -1,7 +1,7 @@
 namespace TwentyOneCardGame
 {
     /// <summary>
-    /// A class to simulate a player in the TwentyOne Card Game.
+    /// A class to simulate a player that can make bets in the TwentyOne Card Game.
     /// </summary>
     public class BettingPlayer : Player
     {
