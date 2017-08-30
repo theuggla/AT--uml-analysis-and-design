@@ -1,1 +1,1 @@
-# analysis-and-design-exercises
+exercises for object-oriented analysis and design with UML
