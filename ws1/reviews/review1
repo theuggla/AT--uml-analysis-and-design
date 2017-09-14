@@ -1,0 +1,23 @@
+The layout is very clear and not overly complicated. Easy to understand. Consistently and informatively named. Yacht is misspelled which I assume is a typo.
+
+"Has" is used as an association name twice, and changing it might improve clarity slightly, for example as "Member - part of YachtClub", and "Calendar - records - Event".
+
+
+The model is clearly a domain class diagram! It has all the conceptual classes needed to cover the requirements. Possibly the "YachtClub" class is unnecessary, since the Yacht Club never actually does anything as a separate thing in real life - rather, the whole model is a model over the Yacht Club and its different components. 
+
+The one drawback is that the model contains no attributes whatsoever, and therefore lacks some information needed to realise the requirements. What this information is is of course dependent on the assumptions made when making the model, but even in an attempt to model attributes as associations instead I do believe that at least a "size" on the boat and a "cost" of the berth are necessary to fulfill the Assign Berth and Register Boat-use cases. Perhaps add them!
+
+
+The model is clearly a domain model in the shape of a UML class diagram. It is most definitely made to understand the problem rather than to solve it, all of this very good. It is clear and easy to understand and follow, and captures all the major concepts (Member - Berth - Boat) needed to fulfill the requirements. It is not overly complicated. A slight drawback is that it is almost too simplified - it contains no attributes, which means it lacks some of the information needed to realise the requirements. I would advice to add what Larman calls "those attributes [...] needed to satisfy the information requirements" (Applying UML and Patterns 9.16:Attributes). In this case those "information requirements" would be the information needed to satisfy the register boat-use case, for example a "size" attribute on the Boat, and a "cost" attribute on the Berth.
+
+This could also be a solution to handle the membership fees in this model, to simply add them as attributes. When the paying and handling payment requirements are being modeled it would possibly be advisable to model them as a separate conceptual class, but since the only place they are represented when handling these particular use cases are when they are updated in the register boat-use case, they are most likely what Larman calls "attributes [where] the requirements imply a need to remember information" (Applying UML and Patterns 9.16: Attributes) - the fee would have to be remembered to be updated. In this case it could therefore simply be modeled as an attribute on the member, for example.
+
+The association names are over all very clear, but the two instances of "has" could be enhanced by changing them to something that "enhance[s] our understanding of the domain". Larman argues against the use of "has" as an association name on the basis of this argument in Applying UML and Patterns 9.14:Associations.  Perhaps they could be changed to something more informative.
+
+The reservation of a berth is handled as an association between the secretary and the berths, but there is nothing to indicate a relationship between the berth and the boat, and thus no way of keeping track of what boat is docked where. There is also no way of handling the history of reservations.
+
+A possible solution to the first problem, the relation between the berth and the boat, is to view it as an association on the basis of "[an association being] a relationship that needs to be preserved for some duration"(Applying UML and Patterns 9.14:Associations). There are of course many possible solutions to the second problem, one being to simply view the reservation as a separate conceptual class in the same way you would model a "Sale" that is being "recorded" somewhere - for an example of this sale - recorded relationship, see Larman in Applying UML and Patterns 9.5:How to Find Conceptual Classes, Table 9.1, and Applying UML and Patterns 9.14:Associations, Table 9.2.
+
+The Calendar class is possibly to be regarded as a report object, and therefore unnecessary (see Applying UML and Patterns 9.9:Guideline:Report Objects). On the other hand, and as Larman also argues in that same section, some times a report object is necessary to draw focus to the important parts of the use case, and a calendar might be an important item to show HOW the members interact with the information about the events, and therefore I would not necessarily remove it.
+
+Over all the model is very clear and aids the understanding of the problem domain.

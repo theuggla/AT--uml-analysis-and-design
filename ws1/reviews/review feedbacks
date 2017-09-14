@@ -1,0 +1,35 @@
+review #0
+
+Thank you! I agree that the readability would improve by using a UML-tool, and will transfer the diagram.
+
+It is a good idea to switch the place of Secretary and Member, I can see that that would resolve the association direction!
+
+I struggled with the name of BerthType myself, so I do agree with your assessment, but I believe I will keep it as BerthType rather than BerthDescription since what I settled for in the end was that the boat has a type, rather than being described by a general boat-ness. It's a tough desicion though, and I'm not completely sure of it.
+
+I also somewhat agree with the Registry - I don't think I will add a registry as such, as I think it would feel like to much of a report class - on the other hand it could be considered the same principle as aLedger to record sales. I will consider this and either add that, some sort of reservation class, than could have a multiplicity. That would help with keeping track of hisory as well. Thank you! I won't add a Calendar-class, since I feel like it would not add any information not already present in the Event-class, and therefore would mostly be what Larman calls a report object. On the other hand, and as Larman also argues in that same section, some times a report object is necessary to draw focus to the important parts of the use case, and a calendar might be an important item to show HOW the members interact with the information about the events. I therefore understand the advice to include it, but believe I will still opt out.
+
+The review is truthful and reflects properly on what was and wasn't done in the submission it's reviewing. It doesn't completely back up it's suggestions, either through course literature or own argumentation - for example, the suggestion to add a Registry class and a Calendar class could have been improved with some reference to the literature, arguing why this would be beneficiary.
+
+review #1
+
+Thank you! I do believe that the boat register, change and remove are possible to build upon the model represented, but I will add a reservation class to make the reservation of the berth and the boat being there more clear. I think this could also work well to represent the berth history you are mentioning.
+
+The review is truthful and reflects on what was and wasn't done in the submission it's reviewing. The grade "Sufficient" on the clarity-part is perhaps not completely backed up by the comments, which more suggests a "Good" grade, but the other sections do not have any dissonance between the comments and the grade. The review doesn't completely back up it's suggestions, either through course literature or own argumentation - for example, I am missing some references to the course literature regarding how to handle the berth history, perhaps accompanied by a more specific suggestion from the reviewer. It is also slicghtly unclear how it is being suggested to "add the [missing] requirements" under completeness, but I do appreciate the advice that they are not completely clearly present in my diagram and will look this over.
+
+review #2
+
+Thank you! I will change the capital letters of the association based on your reference. I don't completely agree that the authentication requirement is missing, since I feel it could be implemented based on the roles present in the model, but I understand your concern. I agree that the readability would improve by using a UML-tool, and will transfer the diagram.
+
+The review is truthful and reflects somewhat on what was and wasn't done in the submission it's reviewing. It feels quite sparse and not completely thorough. It is also slightly unclear how it is being suggested to add the authentication requirement under completeness, but I do appreciate the advice that it is not completely clearly present in my diagram and will look this over. It does properly reference the literature when making a claim.
+
+review #3
+
+Thank you! I agree that the readability would improve by using a UML-tool, and will transfer the diagram. Hopefully this will also help with the felling that the classes are too close together, and I will try to space them out and resize them. I will also change the capital letters of the association based on your reference and to not have voices screaming in people's heads.
+
+I completely understand your reasoning around the Calendar - did the same reasoning myself before finally deciding on not including it, I won't add a Calendar-class, since I felt like it would not add any information not already present in the Event-class, and therefore would mostly be what Larman calls a report object. As you bring up though, and as Larman also argues in that same section, some times a report object is necessary to draw focus to the important parts of the use case, and a calendar might be an important item to show HOW the members interact with the information about the events. I think I will still opt out of the Calendar based on the first argument, but to change the name to CalendarEvent is an excellent idea and I will do that promptly.
+
+I don't completely agree that the authentication requirement is missing, since I feel it could be implemented based on the roles present in the model, but I understand your concern. My reasoning around this was based on the fact that, as you say, it is a software requirement, and the domain model is there to model the real world as it is now, not to design the software system. As the world is now, no one has a password or a username, since the software does not yet exist. They do already have a "role" attribute, in a fashion, and I considered including that, but decided in the end that this was represented in a good enough waty bu Member and Secretary clearly being two different kinds of classes / roles already. I will look it over though!
+
+I agree with your assessment that I should add a BoatType.
+
+The review is truthful, objective and helpful, and reflects on what was and wasn't done in the submission it's reviewing. The grades are all clearly motivated, and the discussion around improvements helpfult, and nuanced. Maybe some references to Larman could have been made aorund the discussion of the calendar and event, but all the improvements suggested comes with suggestions for how to achieve them, and a good discussion of why it might be importand. This review helped me look at my own diagram again and improve it, in a very constructive way.

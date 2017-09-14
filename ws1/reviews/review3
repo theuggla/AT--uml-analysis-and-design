@@ -1,0 +1,22 @@
+The model is very clear, with good language, good vocabulary and correct UML notation. The naming is consistent and informative.
+
+Perhaps the .png format is slightly unfortunate when the diagram does not have a set background, as the image viewer used will just assign a background which might make it hard to read the association labels. This is not strictly diagram-related though, but I would consider using a file with a set background to display the diagram.
+
+
+
+The submission includes grades 3 and 4 as well as 2, and they should be removed and saved for a later date.
+
+In the actual model all requirements are considered both in what classes have been used, what associations are drawn, and what attributes are given. Possibly a price-attribute is missing on the berth, to fulfill the part of the "register boat"-use case where the fee is updated based on berth cost.
+
+The payment class could be considered unnecessary when modelling these requirements, since no payment is made or handled, and could therefore be removed until those requirements are modeled.
+
+
+The model is a well made domain model in the shape of a UML class diagram. It is most definitely made to understand the problem rather than to solve it. It is clear and easy to understand and follow, and captures all the major concepts (Member - Berth - Boat) needed to fulfill the requirements. It is not overly complicated. It gives a very god and clear impression.
+
+Berth-renting history is not explicitly handled anywhere but could probably be traced through berth bookings, depending on how the bookings are recorded. The plurality of the class makes this a bit ambiguous - "berth bookings" implies that it is a collection of bookings, like a ledger recording sales, at the same time as being a representation of an actual booking. Perhaps it would be wise to split the BerthBookings-class in two - BerthBooking and BookingRecord, say -  and follow the same reasoning as Larman does when he talks about "Sales" being "recorded" in a "Ledger": for an example of this sale - recorded relationship, see Larman in Applying UML and Patterns 9.5:How to Find Conceptual Classes, Table 9.1, and Applying UML and Patterns 9.14:Associations, Table 9.2.  The history could also be modeled as an association between the Member and the BerthBooking, showing with multiplicity that a Member can have more than one BerthBooking, and since the BertBooking class have a dateTime attribute these bookings would then serve as a record.
+
+Membership fee is explicitly handled in it's own class in the diagram in a good way associating it to a Membership and a Member. An improvement could be to include some note of the fixed fee and the variable around berth costs -  perhaps a fee part and a derived /sum part derived from the fixed fee and the cost of berths (Applying UML and Patterns 9.16:Attributes:Derived Attributes).
+
+As noted previously the Payment class is perhaps out of scope for these requirements, and I would advice to remove it in line with Larman's reasoning that a model should at any given point be "[...] constrained to the requirements and simplifications currently under consideration". (Applying UML and Patterns 9.6: Example: Find and Draw Conceptual Classes).
+
+Over all this is a high quality submission, covering all the requirements, enhancing understanding of the domain, without being overly complicated.
