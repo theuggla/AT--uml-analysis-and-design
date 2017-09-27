@@ -11,16 +11,14 @@ namespace MemberRegistry.controller
 	{
 		private view.Console m_view;
 		
-		private model.MemberRegistry m_registry;
+		private model.MemberLedger m_ledger;
 
 		private controller.MenuController m_menuController;
 
-		public User(view.Console a_view, model.MemberRegistry a_registry)
+		public User(view.Console a_view, model.MemberLedger a_ledger)
 		{
 			m_view = a_view;
-			m_registry = a_registry;
-			m_menuController = new controller.MenuController(m_registry, m_view);
-
+			m_ledger = a_ledger;
 		}
 
 		public void StartProgram()
@@ -38,8 +36,8 @@ namespace MemberRegistry.controller
 
 		private void PlayOutUseCase(controller.IMenuItemCommand useCase)
 		{
-			Dictionary<string, string> data = useCase.GetData(m_view);
-			useCase.ExecuteCommand(m_registry, data);
+			Dictionary<string, string> data = new Dictionary<string, string>();/*useCase.GetData(m_view);*/
+			useCase.ExecuteCommand(m_ledger, data);
 		}
 	}
 }

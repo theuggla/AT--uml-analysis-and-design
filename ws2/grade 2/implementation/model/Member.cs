@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace MemberRegistry.model
@@ -8,8 +9,7 @@ namespace MemberRegistry.model
         public string Name {get; set;}
         public int PersonalNumber {get; set;}
         public int MemberID {get; set;}
-
-        public List<Boat> boats;
+        public List<Boat> Boats {get; set;}
 
         public Member(string name, int number, int id)
         {
@@ -17,39 +17,32 @@ namespace MemberRegistry.model
             this.PersonalNumber = number;
             this.MemberID = id;
 
-            boats = new List<Boat>();
+            this.Boats = new List<Boat>();
         }
 
-        public void AddBoat(Dictionary<string, string> data)
+        public void AddBoat(BoatType type, int length)
         {
             int newId = GetNextBoatID();
-
-			int length;
-			int.TryParse(data["length"], out length);
-
-            BoatType type = (BoatType)Enum.Parse(typeof(BoatType), data["type"]);
-
 			Boat newBoat = new Boat(type, length, newId);
-			boats.Add(newBoat);
+			this.Boats.Add(newBoat);
         }
 
-        public void RemoveBoat(int boatPosition) {
-            this.boats.RemoveAt(boatPosition);
+        public void RemoveBoat(int id) {
+            this.Boats.RemoveAll(x => x.BoatID == id);
         }
 
-        public void UpdateBoat(int boatPosition, Dictionary<string, string> data) {
-            int length;
-			int.TryParse(data["length"], out length);
+        public void UpdateBoat(int boatID, BoatType type, int length) {
+            Boat boat = this.Boats
+                .Where(x => x.BoatID == boatID)
+                .ToList()[0];
 
-            BoatType type = (BoatType)Enum.Parse(typeof(BoatType), data["type"]);
-
-            this.boats[boatPosition].Update(type, length);
+            boat.Update(type, length);
         }
 
         private int GetNextBoatID()
         {
-            int newt = boats.Count > 0 ? boats[boats.Count - 1].BoatID + 1 : 1;
-			return newt;
+            int next = this.Boats.Count > 0 ? this.Boats[this.Boats.Count - 1].BoatID + 1 : 1;
+			return next;
         } 
     }
 }

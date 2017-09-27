@@ -6,7 +6,8 @@ namespace MemberRegistry
     {
         static void Main(string[] args)
         {
-            model.MemberRegistry r = new model.MemberRegistry();
+            persistance.IPersistance p = new persistance.JSONFilePersistance("saved.json");
+            model.MemberLedger r = new model.MemberLedger(p);
 			view.Console v = new view.Console();
 			controller.User c = new controller.User(v, r);
 

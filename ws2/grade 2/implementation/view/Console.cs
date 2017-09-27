@@ -7,7 +7,7 @@ namespace MemberRegistry.view
 {
 	class Console
 	{
-		public void DisplayInstructions(string prompt) {
+		public void DisplayMessage(string prompt) {
             System.Console.WriteLine($"{prompt}");
         }
 
@@ -19,11 +19,11 @@ namespace MemberRegistry.view
             }
         }
 
-        public void DisplayUserInfo(dynamic userInfo) {
+        public void DisplayUserInfo(dynamic info) {
 
-            foreach(var prop in userInfo.GetType().GetProperties())
+            foreach(var prop in info.GetType().GetProperties())
             {
-                System.Console.WriteLine($"{prop.Name}: {prop.GetValue(userInfo, null)}");
+                System.Console.WriteLine($"{prop.Name}: {prop.GetValue(info, null)}");
             }
 
             System.Console.WriteLine();
@@ -44,6 +44,38 @@ namespace MemberRegistry.view
             return result;
         }
 
+        public bool GetUserBoolean(string question)
+        {
+            while (true) 
+            {
+			    System.Console.WriteLine($"{question} (Y/N): ");
+			    string answer = System.Console.ReadLine();
+			
+			    if (answer.Equals("Y", StringComparison.OrdinalIgnoreCase))
+			    {
+				    return true;
+			    }
+			    else if (answer.Equals("N", StringComparison.OrdinalIgnoreCase))
+			    {
+				    return false;
+			    }
+            }
+        }
+
+        public TEnum GetUserEnum<TEnum>(string prompt) where TEnum : struct
+        {
+            string input;
+            TEnum resultInputType = default(TEnum);
+
+            do
+            {
+                System.Console.Write($"{prompt}: ");
+                input = System.Console.ReadLine();
+
+            } while (!((Enum.TryParse(input, true, out resultInputType)) && (Enum.IsDefined(resultInputType.GetType(), resultInputType))));
+
+            return resultInputType;
+        }
 
         public string GetUserString(string prompt)
         {

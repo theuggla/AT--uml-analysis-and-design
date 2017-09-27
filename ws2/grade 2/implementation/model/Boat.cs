@@ -4,7 +4,6 @@ namespace MemberRegistry.model
     {
         public int Length {get; set;}
         public BoatType Type {get; set;}
-
         public int BoatID {get; set;}
 
         public Boat(BoatType type, int length, int boatID)

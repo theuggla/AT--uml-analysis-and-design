@@ -3,49 +3,36 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class DeleteBoat : IMenuItemCommand
+    class DeleteBoat : BaseCommand, IMenuItemCommand
     {
-        public string Description {get;}
         public MenuCategory[] Tags {get;}
 
-        private view.Console view;
-
-        public DeleteBoat(MenuCategory[] tags, string description, view.Console view) {
+        public DeleteBoat(MenuCategory[] tags, string description, view.Console view) 
+        : base(description, view)
+        {
             this.Tags = tags;
-            this.Description = description;
-            this.view = view;
         }
+        public void ExecuteCommand(model.MemberLedger ledger) {
+            int memberID = GetMemberID();
 
-        public void ExecuteCommand(model.MemberRegistry registry, Dictionary<string, string> data) {
-            int memberID;
-            int.TryParse(data["id"], out memberID);
-            model.Member member = registry.GetMember(memberID);
+            model.Member member = ledger.GetMember(memberID);
 
-            if (member.boats.Count > 0) {
-                    int i = 1;
-                    view.DisplayInstructions("Boats:");
-                    foreach (model.Boat boat in member.boats) {
-                    dynamic viewModelBoat = new {Number = i, Length = boat.Length, BoatType = boat.Type.ToString()};
-                    i++;
-                    view.DisplayUserInfo(viewModelBoat);
-                    } 
+            if (member.Boats.Count > 0) {
 
-                    int boatID = view.GetUserInt("Which boat would you like to delete?", 1, member.boats.Count);
-                    registry.DeleteBoat(memberID, boatID - 1);
+                DisplayMessage("FInd the ID of the boat you would like to delete.");
 
-                    } else {
-                        view.DisplayInstructions("Member has no boats.");
-                    }
-        }
+                for (int i = 0; i < member.Boats.Count; i++)
+                {
+                    dynamic viewModelBoat = GetBoatDisplayModel(member.Boats[i]);
+                    DisplayBoat(viewModelBoat);
+                } 
 
-        public Dictionary<string, string> GetData(view.Console view) {
+                int boatID = GetBoatID();
+                ledger.DeleteBoat(memberID, boatID);
 
-            string number = view.GetUserString("What is the id of the member whose boat you would like to delete?");
-
-            Dictionary<string, string> data = new Dictionary<string, string>();
-            data.Add("id", number);
-
-            return data;
+                } else {
+                    DisplayMessage("Member has no boats.");
+                }
         }
     }
 }

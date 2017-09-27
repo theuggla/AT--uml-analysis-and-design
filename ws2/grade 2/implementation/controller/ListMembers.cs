@@ -3,58 +3,39 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class ListMembers : IMenuItemCommand
+    class ListMembers : BaseCommand, IMenuItemCommand
     {
-        public string Description {get;}
         public MenuCategory[] Tags {get;}
 
-        private view.Console view; 
-
-        public ListMembers(MenuCategory[] tags, string description, view.Console view) {
+        public ListMembers(MenuCategory[] tags, string description, view.Console view) 
+        : base(description, view)
+        {
             this.Tags = tags;
-            this.Description = description;
-            this.view = view;
         }
 
-        public void ExecuteCommand(model.MemberRegistry registry, Dictionary<string, string> data) {
-            List<model.Member> members = registry.ListMembers();
-            if (data["detailed"] == "yes") {
-                foreach (model.Member member in members) {
-                dynamic viewModelMember = new {Name = member.Name, PersonalNumber = member.PersonalNumber, MemberID = member.MemberID};
-                view.DisplayUserInfo(viewModelMember);
+        public void ExecuteCommand(model.MemberLedger ledger) {
 
-                if (member.boats.Count > 0) {
-                    view.DisplayInstructions("Boats:");
-                    int i = 1;
-                    foreach (model.Boat boat in member.boats) {
-                    dynamic viewModelBoat = new {Number = i, Length = boat.Length, BoatType = boat.Type.ToString()};
-                    i++;
+            List<model.Member> members = (List<model.Member>)ledger.ListMembers();
+            bool verbose = GetUserBoolean("Would you like a detailed list?");
 
-                    view.DisplayUserInfo(viewModelBoat);
+            foreach (model.Member member in members) {
+                dynamic displayModel = GetMemberDisplayModel(member, verbose);
+                DisplayMember(displayModel);
+
+                if (verbose)
+                {
+                    if (member.Boats.Count > 0)
+                    {
+                        DisplayMessage("Boats: ");
+                        
+                        foreach(model.Boat boat in member.Boats)
+                        {
+                            dynamic boatDisplayModel = GetBoatDisplayModel(boat);
+                            DisplayBoat(boatDisplayModel);
+                        }
                     }
                 }
-                }
-            } else {
-                foreach (model.Member member in members) {
-                dynamic viewModelMember = new {Name = member.Name, MemberID = member.MemberID, BoatCount = member.boats.Count};
-                view.DisplayUserInfo(viewModelMember);
-                }
             }
-        }
-
-        public Dictionary<string, string> GetData(view.Console view) {
-
-            string answer = view.GetUserString("Would you like a detailed list? (y/n)");
-
-            Dictionary<string, string> data = new Dictionary<string, string>();
-
-            if (answer == "y") {
-                data.Add("detailed", "yes");
-            } else {
-                data.Add("detailed", "no");
-            }
-
-            return data;
         }
     }
 }
