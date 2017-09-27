@@ -1,0 +1,49 @@
+[
+  {
+    "boats": [],
+    "Name": "Karlsson",
+    "PersonalNumber": 78,
+    "MemberID": 0
+  },
+  {
+    "boats": [
+      {
+        "Length": 77,
+        "Type": 1,
+        "BoatID": 1
+      },
+      {
+        "Length": 5,
+        "Type": 2,
+        "BoatID": 2
+      }
+    ],
+    "Name": "Moshi",
+    "PersonalNumber": 28108,
+    "MemberID": 1
+  },
+  {
+    "boats": [],
+    "Name": "Inte Karlsson",
+    "PersonalNumber": 890,
+    "MemberID": 2
+  },
+  {
+    "boats": [
+      {
+        "Length": 8,
+        "Type": 1,
+        "BoatID": 1
+      }
+    ],
+    "Name": "Korv",
+    "PersonalNumber": 870,
+    "MemberID": 4
+  },
+  {
+    "boats": [],
+    "Name": "Sven",
+    "PersonalNumber": 789,
+    "MemberID": 5
+  }
+]
