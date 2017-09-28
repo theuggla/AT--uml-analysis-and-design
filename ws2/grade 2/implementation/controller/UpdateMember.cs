@@ -3,23 +3,19 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class UpdateMember : BaseCommand, IMenuItemCommand
+    class UpdateMember : BaseCommand
     {
-        public MenuCategory[] Tags {get;}
+        public UpdateMember(string description, view.Console view, model.MemberLedger ledger) 
+        : base(description, view, ledger)
+        {}
 
-        public UpdateMember(MenuCategory[] tags, string description, view.Console view) 
-        : base(description, view)
-        {
-            this.Tags = tags;
-        }
-
-        public void ExecuteCommand(model.MemberLedger ledger) {
+        public override void ExecuteCommand() {
             int memberID = GetMemberID();
             string newName = GetMemberName();
             int newPersonalNumber = GetMemberPersonalNumber();
             
 
-            ledger.UpdateMember(memberID, newName, newPersonalNumber);
+            _ledger.UpdateMember(memberID, newName, newPersonalNumber);
         }
     }
 }

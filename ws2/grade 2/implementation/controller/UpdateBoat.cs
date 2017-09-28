@@ -3,25 +3,21 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class UpdateBoat : BaseCommand, IMenuItemCommand
+    class UpdateBoat : BaseCommand
     {
-        public MenuCategory[] Tags {get;}
+        public UpdateBoat(string description, view.Console view, model.MemberLedger ledger) 
+        : base(description, view, ledger)
+        {}
 
-        public UpdateBoat(MenuCategory[] tags, string description, view.Console view) 
-        : base(description, view)
-        {
-            this.Tags = tags;
-        }
-
-        public void ExecuteCommand(model.MemberLedger ledger) {
+        public override void ExecuteCommand() {
             int memberID = GetMemberID();
             
-            model.Member member = ledger.GetMember(memberID);
+            model.Member member = _ledger.GetMember(memberID);
 
             if (member.Boats.Count > 0) 
             {
 
-                DisplayMessage("FInd the ID of the boat you would like to delete.");
+                DisplayMessage("Find the ID of the boat you would like to update.");
 
                 for (int i = 0; i < member.Boats.Count; i++)
                 {
@@ -33,7 +29,7 @@ namespace MemberRegistry.controller
                 BoatType boatType = GetBoatType();
                 int boatLength = GetBoatLength();
 
-                ledger.UpdateBoat(memberID, boatID, boatType, boatLength);
+                _ledger.UpdateBoat(memberID, boatID, boatType, boatLength);
 
             } 
             else 

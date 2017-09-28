@@ -3,22 +3,18 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class AddBoat : BaseCommand, IMenuItemCommand
+    class AddBoat : BaseCommand
     {
-        public MenuCategory[] Tags {get;}
+        public AddBoat(string description, view.Console view, model.MemberLedger ledger) 
+        : base(description, view, ledger)
+        {}
 
-        public AddBoat(MenuCategory[] tags, string description, view.Console view) 
-        : base(description, view)
-        {
-            this.Tags = tags;
-        }
-
-        public void ExecuteCommand(model.MemberLedger ledger) {
+        public override void ExecuteCommand() {
             int memberID = GetMemberID();
             BoatType boatType = GetBoatType();
             int boatLength = GetBoatLength();
 
-            ledger.RegisterBoat(memberID, boatType, boatLength);
+            _ledger.RegisterBoat(memberID, boatType, boatLength);
         }
     }
 }

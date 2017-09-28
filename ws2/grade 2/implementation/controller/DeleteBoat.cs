@@ -3,23 +3,19 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class DeleteBoat : BaseCommand, IMenuItemCommand
+    class DeleteBoat : BaseCommand
     {
-        public MenuCategory[] Tags {get;}
-
-        public DeleteBoat(MenuCategory[] tags, string description, view.Console view) 
-        : base(description, view)
-        {
-            this.Tags = tags;
-        }
-        public void ExecuteCommand(model.MemberLedger ledger) {
+        public DeleteBoat(string description, view.Console view, model.MemberLedger ledger) 
+        : base(description, view, ledger)
+        {}
+        public override void ExecuteCommand() {
             int memberID = GetMemberID();
 
-            model.Member member = ledger.GetMember(memberID);
+            model.Member member = _ledger.GetMember(memberID);
 
             if (member.Boats.Count > 0) {
 
-                DisplayMessage("FInd the ID of the boat you would like to delete.");
+                DisplayMessage("Find the ID of the boat you would like to delete.");
 
                 for (int i = 0; i < member.Boats.Count; i++)
                 {
@@ -28,11 +24,11 @@ namespace MemberRegistry.controller
                 } 
 
                 int boatID = GetBoatID();
-                ledger.DeleteBoat(memberID, boatID);
+                _ledger.DeleteBoat(memberID, boatID);
 
-                } else {
-                    DisplayMessage("Member has no boats.");
-                }
+            } else {
+                DisplayMessage("Member has no boats.");
+            }
         }
     }
 }

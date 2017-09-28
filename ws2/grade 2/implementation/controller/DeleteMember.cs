@@ -3,19 +3,15 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class DeleteMember : BaseCommand, IMenuItemCommand
+    class DeleteMember : BaseCommand
     {
-        public MenuCategory[] Tags {get;}
+        public DeleteMember(string description, view.Console view, model.MemberLedger ledger) 
+        : base(description, view, ledger)
+        {}
 
-        public DeleteMember(MenuCategory[] tags, string description, view.Console view) 
-        : base(description, view)
-        {
-            this.Tags = tags;
-        }
-
-        public void ExecuteCommand(model.MemberLedger ledger) {
+        public override void ExecuteCommand() {
             int memberID = GetMemberID();
-            ledger.DeleteMember(memberID);
+            _ledger.DeleteMember(memberID);
         }
     }
 }

@@ -6,15 +6,16 @@ namespace MemberRegistry.controller
     abstract class BaseCommand
     {
         public string Description {get;}
-
+        protected model.MemberLedger _ledger;
         private view.Console _view;
 
-        public delegate void MemberActionCall(int memberID);
-
-        public BaseCommand(string description, view.Console view) {
+        public BaseCommand(string description, view.Console view, model.MemberLedger ledger) {
             this.Description = description;
             this._view = view;
+            this._ledger = ledger;
         }
+
+        public abstract void ExecuteCommand(); 
 
         protected string GetMemberName()
         {

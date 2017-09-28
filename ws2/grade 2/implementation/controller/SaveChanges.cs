@@ -3,27 +3,15 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class SaveChanges : IMenuItemCommand
+    class SaveChanges : BaseCommand
     {
-        public string Description {get;}
-        public MenuCategory[] Tags {get;}
+        public SaveChanges(string description, view.Console view, model.MemberLedger ledger) 
+        : base(description, view, ledger)
+        {}
 
-        public SaveChanges(MenuCategory[] tags, string description) {
-            this.Tags = tags;
-            this.Description = description;
-        }
-
-        public void ExecuteCommand(model.MemberRegistry registry, Dictionary<string, string> data) {
-            registry.SaveMemberList();
-        }
-
-        public Dictionary<string, string> GetData(view.Console view) {
-
-            view.DisplayInstructions("Changes will be saved.");
-
-            Dictionary<string, string> data = new Dictionary<string, string>();
-
-            return data;
+        public override void ExecuteCommand() {
+            DisplayMessage("Changes will be saved.");
+            _ledger.SaveMemberList();
         }
     }
 }

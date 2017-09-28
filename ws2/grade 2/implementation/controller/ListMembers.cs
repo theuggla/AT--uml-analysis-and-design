@@ -3,19 +3,15 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class ListMembers : BaseCommand, IMenuItemCommand
+    class ListMembers : BaseCommand
     {
-        public MenuCategory[] Tags {get;}
+        public ListMembers(string description, view.Console view, model.MemberLedger ledger) 
+        : base(description, view, ledger)
+        {}
 
-        public ListMembers(MenuCategory[] tags, string description, view.Console view) 
-        : base(description, view)
-        {
-            this.Tags = tags;
-        }
+        public override void ExecuteCommand() {
 
-        public void ExecuteCommand(model.MemberLedger ledger) {
-
-            List<model.Member> members = (List<model.Member>)ledger.ListMembers();
+            List<model.Member> members = _ledger.GetMembers();
             bool verbose = GetUserBoolean("Would you like a detailed list?");
 
             foreach (model.Member member in members) {

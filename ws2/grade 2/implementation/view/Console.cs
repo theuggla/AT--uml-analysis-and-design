@@ -11,9 +11,9 @@ namespace MemberRegistry.view
             System.Console.WriteLine($"{prompt}");
         }
 
-        public void ShowMenu(List<controller.IMenuItemCommand> menuItems) {
+        public void ShowMenu(List<controller.BaseCommand> menuItems) {
             int i = 1;
-            foreach (controller.IMenuItemCommand item in menuItems) {
+            foreach (controller.BaseCommand item in menuItems) {
                 System.Console.WriteLine($"{i}. {item.Description}");
                 i++;
             }

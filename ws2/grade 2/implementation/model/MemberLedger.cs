@@ -54,9 +54,9 @@ namespace MemberRegistry.model
             member.PersonalNumber = newPersonalNumber;
 		}
 
-        public IReadOnlyCollection<Member> ListMembers()
+        public List<Member> GetMembers()
 		{
-			return this._members.AsReadOnly();
+			return this._members;
 		}
 
 		public void RegisterBoat(int memberID, BoatType boatType, int boatLength)

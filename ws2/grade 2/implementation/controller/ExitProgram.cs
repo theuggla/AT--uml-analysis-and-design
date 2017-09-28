@@ -3,27 +3,15 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class ExitProgram : IMenuItemCommand
+    class ExitProgram : BaseCommand
     {
-        public string Description {get;}
-        public MenuCategory[] Tags {get;}
+        public ExitProgram(string description, view.Console view, model.MemberLedger ledger) 
+        : base(description, view, ledger)
+        {}
 
-        public ExitProgram(MenuCategory[] tags, string description) {
-            this.Tags = tags;
-            this.Description = description;
-        }
-
-        public void ExecuteCommand(model.MemberRegistry registry, Dictionary<string, string> data) {
+        public override void ExecuteCommand() {
+            DisplayMessage("Program will be exited.");
             System.Environment.Exit(0);
-        }
-
-        public Dictionary<string, string> GetData(view.Console view) {
-
-            view.DisplayInstructions("Program will be exited.");
-
-            Dictionary<string, string> data = new Dictionary<string, string>();
-
-            return data;
         }
     }
 }

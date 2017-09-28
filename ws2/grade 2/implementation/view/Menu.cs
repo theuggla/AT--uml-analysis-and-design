@@ -7,21 +7,24 @@ namespace MemberRegistry.view
 {
     class Menu
     { 
-       private List<controller.IMenuItemCommand> _menu;
+       private List<controller.BaseCommand> _menu;
+
+       public List<controller.BaseCommand> MenuItems
+       {
+           get
+           {
+               return this._menu;
+           }
+       }
 
        public Menu()
        {
-           this._menu = new List<controller.IMenuItemCommand>();
+           this._menu = new List<controller.BaseCommand>();
        }
 
-       public void Add(controller.IMenuItemCommand command) 
+       public void Add(controller.BaseCommand command) 
        {
            this._menu.Add(command);
-       }
-
-       public List<controller.IMenuItemCommand> GetSubset(MenuCategory tag)
-       {
-           return _menu.Where(item => item.Tags.Contains(tag)).ToList();
        }
     }
 
