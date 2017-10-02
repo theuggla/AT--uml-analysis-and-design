@@ -5,7 +5,7 @@ namespace MemberRegistry.controller
 {
     class DeleteMember : BaseCommand
     {
-        public DeleteMember(string description, view.Console view, model.MemberLedger ledger) 
+        public DeleteMember(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 

@@ -5,7 +5,7 @@ namespace MemberRegistry.controller
 {
     class AddBoat : BaseCommand
     {
-        public AddBoat(string description, view.Console view, model.MemberLedger ledger) 
+        public AddBoat(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 

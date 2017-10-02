@@ -7,9 +7,9 @@ namespace MemberRegistry.controller
     {
         public string Description {get;}
         protected model.MemberLedger _ledger;
-        private view.Console _view;
+        private view.IView _view;
 
-        public BaseCommand(string description, view.Console view, model.MemberLedger ledger) {
+        public BaseCommand(string description, view.IView view, model.MemberLedger ledger) {
             this.Description = description;
             this._view = view;
             this._ledger = ledger;

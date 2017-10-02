@@ -5,14 +5,20 @@ namespace MemberRegistry.controller
 {
     class ListMembers : BaseCommand
     {
-        public ListMembers(string description, view.Console view, model.MemberLedger ledger) 
+        public ListMembers(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 
         public override void ExecuteCommand() {
 
             List<model.Member> members = _ledger.GetMembers();
+
             bool verbose = GetUserBoolean("Would you like a detailed list?");
+
+            if (members.Count == 0) 
+            {
+                DisplayMessage("No members of the club in the system.");
+            }
 
             foreach (model.Member member in members) {
                 dynamic displayModel = GetMemberDisplayModel(member, verbose);

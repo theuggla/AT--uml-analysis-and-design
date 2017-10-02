@@ -11,6 +11,8 @@ namespace MemberRegistry.persistance
         public JSONFilePersistance(string pathToFile)
         {
             this._pathToFile = pathToFile;
+
+            this.MakeSureFileExists();
         }
 
 
@@ -22,7 +24,6 @@ namespace MemberRegistry.persistance
 
         public void SaveMemberList(List<model.Member> content)
         {
-            
             WriteTo(this._pathToFile, JsonConvert.SerializeObject(content, Formatting.Indented));
         }
         
@@ -34,6 +35,14 @@ namespace MemberRegistry.persistance
         private void WriteTo(string file, string content)
         {
             File.WriteAllText(file, content);
+        }
+
+        private void MakeSureFileExists()
+        {
+            if (!File.Exists(this._pathToFile))
+            {
+                using (FileStream fs = File.Create(this._pathToFile)){}
+            }
         }
     }
 }

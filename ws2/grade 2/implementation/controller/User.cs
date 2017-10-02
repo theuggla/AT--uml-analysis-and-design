@@ -9,11 +9,11 @@ namespace MemberRegistry.controller
 {
 	class User
 	{
-		private view.Console _view;
+		private view.IView _view;
 		private model.MemberLedger _ledger;
 		private view.Menu _menu;
 
-		public User(view.Console view, model.MemberLedger ledger)
+		public User(view.IView view, model.MemberLedger ledger)
 		{
 			_view = view;
 			_ledger = ledger;

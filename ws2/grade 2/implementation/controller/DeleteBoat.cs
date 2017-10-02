@@ -5,7 +5,7 @@ namespace MemberRegistry.controller
 {
     class DeleteBoat : BaseCommand
     {
-        public DeleteBoat(string description, view.Console view, model.MemberLedger ledger) 
+        public DeleteBoat(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
         public override void ExecuteCommand() {

@@ -5,7 +5,7 @@ namespace MemberRegistry.controller
 {
     class ViewMember : BaseCommand
     {
-       public ViewMember(string description, view.Console view, model.MemberLedger ledger) 
+       public ViewMember(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 

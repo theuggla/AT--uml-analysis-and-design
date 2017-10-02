@@ -5,7 +5,7 @@ namespace MemberRegistry.controller
 {
     class ExitProgram : BaseCommand
     {
-        public ExitProgram(string description, view.Console view, model.MemberLedger ledger) 
+        public ExitProgram(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 

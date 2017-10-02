@@ -5,13 +5,15 @@ using System.Text;
 
 namespace MemberRegistry.view
 {
-	class Console
+	class Console : IView
 	{
-		public void DisplayMessage(string prompt) {
+		public void DisplayMessage(string prompt) 
+        {
             System.Console.WriteLine($"{prompt}");
         }
 
-        public void ShowMenu(List<controller.BaseCommand> menuItems) {
+        public void ShowMenu(List<controller.BaseCommand> menuItems) 
+        {
             int i = 1;
             foreach (controller.BaseCommand item in menuItems) {
                 System.Console.WriteLine($"{i}. {item.Description}");
@@ -19,8 +21,8 @@ namespace MemberRegistry.view
             }
         }
 
-        public void DisplayUserInfo(dynamic info) {
-
+        public void DisplayUserInfo(dynamic info) 
+        {
             foreach(var prop in info.GetType().GetProperties())
             {
                 System.Console.WriteLine($"{prop.Name}: {prop.GetValue(info, null)}");
@@ -86,6 +88,5 @@ namespace MemberRegistry.view
 
             return input;
         }
-
 	}
 }

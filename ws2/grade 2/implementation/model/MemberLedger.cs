@@ -13,16 +13,8 @@ namespace MemberRegistry.model
 
 		public MemberLedger(persistance.IPersistance persistance)
 		{
-			try
-            {
-				this._persistance = persistance;
-				this._members = InitiateMemberList();
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-			
+			this._persistance = persistance;
+			this._members = InitiateMemberList();
 		}
 
 		public void CreateMember(string name, int personalNumber)
@@ -87,7 +79,6 @@ namespace MemberRegistry.model
 
         private List<model.Member> InitiateMemberList()
 		{
-
 			List<model.Member> memberList = this._persistance.RetrieveMemberList() ?? new List<model.Member>();
 			return memberList;
 		}
