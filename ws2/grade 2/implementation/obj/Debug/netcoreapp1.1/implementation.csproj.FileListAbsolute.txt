@@ -1,9 +1,0 @@
-/media/molly/DATA/code/wp/2/1dv607/analysis-and-design-exercises/ws2/grade 2/implementation/bin/Debug/netcoreapp1.1/implementation.deps.json
-/media/molly/DATA/code/wp/2/1dv607/analysis-and-design-exercises/ws2/grade 2/implementation/bin/Debug/netcoreapp1.1/implementation.runtimeconfig.json
-/media/molly/DATA/code/wp/2/1dv607/analysis-and-design-exercises/ws2/grade 2/implementation/bin/Debug/netcoreapp1.1/implementation.runtimeconfig.dev.json
-/media/molly/DATA/code/wp/2/1dv607/analysis-and-design-exercises/ws2/grade 2/implementation/obj/Debug/netcoreapp1.1/implementation.AssemblyInfo.cs
-/media/molly/DATA/code/wp/2/1dv607/analysis-and-design-exercises/ws2/grade 2/implementation/bin/Debug/netcoreapp1.1/implementation.dll
-/media/molly/DATA/code/wp/2/1dv607/analysis-and-design-exercises/ws2/grade 2/implementation/bin/Debug/netcoreapp1.1/implementation.pdb
-/media/molly/DATA/code/wp/2/1dv607/analysis-and-design-exercises/ws2/grade 2/implementation/obj/Debug/netcoreapp1.1/implementation.dll
-/media/molly/DATA/code/wp/2/1dv607/analysis-and-design-exercises/ws2/grade 2/implementation/obj/Debug/netcoreapp1.1/implementation.pdb
-/media/molly/DATA/code/wp/2/1dv607/analysis-and-design-exercises/ws2/grade 2/implementation/obj/Debug/netcoreapp1.1/implementation.csprojResolveAssemblyReference.cache
