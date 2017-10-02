@@ -1,7 +1,0 @@
-[
-  {
-    "Name": "Karlsson",
-    "PersonalNumber": 22222,
-    "MemberID": 0
-  }
-]
