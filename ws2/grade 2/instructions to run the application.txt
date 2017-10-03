@@ -1,12 +1,13 @@
-Included is a compiled, self contained version to run the application on a Windows10, x86. There are two possible ways this can go, depending on thesecurity measures in place on your windows:
+This document contains a link to a compiled, self contained version to run the application on a Windows10, x86. There are two possible ways this can go, depending on the security measures in place on your windows:
 
-1. Unzip the directory named "runable version".
-2. Open the directory.
-3. Double click on the file named "implementation.exe".
-4a. The app should open in a command window.
+1. Dowload the runnable version from https://theuggla.github.io/analysis-and-design/zips/ws2-grade2-runnable-application-win10x86
+2. Unzip the directory.
+3. Open the directory.
+4. Double click on the file named "implementation.exe".
+5a. The app should open in a command window.
 
 If the app doesn't open, do the following:
 
-4b. Open Windows PowerShell
-5. cd in to the unzipped directory
-6. Do the command ./implementation.exe 
+5b. Open Windows PowerShell
+6. cd in to the unzipped directory
+7. Do the command ./implementation.exe 
