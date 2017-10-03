@@ -16,7 +16,9 @@ dotnet new console
 
 ### Add dependencies
 1. Run the command
-``dotnet add package Newtonsoft.Json --version 10.0.3``
+```
+dotnet add package Newtonsoft.Json --version 10.0.3
+```
 to install the Newtonsoft.Json dependency.
 2. Create a "runtime identifier" for the runtime(s) you would like to compile for, choosing from the following [list] (https://docs.microsoft.com/en-us/dotnet/core/rid-catalog), like so:
 ```
