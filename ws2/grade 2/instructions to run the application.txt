@@ -1,0 +1,12 @@
+Included is a compiled, self contained version to run the application on a Windows10, x86. There are two possible ways this can go, depending on thesecurity measures in place on your windows:
+
+1. Unzip the directory named "runable version".
+2. Open the directory.
+3. Double click on the file named "implementation.exe".
+4a. The app should open in a command window.
+
+If the app doesn't open, do the following:
+
+4b. Open Windows PowerShell
+5. cd in to the unzipped directory
+6. Do the command ./implementation.exe 

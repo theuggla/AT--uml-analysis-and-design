@@ -11,30 +11,32 @@ namespace MemberRegistry.controller
 
         public override void ExecuteCommand() {
             int memberID = GetMemberID();
-            
             model.Member member = _ledger.GetMember(memberID);
 
-            if (member.Boats.Count > 0) 
-            {
-
-                DisplayMessage("Find the ID of the boat you would like to update.");
-
-                for (int i = 0; i < member.Boats.Count; i++)
+            if (member != null)
                 {
-                    dynamic viewModelBoat = GetBoatDisplayModel(member.Boats[i]);
-                    DisplayBoat(viewModelBoat);
+                    if (member.Boats.Count > 0) 
+                {
+
+                    DisplayMessage("Find the ID of the boat you would like to update.");
+
+                    for (int i = 0; i < member.Boats.Count; i++)
+                    {
+                        dynamic viewModelBoat = GetBoatDisplayModel(member.Boats[i]);
+                        DisplayBoat(viewModelBoat);
+                    } 
+
+                    int boatID = GetBoatID();
+                    BoatType boatType = GetBoatType();
+                    int boatLength = GetBoatLength();
+
+                    _ledger.UpdateBoat(memberID, boatID, boatType, boatLength);
+
                 } 
-
-                int boatID = GetBoatID();
-                BoatType boatType = GetBoatType();
-                int boatLength = GetBoatLength();
-
-                _ledger.UpdateBoat(memberID, boatID, boatType, boatLength);
-
-            } 
-            else 
-            {
-                DisplayMessage("Member has no boats.");
+                else 
+                {
+                    DisplayMessage("Member has no boats.");
+                }
             }
         }
     }

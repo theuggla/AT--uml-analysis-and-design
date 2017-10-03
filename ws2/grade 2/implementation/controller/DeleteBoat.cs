@@ -8,12 +8,15 @@ namespace MemberRegistry.controller
         public DeleteBoat(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
+        
         public override void ExecuteCommand() {
+            
             int memberID = GetMemberID();
-
             model.Member member = _ledger.GetMember(memberID);
 
-            if (member.Boats.Count > 0) {
+            if (member != null)
+            {
+                if (member.Boats.Count > 0) {
 
                 DisplayMessage("Find the ID of the boat you would like to delete.");
 
@@ -26,8 +29,9 @@ namespace MemberRegistry.controller
                 int boatID = GetBoatID();
                 _ledger.DeleteBoat(memberID, boatID);
 
-            } else {
-                DisplayMessage("Member has no boats.");
+                } else {
+                    DisplayMessage("Member has no boats.");
+                }
             }
         }
     }

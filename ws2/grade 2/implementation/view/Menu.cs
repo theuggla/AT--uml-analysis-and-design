@@ -27,5 +27,4 @@ namespace MemberRegistry.view
            this._menu.Add(command);
        }
     }
-
 }

@@ -1,0 +1,16 @@
+install dotnet depending on your operationg system: https://www.microsoft.com/net/core
+
+download the source code, cd into the project directory and run following commands:
+1. dotnet new console
+1.5 replace Program.cs with code in application.cs
+2. dotnet add package Newtonsoft.Json --version 10.0.3
+3. create runtime identifier from the list, like so:
+<PropertyGroup>
+    <RuntimeIdentifiers>win10-x64;osx.10.11-x64</RuntimeIdentifiers>
+</PropertyGroup>
+the list:
+https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
+4. dotnet restore
+5. dotnet publish -c Release -r [name-of-runtime]
+ex: dotnet publish -c Release -r win10-x64
+6. launch in platform-specific way

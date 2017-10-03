@@ -15,7 +15,7 @@ namespace MemberRegistry.controller
             this._ledger = ledger;
         }
 
-        public abstract void ExecuteCommand(); 
+        public abstract void ExecuteCommand();
 
         protected string GetMemberName()
         {

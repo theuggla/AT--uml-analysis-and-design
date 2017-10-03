@@ -27,9 +27,16 @@ namespace MemberRegistry.model
 
 		public Member GetMember(int id)
 		{
-			return this._members
+			try
+			{
+				return this._members
 				.Where(x => x.MemberID == id)
 				.ToList()[0];
+			}
+			catch (ArgumentOutOfRangeException e)
+			{
+				return null;
+			}
 		}
 
 		public void DeleteMember(int id)
@@ -42,8 +49,11 @@ namespace MemberRegistry.model
 		{
 			model.Member member = GetMember(id);
 
-            member.Name = newName;
-            member.PersonalNumber = newPersonalNumber;
+			if (member != null)
+			{
+				member.Name = newName;
+            	member.PersonalNumber = newPersonalNumber;
+			}
 		}
 
         public List<Member> GetMembers()
@@ -55,21 +65,30 @@ namespace MemberRegistry.model
 		{
 			model.Member member = GetMember(memberID);
 
-			member.AddBoat(boatType, boatLength);
+			if (member != null)
+			{
+				member.AddBoat(boatType, boatLength);
+			}
 		}
 
 		public void DeleteBoat(int memberID, int boatID)
 		{
 			model.Member member = GetMember(memberID);
 
-			member.RemoveBoat(boatID);
+			if (member != null)
+			{
+				member.RemoveBoat(boatID);
+			}
 		}
 
 		public void UpdateBoat(int memberID, int boatID, BoatType type, int length)
 		{
 			model.Member member = GetMember(memberID);
 
-			member.UpdateBoat(boatID, type, length);
+			if (member != null)
+			{
+				member.UpdateBoat(boatID, type, length);
+			}
 		}
 
 		public void SaveMemberList()

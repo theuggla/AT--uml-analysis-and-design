@@ -14,19 +14,21 @@ namespace MemberRegistry.controller
             int memberID = GetMemberID();
             model.Member member = _ledger.GetMember(memberID);
 
-            dynamic memberDisplayModel = GetMemberDisplayModel(member);
-            DisplayMember(memberDisplayModel);
-            
-            if (member.Boats.Count > 0)
+            if (member != null)
             {
-                DisplayMessage("Boats: ");
-                foreach(model.Boat boat in member.Boats)
+                dynamic memberDisplayModel = GetMemberDisplayModel(member);
+                DisplayMember(memberDisplayModel);
+            
+                if (member.Boats.Count > 0)
                 {
-                    dynamic boatDisplayModel = GetBoatDisplayModel(boat);
-                    DisplayBoat(boatDisplayModel);
+                    DisplayMessage("Boats: ");
+                    foreach(model.Boat boat in member.Boats)
+                    {
+                        dynamic boatDisplayModel = GetBoatDisplayModel(boat);
+                        DisplayBoat(boatDisplayModel);
+                    }
                 }
-            }
-
+            }        
         }
     }
 }
