@@ -8,7 +8,11 @@ namespace BlackJack.view
     interface IView
     {
         void DisplayWelcomeMessage();
-        int GetInput();
+        void CollectDesiredPlayerAction();
+        bool WantsToPlay();
+        bool WantsToHit();
+        bool WantsToStand();
+        bool WantsToQuit();
         void DisplayCard(model.Card a_card);
         void DisplayPlayerHand(IEnumerable<model.Card> a_hand, int a_score);
         void DisplayDealerHand(IEnumerable<model.Card> a_hand, int a_score);
