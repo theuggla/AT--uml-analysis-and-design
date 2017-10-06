@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace BlackJack.view
 {
@@ -16,16 +17,18 @@ namespace BlackJack.view
             System.Console.WriteLine("----------------------");
             System.Console.WriteLine("Skriv 'p' för att Spela, 'h' för nytt kort, 's' för att stanna 'q' för att avsluta\n");
         }
-        private int GetInput()
+
+        public void DisplayNewGameSetup()
         {
-            return System.Console.In.Read();
+            System.Console.Clear();
         }
+
         public void CollectDesiredPlayerAction()
         {
             this.action = this.GetInput();
         }
 
-                public bool WantsToPlay()
+        public bool WantsToPlay()
         {
             return action == 'p';
         }
@@ -60,14 +63,24 @@ namespace BlackJack.view
                 System.Console.WriteLine("{0} {1}", colors[(int)a_card.GetColor()], values[(int)a_card.GetValue()]);
             }
         }
+
         public void DisplayPlayerHand(IEnumerable<model.Card> a_hand, int a_score)
         {
             DisplayHand("Spelare", a_hand, a_score);
         }
+
         public void DisplayDealerHand(IEnumerable<model.Card> a_hand, int a_score)
         {
             DisplayHand("Croupier", a_hand, a_score);
         }
+
+        public void DisplayCardIsBeingDealt()
+        {
+            System.Console.WriteLine("Delar ut kort...");
+            Thread.Sleep(2000);
+            System.Console.Clear();
+        }
+
         public void DisplayGameOver(bool a_dealerIsWinner)
         {
             System.Console.Write("Slut: ");
@@ -79,6 +92,11 @@ namespace BlackJack.view
             {
                 System.Console.WriteLine("Du vann!");
             }
+        }
+
+        private int GetInput()
+        {
+            return System.Console.In.Read();
         }
 
         private void DisplayHand(String a_name, IEnumerable<model.Card> a_hand, int a_score)

@@ -11,12 +11,26 @@ namespace BlackJack.model
         private rules.INewGameStrategy m_newGameRule;
         private rules.IHitStrategy m_hitRule;
         private rules.IWinnerStrategy m_winnerRule;
+        private List<ICardDealtObserver> m_subrcribers;
 
         public Dealer(rules.RulesFactory a_rulesFactory)
         {
+            m_subrcribers = new List<ICardDealtObserver>();
             m_newGameRule = a_rulesFactory.GetNewGameRule();
             m_hitRule = a_rulesFactory.GetHitRule();
             m_winnerRule = a_rulesFactory.GetWinnerRule();
+        }
+
+        public bool AddSubscriber(ICardDealtObserver a_subscriber)
+        {
+            m_subrcribers.Add(a_subscriber);
+            return true;
+        }
+
+        public bool RemoveSubscriber(ICardDealtObserver a_subscriber)
+        {
+            m_subrcribers.Remove(a_subscriber);
+            return true;
         }
 
         public bool NewGame(Player a_player)
@@ -27,7 +41,7 @@ namespace BlackJack.model
                 this.ClearHand();
                 a_player.ClearHand();
 
-                return m_newGameRule.NewGame(m_deck, this, a_player);   
+                return m_newGameRule.NewGame(this, a_player);   
             }
 
             return false;
@@ -37,7 +51,7 @@ namespace BlackJack.model
         {
             if (this.GameIsGoingOn() && a_player.CalcScore() < g_maxScore && !this.IsGameOver(a_player))
             {
-                this.GiveCardToPlayer(a_player);
+                this.GiveCardToPlayer(a_player, true);
                 return true;
             }
 
@@ -52,7 +66,7 @@ namespace BlackJack.model
 
                 while (m_hitRule.DoHit(this))
                 {
-                    this.GiveCardToPlayer(this);
+                    this.GiveCardToPlayer(this, true);
                 }
 
                 return true;
@@ -60,6 +74,17 @@ namespace BlackJack.model
 
 
             return false;
+        }
+
+        public bool GiveCardToPlayer(Player a_player, bool show)
+        {
+            Card c = m_deck.GetCard();
+            c.Show(show);
+            a_player.DealCard(c);
+
+            this.NotifySubscribersOfCardDealt();
+
+            return true;
         }
 
         public bool IsDealerWinner(Player a_player)
@@ -76,6 +101,16 @@ namespace BlackJack.model
             return false;
         }
 
+        private bool NotifySubscribersOfCardDealt()
+        {
+            foreach(ICardDealtObserver observer in m_subrcribers) 
+            {
+                observer.CardDealt();
+            }
+
+            return true;
+        }
+
         private bool GameIsGoingOn()
         {
             return m_deck != null;
@@ -84,15 +119,6 @@ namespace BlackJack.model
         private bool DealerWantsToStand()
         {
             return m_hitRule.DoHit(this) != true;
-        }
-
-        private bool GiveCardToPlayer(Player a_playerToReceiveCard)
-        {
-            Card c = m_deck.GetCard();
-            c.Show(true);
-            a_playerToReceiveCard.DealCard(c);
-
-            return true;
         }
     }
 }

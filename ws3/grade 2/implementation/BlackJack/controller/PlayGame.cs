@@ -2,39 +2,62 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace BlackJack.controller
 {
-    class PlayGame
+    class PlayGame : model.ICardDealtObserver
     {
-        public bool Play(model.Game a_game, view.IView a_view)
+        private model.Game m_game;
+        private view.IView m_view;
+
+        public PlayGame(model.Game a_game, view.IView a_view)
         {
-            a_view.DisplayWelcomeMessage();
-            
-            a_view.DisplayDealerHand(a_game.GetDealerHand(), a_game.GetDealerScore());
-            a_view.DisplayPlayerHand(a_game.GetPlayerHand(), a_game.GetPlayerScore());
+            this.m_game = a_game;
+            this.m_view = a_view;
 
-            if (a_game.IsGameOver())
+            this.m_game.AddCardDealtObserver(this);
+        }
+
+        public bool Play()
+        {
+            m_view.DisplayWelcomeMessage();
+            this.DisplayHands();
+
+            if (m_game.IsGameOver())
             {
-                a_view.DisplayGameOver(a_game.IsDealerWinner());
+                m_view.DisplayGameOver(m_game.IsDealerWinner());
             }
 
-            a_view.CollectDesiredPlayerAction();
+            m_view.CollectDesiredPlayerAction();
 
-            if (a_view.WantsToPlay())
+            if (m_view.WantsToPlay())
             {
-                a_game.NewGame();
+                m_view.DisplayNewGameSetup();
+                m_game.NewGame();
             }
-            else if (a_view.WantsToHit())
+            else if (m_view.WantsToHit())
             {
-                a_game.Hit();
+                m_game.Hit();
             }
-            else if (a_view.WantsToStand())
+            else if (m_view.WantsToStand())
             {
-                a_game.Stand();
+                m_game.Stand();
             }
 
-            return !a_view.WantsToQuit();
+            return !m_view.WantsToQuit();
+        }
+
+        public void CardDealt()
+        {
+            this.m_view.DisplayCardIsBeingDealt();
+            this.DisplayHands();
+        }
+
+        private void DisplayHands()
+        {
+            m_view.DisplayDealerHand(m_game.GetDealerHand(), m_game.GetDealerScore());
+            m_view.DisplayPlayerHand(m_game.GetPlayerHand(), m_game.GetPlayerScore());
         }
     }
 }

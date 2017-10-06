@@ -8,6 +8,8 @@ namespace BlackJack.view
     interface IView
     {
         void DisplayWelcomeMessage();
+        void DisplayCardIsBeingDealt();
+        void DisplayNewGameSetup();
         void CollectDesiredPlayerAction();
         bool WantsToPlay();
         bool WantsToHit();
