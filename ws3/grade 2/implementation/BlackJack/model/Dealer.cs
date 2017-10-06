@@ -8,11 +8,9 @@ namespace BlackJack.model
     class Dealer : Player
     {
         private Deck m_deck = null;
-        private const int g_maxScore = 21;
         private rules.INewGameStrategy m_newGameRule;
         private rules.IHitStrategy m_hitRule;
         private rules.IWinnerStrategy m_winnerRule;
-
 
         public Dealer(rules.RulesFactory a_rulesFactory)
         {
@@ -37,13 +35,9 @@ namespace BlackJack.model
 
         public bool Hit(Player a_player)
         {
-            if (this.GameIsGoingOn() && a_player.CalcScore() < 21 && !this.IsGameOver(a_player))
+            if (this.GameIsGoingOn() && a_player.CalcScore() < g_maxScore && !this.IsGameOver(a_player))
             {
-                Card c;
-                c = m_deck.GetCard();
-                c.Show(true);
-                a_player.DealCard(c);
-
+                this.GiveCardToPlayer(a_player);
                 return true;
             }
 
@@ -54,14 +48,14 @@ namespace BlackJack.model
         {
             if (this.GameIsGoingOn())
             {
-                ShowHand();
+                this.ShowHand();
 
                 while (m_hitRule.DoHit(this))
                 {
-                    Card c = m_deck.GetCard();
-                    c.Show(true);
-                    DealCard(c);
+                    this.GiveCardToPlayer(this);
                 }
+
+                return true;
             }
 
 
@@ -75,7 +69,7 @@ namespace BlackJack.model
 
         public bool IsGameOver(Player a_player)
         {
-            if (this.GameIsGoingOn() && this.DealerWantsToStand() || a_player.CalcScore() >= 21)
+            if (this.GameIsGoingOn() && this.DealerWantsToStand() || a_player.CalcScore() >= g_maxScore)
             {
                 return true;
             }
@@ -90,6 +84,15 @@ namespace BlackJack.model
         private bool DealerWantsToStand()
         {
             return m_hitRule.DoHit(this) != true;
+        }
+
+        private bool GiveCardToPlayer(Player a_playerToReceiveCard)
+        {
+            Card c = m_deck.GetCard();
+            c.Show(true);
+            a_playerToReceiveCard.DealCard(c);
+
+            return true;
         }
     }
 }

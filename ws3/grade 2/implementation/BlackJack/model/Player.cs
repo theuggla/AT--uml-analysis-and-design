@@ -8,6 +8,7 @@ namespace BlackJack.model
     class Player
     {
         private List<Card> m_hand = new List<Card>();
+        protected const int g_maxScore = 21;
 
         public void DealCard(Card a_card)
         {
@@ -45,11 +46,11 @@ namespace BlackJack.model
                 }
             }
 
-            if (score > 21)
+            if (score > g_maxScore)
             {
                 foreach (Card c in GetHand())
                 {
-                    if (c.GetValue() == Card.Value.Ace && score > 21)
+                    if (c.GetValue() == Card.Value.Ace && score > g_maxScore)
                     {
                         score -= 10;
                     }
