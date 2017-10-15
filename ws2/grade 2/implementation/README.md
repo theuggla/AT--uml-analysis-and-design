@@ -3,7 +3,7 @@
 This is the source code to a basic CRUD MemberRegistry for the console. To download and compile from the command line, do as follows:
 
 ### Install dotnet
-Install dotnet depending on your operationg system, instructions here (https://www.microsoft.com/net/core).
+Install dotnet depending on your operating system, instructions here (https://www.microsoft.com/net/core).
 
 ### Initiate the project
 1. Download the source code.

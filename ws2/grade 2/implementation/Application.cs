@@ -10,7 +10,7 @@ namespace MemberRegistry
             model.MemberLedger ledger = new model.MemberLedger(persistance);
 			view.Console view = new view.Console();
             view.Menu menu = new view.Menu();
-			controller.User controller = new controller.User(view, menu);
+			controller.UserController controller = new controller.UserController(view, menu);
 
             PopulateMenu(view, ledger, menu);
 			controller.StartProgram();
@@ -18,16 +18,16 @@ namespace MemberRegistry
 
         static void PopulateMenu(view.IView view, model.MemberLedger ledger, view.Menu menu)
         {
-            controller.AddMember addMemberUseCase = new controller.AddMember("Create Member", view, ledger);
-			controller.ViewMember viewMemberUseCase = new controller.ViewMember("View Member", view, ledger);
-			controller.UpdateMember updateMemberUseCase = new controller.UpdateMember("Update Member", view, ledger);
-			controller.DeleteMember deleteMemberUseCase = new controller.DeleteMember("Delete Member", view, ledger);
-			controller.ListMembers listMembersUseCase = new controller.ListMembers("List Members", view, ledger);
-			controller.AddBoat addBoatUseCase = new controller.AddBoat("Add Boat", view, ledger);
-			controller.UpdateBoat updateBoatUseCase = new controller.UpdateBoat("Update Boat", view, ledger);
-			controller.DeleteBoat deleteBoatUseCase = new controller.DeleteBoat("Delete Boat", view, ledger);
-			controller.SaveChanges saveChangesUseCase = new controller.SaveChanges("Save Changes", view, ledger);
-			controller.ExitProgram exitProgramUseCase = new controller.ExitProgram("Exit Program", view, ledger);
+            controller.AddMemberCommand addMemberUseCase = new controller.AddMemberCommand("Create Member", view, ledger);
+			controller.ViewMemberCommand viewMemberUseCase = new controller.ViewMemberCommand("View Member", view, ledger);
+			controller.UpdateMemberCommand updateMemberUseCase = new controller.UpdateMemberCommand("Update Member", view, ledger);
+			controller.DeleteMemberCommand deleteMemberUseCase = new controller.DeleteMemberCommand("Delete Member", view, ledger);
+			controller.ListMembersCommand listMembersUseCase = new controller.ListMembersCommand("List Members", view, ledger);
+			controller.AddBoatCommand addBoatUseCase = new controller.AddBoatCommand("Add Boat", view, ledger);
+			controller.UpdateBoatCommand updateBoatUseCase = new controller.UpdateBoatCommand("Update Boat", view, ledger);
+			controller.DeleteBoatCommand deleteBoatUseCase = new controller.DeleteBoatCommand("Delete Boat", view, ledger);
+			controller.SaveChangesCommand saveChangesUseCase = new controller.SaveChangesCommand("Save Changes", view, ledger);
+			controller.ExitProgramCommand exitProgramUseCase = new controller.ExitProgramCommand("Exit Program", view, ledger);
 
 			menu.Add(addMemberUseCase);
 			menu.Add(viewMemberUseCase);
