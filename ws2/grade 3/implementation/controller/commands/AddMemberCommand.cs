@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class AddMember : BaseCommand
+    class AddMemberCommand : BaseCommand, LoggedInCommand
     {
-        public AddMember(string description, view.IView view, model.MemberLedger ledger) 
+        public AddMemberCommand(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 
@@ -13,9 +13,10 @@ namespace MemberRegistry.controller
         {
             DisplayMessage("Please give the member details:");
             string memberName = GetMemberName();
+            string memberPassword = GetMemberPassword();
             int personalNumber = GetMemberPersonalNumber();
 
-            _ledger.CreateMember(memberName, personalNumber);
+            _ledger.CreateMember(memberName, memberPassword, personalNumber);
         }
     }
 }

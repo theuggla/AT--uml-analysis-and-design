@@ -1,0 +1,10 @@
+[
+  {
+    "Name": "Sven",
+    "PersonalNumber": 22,
+    "Password": "crumcrum",
+    "IsLoggedIn": true,
+    "MemberID": 1,
+    "Boats": []
+  }
+]

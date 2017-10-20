@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class DeleteMember : BaseCommand
+    class DeleteMemberCommand : BaseCommand, LoggedInCommand
     {
-        public DeleteMember(string description, view.IView view, model.MemberLedger ledger) 
+        public DeleteMemberCommand (string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 

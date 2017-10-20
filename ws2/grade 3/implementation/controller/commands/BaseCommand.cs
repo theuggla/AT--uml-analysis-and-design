@@ -22,6 +22,11 @@ namespace MemberRegistry.controller
             return this._view.GetUserString("What is the name of the member?");
         }
 
+        protected string GetMemberPassword()
+        {
+            return this._view.GetUserString("What is the password of the member?");
+        }
+
         protected int GetMemberPersonalNumber()
         {
             return this._view.GetUserInt("What is the personal number of the member?", 0);

@@ -17,11 +17,11 @@ namespace MemberRegistry.model
 			this._members = InitiateMemberList();
 		}
 
-		public void CreateMember(string name, int personalNumber)
+		public void CreateMember(string name, string password, int personalNumber)
 		{
 			int newId = getNextMemberID();
 	
-			Member newMember = new Member(name, personalNumber, newId);
+			Member newMember = new Member(name, password, personalNumber, newId);
 			this._members.Add(newMember);
 		}
 
@@ -91,9 +91,57 @@ namespace MemberRegistry.model
 			}
 		}
 
+		public bool LoginMember(int id, string password)
+		{
+			try
+			{
+				model.Member member = this._members
+				.Where(x => x.MemberID == id && x.Password == password)
+				.ToList()[0];
+
+				member.IsLoggedIn = true;
+
+				return true;
+			}
+			catch (ArgumentOutOfRangeException e)
+			{
+				return false;
+			}
+		}
+
+		public void LogoutMember()
+		{
+			model.Member member = this.GetLoggedInMember();
+			
+			if (member != null) {
+				member.IsLoggedIn = false;
+			}
+		}
+
+		public bool ThereIsLoggedInMember()
+		{
+			return this.GetLoggedInMember() != null;
+		}
+
 		public void SaveMemberList()
 		{
 			this._persistance.SaveMemberList(this._members);
+		}
+
+		private model.Member GetLoggedInMember()
+		{
+			try
+			{
+				model.Member member = this._members
+				.Where(x => x.IsLoggedIn == true)
+				.ToList()[0];
+
+				return member;
+			}
+			catch (ArgumentOutOfRangeException e)
+			{
+				return null;
+			}
 		}
 
         private List<model.Member> InitiateMemberList()

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class AddBoat : BaseCommand
+    class AddBoatCommand : BaseCommand, LoggedInCommand
     {
-        public AddBoat(string description, view.IView view, model.MemberLedger ledger) 
+        public AddBoatCommand(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 

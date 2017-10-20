@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class UpdateMember : BaseCommand
+    class UpdateMemberCommand : BaseCommand, LoggedInCommand
     {
-        public UpdateMember(string description, view.IView view, model.MemberLedger ledger) 
+        public UpdateMemberCommand(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 
@@ -14,7 +14,6 @@ namespace MemberRegistry.controller
             string newName = GetMemberName();
             int newPersonalNumber = GetMemberPersonalNumber();
             
-
             _ledger.UpdateMember(memberID, newName, newPersonalNumber);
         }
     }

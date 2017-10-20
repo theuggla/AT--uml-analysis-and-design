@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class SaveChanges : BaseCommand
+    class SaveChangesCommand : BaseCommand, LoggedInCommand
     {
-        public SaveChanges(string description, view.IView view, model.MemberLedger ledger) 
+        public SaveChangesCommand(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 

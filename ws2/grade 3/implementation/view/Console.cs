@@ -12,7 +12,7 @@ namespace MemberRegistry.view
             System.Console.WriteLine($"{prompt}");
         }
 
-        public void ShowMenu(List<controller.BaseCommand> menuItems) 
+        public void ShowMenu(IEnumerable<controller.BaseCommand> menuItems) 
         {
             int i = 1;
             foreach (controller.BaseCommand item in menuItems) {

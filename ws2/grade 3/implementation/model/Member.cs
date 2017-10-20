@@ -8,12 +8,15 @@ namespace MemberRegistry.model
     {
         public string Name {get; set;}
         public int PersonalNumber {get; set;}
+        public string Password {get; set;}
+        public bool IsLoggedIn {get; set;}
         public int MemberID {get; set;}
         public List<Boat> Boats {get; set;}
 
-        public Member(string name, int number, int id)
+        public Member(string name, string password, int number, int id)
         {
             this.Name = name;
+            this.Password = password;
             this.PersonalNumber = number;
             this.MemberID = id;
 

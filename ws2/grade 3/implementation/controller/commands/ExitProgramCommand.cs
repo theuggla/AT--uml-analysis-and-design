@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class ExitProgram : BaseCommand
+    class ExitProgramCommand : BaseCommand, LoggedOutCommand
     {
-        public ExitProgram(string description, view.IView view, model.MemberLedger ledger) 
+        public ExitProgramCommand(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
 

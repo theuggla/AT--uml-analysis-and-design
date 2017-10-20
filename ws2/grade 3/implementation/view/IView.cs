@@ -9,7 +9,7 @@ namespace MemberRegistry.view
 	{
 		void DisplayMessage(string prompt);
 
-        void ShowMenu(List<controller.BaseCommand> menuItems);
+        void ShowMenu(IEnumerable<controller.BaseCommand> menuItems);
 
         void DisplayUserInfo(dynamic info);
 

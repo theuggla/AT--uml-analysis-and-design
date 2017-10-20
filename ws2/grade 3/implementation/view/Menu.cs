@@ -26,5 +26,18 @@ namespace MemberRegistry.view
        {
            this._menu.Add(command);
        }
+
+       public IEnumerable<controller.BaseCommand> GetMenuSubset(bool isLoggedIn)
+       {
+           if (isLoggedIn) {
+               return this._menu
+                        .OfType<controller.LoggedInCommand>()
+                        .Cast<controller.BaseCommand>();
+           } else {
+               return this._menu
+                        .OfType<controller.LoggedOutCommand>()
+                        .Cast<controller.BaseCommand>();
+           }
+       }
     }
 }
