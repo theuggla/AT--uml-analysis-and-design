@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class AddMemberCommand : BaseCommand, LoggedInCommand
+    class AddMemberCommand : CRUDCommand
     {
         public AddMemberCommand(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
@@ -11,10 +11,9 @@ namespace MemberRegistry.controller
 
         public override void ExecuteCommand() 
         {
-            DisplayMessage("Please give the member details:");
-            string memberName = GetMemberName();
-            string memberPassword = GetMemberPassword();
-            int personalNumber = GetMemberPersonalNumber();
+            string memberName = base.GetMemberName();
+            string memberPassword = base.GetMemberPassword();
+            int personalNumber = base.GetMemberPersonalNumber();
 
             _ledger.CreateMember(memberName, memberPassword, personalNumber);
         }

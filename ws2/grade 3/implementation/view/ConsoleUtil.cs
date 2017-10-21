@@ -5,39 +5,28 @@ using System.Text;
 
 namespace MemberRegistry.view
 {
-	class Console : IView
+	class ConsoleUtil
 	{
-		public void DisplayMessage(string prompt) 
+        public void DisplaySuccessMessage(string prompt)
         {
-            System.Console.WriteLine($"{prompt}");
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.WriteLine($"*********{prompt}********");
+            Console.WriteLine();
+
+            Console.ResetColor();
+            Console.WriteLine();
         }
 
-        public void ShowMenu(IEnumerable<controller.BaseCommand> menuItems) 
+        public void DisplayFailureMessage(string prompt)
         {
-            int i = 1;
-            foreach (controller.BaseCommand item in menuItems) {
-                System.Console.WriteLine($"{i}. {item.Description}");
-                i++;
-            }
-        }
+            Console.WriteLine();
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine($"*********{prompt}********");
+            Console.WriteLine();
 
-        public void ShowSearchCriteria(IEnumerable<model.ISearchCriteria> criteriaItems)
-        {
-            int i = 1;
-            foreach (model.ISearchCriteria item in criteriaItems) {
-                System.Console.WriteLine($"{i}. {item.GetDescription()}");
-                i++;
-            }
-        }
-
-        public void DisplayUserInfo(dynamic info) 
-        {
-            foreach(var prop in info.GetType().GetProperties())
-            {
-                System.Console.WriteLine($"{prop.Name}: {prop.GetValue(info, null)}");
-            }
-
-            System.Console.WriteLine();
+            Console.ResetColor();
+            Console.WriteLine();
         }
 
         public int GetUserInt(string prompt, int minValue = int.MinValue, int maxValue = int.MaxValue)

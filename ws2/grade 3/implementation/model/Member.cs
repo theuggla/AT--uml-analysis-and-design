@@ -24,6 +24,11 @@ namespace MemberRegistry.model
             this.Boats = new List<Boat>();
         }
 
+        public model.Boat GetBoat(int id)
+        {
+			return this.Boats.Where(boat => boat.BoatID == id).ToList()[0];
+        }
+
         public void AddBoat(BoatType type, int length)
         {
             int newId = GetNextBoatID();
@@ -31,15 +36,13 @@ namespace MemberRegistry.model
 			this.Boats.Add(newBoat);
         }
 
-        public void RemoveBoat(int id) {
-            this.Boats.RemoveAll(x => x.BoatID == id);
+        public void RemoveBoat(model.Boat boat) 
+        {
+            this.Boats.Remove(boat);
         }
 
-        public void UpdateBoat(int boatID, BoatType type, int length) {
-            Boat boat = this.Boats
-                .Where(x => x.BoatID == boatID)
-                .ToList()[0];
-
+        public void UpdateBoat(model.Boat boat, BoatType type, int length) 
+        {
             boat.Update(type, length);
         }
 

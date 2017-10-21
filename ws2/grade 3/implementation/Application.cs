@@ -1,23 +1,26 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MemberRegistry
 {
-    class Program
+    class Application
     {
         static void Main(string[] args)
         {
             persistance.IPersistance persistance = new persistance.JSONFilePersistance("saved.json");
             model.MemberLedger ledger = new model.MemberLedger(persistance);
-			view.Console view = new view.Console();
-            view.Menu menu = new view.Menu();
-			controller.UserController controller = new controller.UserController(view, menu, ledger);
+			view.MainView view = new view.MainView();
+			IEnumerable<model.IMenuItem> menu = PopulateMenu(view, ledger);
+			controller.UserController controller = new controller.UserController(view, ledger, menu);
 
-            PopulateMenu(view, ledger, menu);
 			controller.StartProgram();
         }
 
-        static void PopulateMenu(view.IView view, model.MemberLedger ledger, view.Menu menu)
+        static IEnumerable<model.IMenuItem> PopulateMenu(view.IView view, model.MemberLedger ledger)
         {
+			List<model.IMenuItem> menu = new List<model.IMenuItem>();
+
             controller.AddMemberCommand addMemberUseCase = new controller.AddMemberCommand("Create Member", view, ledger);
 			controller.ViewMemberCommand viewMemberUseCase = new controller.ViewMemberCommand("View Member", view, ledger);
 			controller.UpdateMemberCommand updateMemberUseCase = new controller.UpdateMemberCommand("Update Member", view, ledger);
@@ -43,6 +46,8 @@ namespace MemberRegistry
 			menu.Add(loginUserUseCase);
 			menu.Add(logoutUserUseCase);
 			menu.Add(exitProgramUseCase);
+
+			return menu;
         }
     }
 }

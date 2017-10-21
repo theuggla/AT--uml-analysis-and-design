@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace MemberRegistry.model
 {
-	interface ISearchCriteria
+	interface ISearchCriteria : model.IMenuItem
 	{
-        string GetDescription();
         IEnumerable<model.Member> ExecuteCriteria(IEnumerable<model.Member> memberList);
     }
 }

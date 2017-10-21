@@ -4,120 +4,65 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    abstract class BaseCommand
+    abstract class BaseCommand : model.IMenuItem
     {
-        public string Description {get;}
+        private string _description;
         protected model.MemberLedger _ledger;
-        private view.IView _view;
+        protected view.IView _view;
+        protected model.Member _currentlySelectedMember;
 
-        public BaseCommand(string description, view.IView view, model.MemberLedger ledger) {
-            this.Description = description;
+        public BaseCommand(string description, view.IView view, model.MemberLedger ledger) 
+        {
+            this._description = description;
             this._view = view;
             this._ledger = ledger;
         }
 
         public abstract void ExecuteCommand();
 
-        protected string GetMemberName()
+        public string GetDescription()
         {
-            return this._view.GetUserString("What is the name of the member?");
+            return this._description;
+        }
+
+        protected model.Member GetMember()
+        {
+            return this._view.GetSelectedMember(this._ledger);
         }
 
         protected string GetMemberPassword()
         {
-            return this._view.GetUserString("What is the password of the member?");
+            return this._view.GetMemberPassword();
         }
 
-        protected int GetMemberPersonalNumber()
+        protected void DisplaySuccessMessage(string prompt)
         {
-            return this._view.GetUserInt("What is the personal number of the member?", 0);
+            this._view.DisplaySuccessMessage(prompt);
         }
 
-        protected int GetMemberID()
+        protected void DisplayFailureMessage(string prompt)
         {
-            return this._view.GetUserInt("What is the ID of the member?");
+            this._view.DisplayFailureMessage(prompt);
         }
 
-        protected int GetBoatLength()
+        protected bool MemberExists()
         {
-            return this._view.GetUserInt("What is the length of the boat?");
+            return this._currentlySelectedMember != null;
         }
 
-        protected BoatType GetBoatType()
+        protected bool MemberHasBoats()
         {
-             BoatType type = _view.GetUserEnum<BoatType>("What is the type of the boat?");
-             return type;
+            return this._currentlySelectedMember.Boats.Count > 0;
         }
 
-        protected int GetBoatID()
+        protected model.Boat GetBoat()
         {
-            return this._view.GetUserInt("What is the ID of the boat?");
-        }
-
-        protected dynamic GetMemberDisplayModel(model.Member member, bool verbose = true)
-        {
-            dynamic displayModel = verbose ? GetVerboseDisplayModel(member) : GetCompactDisplayModel(member);
-            return displayModel;
-        }
-            
-        protected dynamic GetBoatDisplayModel(model.Boat boat)
-        {
-            dynamic displayModel = new {BoatID = boat.BoatID, Length = boat.Length, BoatType = boat.Type.ToString()};
-
-            return displayModel;
+            return this._view.GetSelectedBoat(this._currentlySelectedMember);
         }
 
         protected model.ISearchCriteria GetSearchCriteria(IEnumerable<model.ISearchCriteria> criteriaList)
         {
-            this._view.ShowSearchCriteria(criteriaList);
-            int criteriaIndex = this._view.GetUserInt("Which criteria do you want to search for?", 1, criteriaList.Count());
-            return criteriaList.ElementAt(criteriaIndex -1);
-        }
-
-        protected void DisplayMember(dynamic memberDisplayModel)
-        {
-            this._view.DisplayUserInfo(memberDisplayModel);
-        }
-
-        protected void DisplayBoat(dynamic boatDisplayModel)
-        {
-            this._view.DisplayUserInfo(boatDisplayModel);
-        }
-
-        protected void DisplayMessage(string prompt)
-        {
-            this._view.DisplayMessage(prompt);
-        }
-
-        protected bool GetUserBoolean(string prompt)
-        {
-            return this._view.GetUserBoolean(prompt);
-        }
-
-        private dynamic GetVerboseDisplayModel(model.Member member)
-        {
-
-            string name = member.Name;
-            int personalNumber = member.PersonalNumber;
-            int memberID = member.MemberID;
-        
-            return new {
-                        Name = name, 
-                        PersonalNumber = personalNumber, 
-                        MemberID = memberID
-                    };
-        }
-
-        private dynamic GetCompactDisplayModel(model.Member member)
-        {
-            dynamic displayModel = new {
-                                    Name = member.Name, 
-                                    PersonalNumber = member.PersonalNumber, 
-                                    MemberID = member.MemberID,
-                                    Boats = member.Boats.Count
-                                };
-            return displayModel;
-
+            return (model.ISearchCriteria) this._view.GetSelectedMenuItem<model.ISearchCriteria>("Search Criteria", criteriaList);
         }
     }
 }

@@ -39,16 +39,14 @@ namespace MemberRegistry.model
 			}
 		}
 
-		public void DeleteMember(int id)
+		public void DeleteMember(model.Member member)
 		{
 			this._members
-				.RemoveAll(x => x.MemberID == id);
+				.Remove(member);
 		}
 
-		public void UpdateMember(int id, string newName, int newPersonalNumber)
+		public void UpdateMember(model.Member member, string newName, int newPersonalNumber)
 		{
-			model.Member member = GetMember(id);
-
 			if (member != null)
 			{
 				member.Name = newName;
@@ -56,57 +54,38 @@ namespace MemberRegistry.model
 			}
 		}
 
-        public List<Member> GetMembers()
+        public IEnumerable<Member> GetMembers()
 		{
 			return this._members;
 		}
 
-		public void RegisterBoat(int memberID, BoatType boatType, int boatLength)
+		public void RegisterBoat(model.Member member, BoatType boatType, int boatLength)
 		{
-			model.Member member = GetMember(memberID);
-
 			if (member != null)
 			{
 				member.AddBoat(boatType, boatLength);
 			}
 		}
 
-		public void DeleteBoat(int memberID, int boatID)
+		public void DeleteBoat(model.Member member, model.Boat boat)
 		{
-			model.Member member = GetMember(memberID);
-
 			if (member != null)
 			{
-				member.RemoveBoat(boatID);
+				member.RemoveBoat(boat);
 			}
 		}
 
-		public void UpdateBoat(int memberID, int boatID, BoatType type, int length)
+		public void UpdateBoat(model.Member member, model.Boat boat, BoatType type, int length)
 		{
-			model.Member member = GetMember(memberID);
-
 			if (member != null)
 			{
-				member.UpdateBoat(boatID, type, length);
+				member.UpdateBoat(boat, type, length);
 			}
 		}
 
-		public bool LoginMember(int id, string password)
+		public void LoginMember(model.Member member)
 		{
-			try
-			{
-				model.Member member = this._members
-				.Where(x => x.MemberID == id && x.Password == password)
-				.ToList()[0];
-
-				member.IsLoggedIn = true;
-
-				return true;
-			}
-			catch (ArgumentOutOfRangeException e)
-			{
-				return false;
-			}
+			member.IsLoggedIn = true;
 		}
 
 		public void LogoutMember()
@@ -117,12 +96,7 @@ namespace MemberRegistry.model
 				member.IsLoggedIn = false;
 			}
 		}
-
-		public bool ThereIsLoggedInMember()
-		{
-			return this.GetLoggedInMember() != null;
-		}
-
+		
 		public void SaveMemberList()
 		{
 			this._persistance.SaveMemberList(this._members);

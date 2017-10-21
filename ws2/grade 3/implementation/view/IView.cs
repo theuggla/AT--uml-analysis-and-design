@@ -7,19 +7,19 @@ namespace MemberRegistry.view
 {
 	interface IView
 	{
-		void DisplayMessage(string prompt);
-
-        void ShowMenu(IEnumerable<controller.BaseCommand> menuItems);
-        void ShowSearchCriteria(IEnumerable<model.ISearchCriteria> criteriaItems);
-
-        void DisplayUserInfo(dynamic info);
-
-        int GetUserInt(string prompt, int minValue = int.MinValue, int maxValue = int.MaxValue);
-
-        bool GetUserBoolean(string question);
-
-        TEnum GetUserEnum<TEnum>(string prompt) where TEnum : struct;
-
-        string GetUserString(string prompt);
+		void DisplayWelcomeMessage();
+		void DisplaySuccessMessage(string prompt);
+		void DisplayFailureMessage(string prompt);
+        void DisplayMembers(IEnumerable<model.Member> members);
+		void DisplayBoats(IEnumerable<model.Boat> boats);
+		model.Member GetCurrentUser(model.MemberLedger ledger);
+		model.Member GetSelectedMember(model.MemberLedger ledger);
+		model.Boat GetSelectedBoat(model.Member member);
+		model.IMenuItem GetSelectedMenuItem<TMenuInterface>(string menuName, IEnumerable<model.IMenuItem> completeSelection);
+		string GetMemberPassword();
+		string GetMemberName();
+		int GetMemberPersonalNumber();
+        int GetBoatLength();
+        BoatType GetBoatType();
 	}
 }

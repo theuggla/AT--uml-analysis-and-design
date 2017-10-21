@@ -9,36 +9,37 @@ namespace MemberRegistry.controller
 	class UserController
 	{
 		private view.IView _view;
-		private view.Menu _menu;
-		private IEnumerable<controller.BaseCommand> _currentMenu;
 		private model.MemberLedger _ledger;
+		private IEnumerable<model.IMenuItem> _completeMenuSelection;
+		private model.Member _currentUser;
 
-		public UserController(view.IView view, view.Menu menu, model.MemberLedger ledger)
+		public UserController(view.IView mainView, model.MemberLedger ledger, IEnumerable<model.IMenuItem> completeMenuSelection)
 		{
-			this._view = view;
-			this._menu = menu;
+			this._view = mainView;
 			this._ledger = ledger;
+			this._completeMenuSelection = completeMenuSelection;
 		}
 
 		public void StartProgram()
 		{
-			_view.DisplayMessage("Hi.");
+			_view.DisplayWelcomeMessage();
+			this._currentUser = _view.GetCurrentUser(this._ledger);
 
 			while (true)
 			{
-				bool userIsLoggedIn = this._ledger.ThereIsLoggedInMember();
-				this._currentMenu = this._menu.GetMenuSubset(userIsLoggedIn);
+				controller.BaseCommand useCase;
 
-				_view.ShowMenu(this._currentMenu);
-				controller.BaseCommand useCase = this.GetCorrectUseCase();
+				if (this._currentUser != null && this._currentUser.IsLoggedIn)
+				{
+					useCase = (controller.BaseCommand) this._view.GetSelectedMenuItem<controller.ILoggedInCommand>("Logged In Menu", this._completeMenuSelection);
+				}
+				else
+				{
+					useCase = (controller.BaseCommand) this._view.GetSelectedMenuItem<controller.ILoggedOutCommand>("Logged Out Menu", this._completeMenuSelection);
+				}
+				
 				PlayOutUseCase(useCase);
 			}
-		}
-
-		private controller.BaseCommand GetCorrectUseCase()
-		{
-			int userChoice = this._view.GetUserInt("Chose a number in the menu", 1, this._currentMenu.Count());
-			return this._currentMenu.ElementAt(userChoice - 1);
 		}
 
 		private void PlayOutUseCase(controller.BaseCommand useCase)

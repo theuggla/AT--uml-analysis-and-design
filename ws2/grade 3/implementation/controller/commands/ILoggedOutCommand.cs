@@ -3,5 +3,5 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    interface LoggedInCommand {}
+    interface ILoggedOutCommand {}
 }
