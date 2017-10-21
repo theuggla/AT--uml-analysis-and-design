@@ -128,6 +128,16 @@ namespace MemberRegistry.model
 			this._persistance.SaveMemberList(this._members);
 		}
 
+		public IEnumerable<model.ISearchCriteria> GetSearchCriteriaList()
+		{
+			throw new NotImplementedException();
+		}
+
+		public IEnumerable<model.Member> Search(model.ISearchCriteria criteria)
+		{
+			return criteria.ExecuteCriteria(this._members);
+		}
+
 		private model.Member GetLoggedInMember()
 		{
 			try
