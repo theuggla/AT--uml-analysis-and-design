@@ -23,10 +23,10 @@ namespace MemberRegistry
 			controller.UpdateMemberCommand updateMemberUseCase = new controller.UpdateMemberCommand("Update Member", view, ledger);
 			controller.DeleteMemberCommand deleteMemberUseCase = new controller.DeleteMemberCommand("Delete Member", view, ledger);
 			controller.ListMembersCommand listMembersUseCase = new controller.ListMembersCommand("List Members", view, ledger);
+			controller.SearchCommand searchUseCase = new controller.SearchCommand("Search Members", view, ledger);
 			controller.AddBoatCommand addBoatUseCase = new controller.AddBoatCommand("Add Boat", view, ledger);
 			controller.UpdateBoatCommand updateBoatUseCase = new controller.UpdateBoatCommand("Update Boat", view, ledger);
 			controller.DeleteBoatCommand deleteBoatUseCase = new controller.DeleteBoatCommand("Delete Boat", view, ledger);
-			controller.SaveChangesCommand saveChangesUseCase = new controller.SaveChangesCommand("Save Changes", view, ledger);
 			controller.LoginUserCommand loginUserUseCase = new controller.LoginUserCommand("Login User", view, ledger);
 			controller.LogoutUserCommand logoutUserUseCase = new controller.LogoutUserCommand("Logout User", view, ledger);
 			controller.ExitProgramCommand exitProgramUseCase = new controller.ExitProgramCommand("Exit Program", view, ledger);
@@ -36,10 +36,10 @@ namespace MemberRegistry
 			menu.Add(updateMemberUseCase);
 			menu.Add(deleteMemberUseCase);
 			menu.Add(listMembersUseCase);
+			menu.Add(searchUseCase);
 			menu.Add(addBoatUseCase);
 			menu.Add(updateBoatUseCase);
 			menu.Add(deleteBoatUseCase);
-			menu.Add(saveChangesUseCase);
 			menu.Add(loginUserUseCase);
 			menu.Add(logoutUserUseCase);
 			menu.Add(exitProgramUseCase);

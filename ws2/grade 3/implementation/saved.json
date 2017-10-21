@@ -3,8 +3,14 @@
     "Name": "Sven",
     "PersonalNumber": 22,
     "Password": "crumcrum",
-    "IsLoggedIn": true,
+    "IsLoggedIn": false,
     "MemberID": 1,
-    "Boats": []
+    "Boats": [
+      {
+        "Length": 22,
+        "Type": 2,
+        "BoatID": 1
+      }
+    ]
   }
 ]

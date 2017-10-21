@@ -21,6 +21,15 @@ namespace MemberRegistry.view
             }
         }
 
+        public void ShowSearchCriteria(IEnumerable<model.ISearchCriteria> criteriaItems)
+        {
+            int i = 1;
+            foreach (model.ISearchCriteria item in criteriaItems) {
+                System.Console.WriteLine($"{i}. {item.GetDescription()}");
+                i++;
+            }
+        }
+
         public void DisplayUserInfo(dynamic info) 
         {
             foreach(var prop in info.GetType().GetProperties())

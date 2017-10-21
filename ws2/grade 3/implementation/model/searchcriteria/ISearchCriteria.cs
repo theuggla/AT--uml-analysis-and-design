@@ -8,6 +8,7 @@ namespace MemberRegistry.model
 {
 	interface ISearchCriteria
 	{
+        string GetDescription();
         IEnumerable<model.Member> ExecuteCriteria(IEnumerable<model.Member> memberList);
     }
 }

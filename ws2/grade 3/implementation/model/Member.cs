@@ -19,6 +19,7 @@ namespace MemberRegistry.model
             this.Password = password;
             this.PersonalNumber = number;
             this.MemberID = id;
+            this.IsLoggedIn = false;
 
             this.Boats = new List<Boat>();
         }

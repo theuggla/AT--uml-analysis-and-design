@@ -10,6 +10,7 @@ namespace MemberRegistry.view
 		void DisplayMessage(string prompt);
 
         void ShowMenu(IEnumerable<controller.BaseCommand> menuItems);
+        void ShowSearchCriteria(IEnumerable<model.ISearchCriteria> criteriaItems);
 
         void DisplayUserInfo(dynamic info);
 

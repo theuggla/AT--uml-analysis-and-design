@@ -130,7 +130,9 @@ namespace MemberRegistry.model
 
 		public IEnumerable<model.ISearchCriteria> GetSearchCriteriaList()
 		{
-			throw new NotImplementedException();
+			List<model.ISearchCriteria> criteria = new List<model.ISearchCriteria>();
+			criteria.Add(new model.HasCanoeCriteria());
+			return criteria;
 		}
 
 		public IEnumerable<model.Member> Search(model.ISearchCriteria criteria)

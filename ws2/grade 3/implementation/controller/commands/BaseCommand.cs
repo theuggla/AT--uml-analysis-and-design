@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
@@ -64,6 +65,13 @@ namespace MemberRegistry.controller
             dynamic displayModel = new {BoatID = boat.BoatID, Length = boat.Length, BoatType = boat.Type.ToString()};
 
             return displayModel;
+        }
+
+        protected model.ISearchCriteria GetSearchCriteria(IEnumerable<model.ISearchCriteria> criteriaList)
+        {
+            this._view.ShowSearchCriteria(criteriaList);
+            int criteriaIndex = this._view.GetUserInt("Which criteria do you want to search for?", 1, criteriaList.Count());
+            return criteriaList.ElementAt(criteriaIndex -1);
         }
 
         protected void DisplayMember(dynamic memberDisplayModel)

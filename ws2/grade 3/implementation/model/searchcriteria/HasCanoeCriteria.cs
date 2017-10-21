@@ -12,5 +12,10 @@ namespace MemberRegistry.model
                     .Where(x => x.Boats.Count > 0)
                     .Where(x => x.Boats.Where(boat => boat.Type == BoatType.Canoe).ToList().Count > 0);
         }
+
+        public string GetDescription()
+        {
+            return "Members who have a canoe.";
+        }
     }
 }
