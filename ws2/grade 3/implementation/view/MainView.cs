@@ -75,8 +75,6 @@ namespace MemberRegistry.view
                 {
                     return member;
                 }
-
-                Console.WriteLine("Sorry, wrong password.");
             }
 
             return null;
@@ -84,6 +82,7 @@ namespace MemberRegistry.view
 
         public model.Member GetSelectedMember(model.MemberLedger ledger)
         {
+            Console.Clear();
             int id = this._console.GetUserInt("ID of member: ");
             return ledger.GetMember(id);
         }
@@ -101,6 +100,7 @@ namespace MemberRegistry.view
         
         public void DisplayMembers(IEnumerable<model.Member> members) 
         {
+            Console.Clear();
             bool verbose = this._console.GetUserBoolean("Do you want detailed information?");
             string header = members.Count() > 1 ? "Member List" : "Member Info";
 
@@ -115,28 +115,27 @@ namespace MemberRegistry.view
 
             System.Console.WriteLine($"**********~{header}~**********");
             System.Console.WriteLine();
-            System.Console.Write("Press enter to return to menu.");
-            System.Console.ReadLine();
+            this._console.PauseUntilProceedIsIndicated();
         }
 
         private void DisplayMember(model.Member member, bool verbose) 
         {
+            System.Console.WriteLine($"Member ID: {member.MemberID}");
+            System.Console.WriteLine($"Name: {member.Name}");
+
             if (verbose)
             {
-                System.Console.WriteLine($"Member ID: {member.MemberID}");
-                System.Console.WriteLine($"Name: {member.Name}");
                 System.Console.WriteLine($"Personal Number: {member.PersonalNumber}");
                 System.Console.WriteLine();
                 this.DisplayBoats(member.Boats);
-                System.Console.WriteLine();
             }
             else
             {
-                System.Console.WriteLine($"Member ID: {member.MemberID}");
-                System.Console.WriteLine($"Name: {member.Name}");
                 System.Console.WriteLine($"Boats: {member.Boats.Count}");
                 System.Console.WriteLine();
             }
+
+            System.Console.WriteLine("-------------------------------------");
         }
 
         public void DisplayBoats(IEnumerable<model.Boat> boats) 
@@ -147,7 +146,6 @@ namespace MemberRegistry.view
                 foreach(model.Boat boat in boats)
                 {
                     this.DisplayBoat(boat);
-                    System.Console.WriteLine();
                 }
 
             }

@@ -13,15 +13,8 @@ namespace MemberRegistry.controller
         {
             base._currentlySelectedMember = base.GetMember();
 
-            if (base.MemberExists() && base.MemberHasBoats())
-            {
-                base.DisplayBoats();
-                this.UpdateBoat();
-            }
-            else 
-            {
-                base.DisplayFailureMessage("Member has no boats.");
-            }
+            base.DisplayBoats();
+            this.UpdateBoat();
     }
 
     private void UpdateBoat()

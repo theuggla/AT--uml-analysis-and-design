@@ -20,7 +20,7 @@ namespace MemberRegistry.view
            this.DisplayMenu(menuName, itemsToDisplay);
            int choice = console.GetUserInt($"Select number from {menuName}: ", 1, itemsToDisplay.Count());
 
-           return itemsToDisplay.ElementAt(choice);
+           return itemsToDisplay.ElementAt(choice - 1);
        }
 
        private IEnumerable<model.IMenuItem> GetMenuSubset<TMenuInterface>(IEnumerable<model.IMenuItem> completeSelection)

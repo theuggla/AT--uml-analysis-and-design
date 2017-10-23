@@ -4,18 +4,13 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    abstract class DisplayCommand : BaseCommand, ILoggedOutCommand
+    abstract class DisplayCommand : BaseCommand, ILoggedInCommand
     {
         protected List<model.Member> _currentMemberList;
 
         public DisplayCommand(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
         {}
-
-        protected bool ThereAreMembersInTheSystem()
-        {
-            return this._currentMemberList.Count() != 0;
-        }
 
         protected void DisplayMembers()
         {

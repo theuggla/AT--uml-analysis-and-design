@@ -20,17 +20,20 @@ namespace MemberRegistry
         static IEnumerable<model.IMenuItem> PopulateMenu(view.IView view, model.MemberLedger ledger)
         {
 			List<model.IMenuItem> menu = new List<model.IMenuItem>();
+			List<model.ISearchCriteria> criteria = PopulateSearchCriteriaList();
 
-            controller.AddMemberCommand addMemberUseCase = new controller.AddMemberCommand("Create Member", view, ledger);
+
 			controller.ViewMemberCommand viewMemberUseCase = new controller.ViewMemberCommand("View Member", view, ledger);
+			controller.ListMembersCommand listMembersUseCase = new controller.ListMembersCommand("List Members", view, ledger);
+			controller.SearchCommand searchUseCase = new controller.SearchCommand("Search Members", view, ledger, criteria);
+
+			controller.AddMemberCommand addMemberUseCase = new controller.AddMemberCommand("Create Member", view, ledger);
 			controller.UpdateMemberCommand updateMemberUseCase = new controller.UpdateMemberCommand("Update Member", view, ledger);
 			controller.DeleteMemberCommand deleteMemberUseCase = new controller.DeleteMemberCommand("Delete Member", view, ledger);
-			controller.ListMembersCommand listMembersUseCase = new controller.ListMembersCommand("List Members", view, ledger);
-			controller.SearchCommand searchUseCase = new controller.SearchCommand("Search Members", view, ledger);
 			controller.AddBoatCommand addBoatUseCase = new controller.AddBoatCommand("Add Boat", view, ledger);
 			controller.UpdateBoatCommand updateBoatUseCase = new controller.UpdateBoatCommand("Update Boat", view, ledger);
 			controller.DeleteBoatCommand deleteBoatUseCase = new controller.DeleteBoatCommand("Delete Boat", view, ledger);
-			controller.LoginUserCommand loginUserUseCase = new controller.LoginUserCommand("Login User", view, ledger);
+
 			controller.LogoutUserCommand logoutUserUseCase = new controller.LogoutUserCommand("Logout User", view, ledger);
 			controller.ExitProgramCommand exitProgramUseCase = new controller.ExitProgramCommand("Exit Program", view, ledger);
 
@@ -43,11 +46,19 @@ namespace MemberRegistry
 			menu.Add(addBoatUseCase);
 			menu.Add(updateBoatUseCase);
 			menu.Add(deleteBoatUseCase);
-			menu.Add(loginUserUseCase);
 			menu.Add(logoutUserUseCase);
 			menu.Add(exitProgramUseCase);
 
 			return menu;
         }
+
+		public static List<model.ISearchCriteria> PopulateSearchCriteriaList()
+		{
+			List<model.ISearchCriteria> criteria = new List<model.ISearchCriteria>();
+
+			criteria.Add(new model.HasCanoeCriteria());
+
+			return criteria;
+		}
     }
 }

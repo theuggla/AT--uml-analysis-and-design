@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.controller 
 {
-    class ViewMemberCommand : DisplayCommand
+    class ViewMemberCommand : DisplayCommand, ILoggedOutCommand
     {
        public ViewMemberCommand(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)
@@ -12,15 +12,7 @@ namespace MemberRegistry.controller
         public override void ExecuteCommand() 
         {
             base._currentlySelectedMember = base.GetMember();
-
-            if (base.MemberExists())
-            {
-                base.DisplayMember();
-            }
-            else
-            {
-                base.DisplayFailureMessage("No such member");
-            }        
+            base.DisplayMember();      
         }
     }
 }

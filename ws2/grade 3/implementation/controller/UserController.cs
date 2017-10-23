@@ -23,7 +23,7 @@ namespace MemberRegistry.controller
 		public void StartProgram()
 		{
 			_view.DisplayWelcomeMessage();
-			this._currentUser = _view.GetCurrentUser(this._ledger);
+			this.TryToLogInUser();
 
 			while (true)
 			{
@@ -42,9 +42,29 @@ namespace MemberRegistry.controller
 			}
 		}
 
+		private void TryToLogInUser()
+		{
+			try
+			{
+				this._currentUser = _view.GetCurrentUser(this._ledger);
+			}
+			catch (Exception)
+			{
+				this._view.DisplayFailureMessage("Wrong ID or password.");
+			}
+		}
+
 		private void PlayOutUseCase(controller.BaseCommand useCase)
 		{
-			useCase.ExecuteCommand();
+			try
+			{
+				useCase.ExecuteCommand();
+			}
+			catch (Exception)
+			{
+				this._view.DisplayFailureMessage("Sorry, something went wrong. Perhaps try again?");
+			}
+			
 		}
 	}
 }

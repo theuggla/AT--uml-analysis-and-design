@@ -16,6 +16,8 @@ namespace MemberRegistry.view
 
             Console.ResetColor();
             Console.WriteLine();
+
+            this.PauseUntilProceedIsIndicated();
         }
 
         public void DisplayFailureMessage(string prompt)
@@ -27,6 +29,14 @@ namespace MemberRegistry.view
 
             Console.ResetColor();
             Console.WriteLine();
+
+            this.PauseUntilProceedIsIndicated();
+        }
+
+        public void PauseUntilProceedIsIndicated()
+        {
+            System.Console.Write("Press enter to return to menu.");
+            System.Console.ReadLine();
         }
 
         public int GetUserInt(string prompt, int minValue = int.MinValue, int maxValue = int.MaxValue)
@@ -36,8 +46,9 @@ namespace MemberRegistry.view
 
             do
             {
-                System.Console.Write($"{prompt}: ");
+                System.Console.Write($"{prompt} ");
                 input = System.Console.ReadLine();
+                System.Console.Clear();
 
             } while (!(int.TryParse(input, out result)) || (result < minValue) || (result > maxValue));
 
@@ -59,6 +70,8 @@ namespace MemberRegistry.view
 			    {
 				    return false;
 			    }
+
+                System.Console.Clear();
             }
         }
 
@@ -69,8 +82,9 @@ namespace MemberRegistry.view
 
             do
             {
-                System.Console.Write($"{prompt}: ");
+                System.Console.Write($"{prompt} ");
                 input = System.Console.ReadLine();
+                System.Console.Clear();
 
             } while (!((Enum.TryParse(input, true, out resultInputType)) && (Enum.IsDefined(resultInputType.GetType(), resultInputType))));
 
@@ -81,7 +95,7 @@ namespace MemberRegistry.view
         {
             string input;
 
-            System.Console.Write($"{prompt}: ");
+            System.Console.Write($"{prompt} ");
             input = System.Console.ReadLine();
 
             return input;

@@ -14,7 +14,7 @@ namespace MemberRegistry.model
 		public MemberLedger(persistance.IPersistance persistance)
 		{
 			this._persistance = persistance;
-			this._members = InitiateMemberList();
+			this._members = LoadMemberList();
 		}
 
 		public void CreateMember(string name, string password, int personalNumber)
@@ -27,16 +27,9 @@ namespace MemberRegistry.model
 
 		public Member GetMember(int id)
 		{
-			try
-			{
-				return this._members
+			return this._members
 				.Where(x => x.MemberID == id)
 				.ToList()[0];
-			}
-			catch (ArgumentOutOfRangeException e)
-			{
-				return null;
-			}
 		}
 
 		public void DeleteMember(model.Member member)
@@ -47,11 +40,8 @@ namespace MemberRegistry.model
 
 		public void UpdateMember(model.Member member, string newName, int newPersonalNumber)
 		{
-			if (member != null)
-			{
-				member.Name = newName;
-            	member.PersonalNumber = newPersonalNumber;
-			}
+			member.Name = newName;
+            member.PersonalNumber = newPersonalNumber;
 		}
 
         public IEnumerable<Member> GetMembers()
@@ -61,26 +51,17 @@ namespace MemberRegistry.model
 
 		public void RegisterBoat(model.Member member, BoatType boatType, int boatLength)
 		{
-			if (member != null)
-			{
-				member.AddBoat(boatType, boatLength);
-			}
+			member.AddBoat(boatType, boatLength);
 		}
 
 		public void DeleteBoat(model.Member member, model.Boat boat)
 		{
-			if (member != null)
-			{
-				member.RemoveBoat(boat);
-			}
+			member.RemoveBoat(boat);
 		}
 
 		public void UpdateBoat(model.Member member, model.Boat boat, BoatType type, int length)
 		{
-			if (member != null)
-			{
-				member.UpdateBoat(boat, type, length);
-			}
+			member.UpdateBoat(boat, type, length);
 		}
 
 		public void LoginMember(model.Member member)
@@ -92,21 +73,12 @@ namespace MemberRegistry.model
 		{
 			model.Member member = this.GetLoggedInMember();
 			
-			if (member != null) {
-				member.IsLoggedIn = false;
-			}
+			member.IsLoggedIn = false;
 		}
 		
 		public void SaveMemberList()
 		{
 			this._persistance.SaveMemberList(this._members);
-		}
-
-		public IEnumerable<model.ISearchCriteria> GetSearchCriteriaList()
-		{
-			List<model.ISearchCriteria> criteria = new List<model.ISearchCriteria>();
-			criteria.Add(new model.HasCanoeCriteria());
-			return criteria;
 		}
 
 		public IEnumerable<model.Member> Search(model.ISearchCriteria criteria)
@@ -116,21 +88,14 @@ namespace MemberRegistry.model
 
 		private model.Member GetLoggedInMember()
 		{
-			try
-			{
-				model.Member member = this._members
+			model.Member member = this._members
 				.Where(x => x.IsLoggedIn == true)
 				.ToList()[0];
 
-				return member;
-			}
-			catch (ArgumentOutOfRangeException e)
-			{
-				return null;
-			}
+			return member;
 		}
 
-        private List<model.Member> InitiateMemberList()
+        private List<model.Member> LoadMemberList()
 		{
 			List<model.Member> memberList = this._persistance.RetrieveMemberList() ?? new List<model.Member>();
 			return memberList;

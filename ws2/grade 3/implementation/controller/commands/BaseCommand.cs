@@ -45,11 +45,6 @@ namespace MemberRegistry.controller
             this._view.DisplayFailureMessage(prompt);
         }
 
-        protected bool MemberExists()
-        {
-            return this._currentlySelectedMember != null;
-        }
-
         protected bool MemberHasBoats()
         {
             return this._currentlySelectedMember.Boats.Count > 0;

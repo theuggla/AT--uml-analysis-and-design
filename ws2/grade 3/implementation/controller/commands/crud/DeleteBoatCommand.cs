@@ -12,15 +12,7 @@ namespace MemberRegistry.controller
         public override void ExecuteCommand() 
         {
             base._currentlySelectedMember = GetMember();
-
-            if (base.MemberExists() && base.MemberHasBoats())
-            {
-                this.DeleteMemberBoat();
-            } 
-            else 
-            {
-                base.DisplayFailureMessage("Member doesn't exist or has no boats.");
-            }
+            this.DeleteMemberBoat();
         }
 
         private void DeleteMemberBoat()
