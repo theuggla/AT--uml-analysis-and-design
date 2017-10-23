@@ -49,14 +49,19 @@ namespace MemberRegistry.controller
 				string password = "";
 				this._currentUser = _view.GetCurrentUserLoginCredentials(this._ledger, ref password);
 
-				if (this._currentUser.Password == password)
+				if (this._currentUser != null )
 				{
-					this._currentUser.IsLoggedIn = true;
+					if (this._currentUser.Password == password)
+					{
+						this._currentUser.IsLoggedIn = true;
+					}
+					else
+					{
+						throw new Exception();
+					}
+
 				}
-				else
-				{
-					throw new Exception();
-				}
+				
 			}
 			catch (Exception)
 			{
@@ -70,7 +75,7 @@ namespace MemberRegistry.controller
 			{
 				useCase.ExecuteCommand();
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
 				this._view.DisplayFailureMessage("Sorry, something went wrong. Perhaps try again?");
 			}

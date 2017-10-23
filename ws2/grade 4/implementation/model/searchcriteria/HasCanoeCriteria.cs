@@ -16,7 +16,7 @@ namespace MemberRegistry.model
 
         public string GetDescription()
         {
-            return "members who have a canoe";
+            return "have a canoe";
         }
     }
 }

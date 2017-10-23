@@ -26,5 +26,19 @@
         "BoatID": 1
       }
     ]
+  },
+  {
+    "Name": "Simon",
+    "PersonalNumber": 80,
+    "Password": "crumcrum",
+    "IsLoggedIn": false,
+    "MemberID": 3,
+    "Boats": [
+      {
+        "Length": 31,
+        "Type": 1,
+        "BoatID": 1
+      }
+    ]
   }
 ]

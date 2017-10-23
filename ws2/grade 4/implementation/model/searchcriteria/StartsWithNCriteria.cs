@@ -15,7 +15,7 @@ namespace MemberRegistry.model
 
         public string GetDescription()
         {
-            return "members who's name starts with an N";
+            return "name starts with an N";
         }
     }
 }

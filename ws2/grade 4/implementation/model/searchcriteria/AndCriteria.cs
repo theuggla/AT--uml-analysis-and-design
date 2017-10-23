@@ -9,8 +9,6 @@ namespace MemberRegistry.model
         private ISearchCriteria _firstCriteria;
         private ISearchCriteria _otherCriteria;
 
-        private string _description;
-
         public AndCriteria(ISearchCriteria firstCriteria, ISearchCriteria otherCriteria)
         {
             this._firstCriteria = firstCriteria;
@@ -25,7 +23,7 @@ namespace MemberRegistry.model
 
         public string GetDescription()
         {
-            return " " + this._firstCriteria.GetDescription() + " and " + this._otherCriteria.GetDescription();
+            return this._firstCriteria.GetDescription() + " and " + this._otherCriteria.GetDescription() + " ";
         }
     }
 }

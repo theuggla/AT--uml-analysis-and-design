@@ -47,6 +47,7 @@ namespace MemberRegistry
 
 			criteria.Add(new model.HasCanoeCriteria());
 			criteria.Add(new model.StartsWithSCriteria());
+			criteria.Add(new model.StartsWithNCriteria());
 
 			return criteria;
 		}
@@ -60,8 +61,8 @@ namespace MemberRegistry
 			model.ISearchCriteria startsWithNCriteria = new model.StartsWithNCriteria();
 
 			model.ISearchCriteria andCriteria = new model.AndCriteria(canoeCriteria, startsWithSCriteria);
-			model.ISearchCriteria orCriteria = new model.AndCriteria(canoeCriteria, startsWithSCriteria);
-			model.ISearchCriteria complexCriteria = new model.AndCriteria(andCriteria, startsWithNCriteria);
+			model.ISearchCriteria orCriteria = new model.OrCriteria(canoeCriteria, startsWithNCriteria);
+			model.ISearchCriteria complexCriteria = new model.OrCriteria(andCriteria, startsWithNCriteria);
 
 			criteria.Add(andCriteria);
 			criteria.Add(orCriteria);
