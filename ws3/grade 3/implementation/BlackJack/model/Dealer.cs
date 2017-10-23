@@ -13,7 +13,7 @@ namespace BlackJack.model
         private rules.IWinnerStrategy m_winnerRule;
         private List<ICardDealtObserver> m_subrcribers;
 
-        public Dealer(rules.RulesFactory a_rulesFactory)
+        public Dealer(rules.AbstractRulesFactory a_rulesFactory)
         {
             m_subrcribers = new List<ICardDealtObserver>();
             m_newGameRule = a_rulesFactory.GetNewGameRule();

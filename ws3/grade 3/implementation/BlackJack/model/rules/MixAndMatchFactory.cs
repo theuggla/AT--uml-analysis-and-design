@@ -1,23 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace BlackJack.model.rules
 {
-    class RulesFactory
+    class MixandMatchFactory : AbstractRulesFactory
     {
-        public IHitStrategy GetHitRule()
+        public override IHitStrategy GetHitRule()
         {
             return new Soft17HitStrategy();
         }
 
-        public INewGameStrategy GetNewGameRule()
+        public override INewGameStrategy GetNewGameRule()
         {
             return new AmericanNewGameStrategy();
         }
 
-        public IWinnerStrategy GetWinnerRule()
+        public override IWinnerStrategy GetWinnerRule()
         {
             return new PlayerWinsOnEqualWinnerStrategy();
         }
