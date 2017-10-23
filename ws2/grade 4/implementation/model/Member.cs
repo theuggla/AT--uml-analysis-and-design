@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.model
 {
-    public class Member
+    public class Member : validation.IValidatable
     {
         public string Name {get; set;}
         public int PersonalNumber {get; set;}
@@ -51,5 +51,10 @@ namespace MemberRegistry.model
             int next = this.Boats.Count > 0 ? this.Boats[this.Boats.Count - 1].BoatID + 1 : 1;
 			return next;
         } 
+
+        public void Validate(model.validation.IValidator validator)
+        {
+            validator.validate(this);
+        }
     }
 }

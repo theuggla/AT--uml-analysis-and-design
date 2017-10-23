@@ -96,6 +96,12 @@ namespace MemberRegistry.view
         public void DisplayMembers(IEnumerable<model.Member> members) 
         {
             Console.Clear();
+
+            if (members.Count() == 0)
+            {
+                System.Console.WriteLine("No members in the system!");
+            }
+
             bool verbose = this._console.GetUserBoolean("Do you want detailed information?");
             string header = members.Count() > 1 ? "Member List" : "Member Info";
 
