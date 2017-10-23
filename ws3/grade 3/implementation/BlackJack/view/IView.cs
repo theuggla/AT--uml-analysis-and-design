@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BlackJack.view
 {
-    interface IView
+    interface IView : model.rules.IRulesFactoryVisitor
     {
         void DisplayWelcomeMessage();
         void DisplayCardIsBeingDealt();

@@ -18,7 +18,7 @@ namespace BlackJack.model.rules
                 case RuleType.PlayerFavoured:
                     return new PlayerFavouredFactory();
                 case RuleType.Mix:
-                    return new MixandMatchFactory();
+                    return new MixAndMatchFactory();
                 default:
                     return null;
             }

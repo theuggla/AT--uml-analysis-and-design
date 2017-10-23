@@ -9,10 +9,12 @@ namespace BlackJack.model
     {
         private model.Dealer m_dealer;
         private model.Player m_player;
+        private model.rules.AbstractRulesFactory m_rules;
 
         public Game(rules.RulesFactoryProducer.RuleType ruleType)
         {
-            m_dealer = new Dealer(rules.RulesFactoryProducer.GetFactory(ruleType));
+            m_rules = rules.RulesFactoryProducer.GetFactory(ruleType);
+            m_dealer = new Dealer(m_rules);
             m_player = new Player();
         }
 
@@ -64,6 +66,11 @@ namespace BlackJack.model
         public void AddCardDealtObserver(ICardDealtObserver a_subscriber)
         {
             m_dealer.AddSubscriber(a_subscriber);
+        }
+
+        public void GetRulesOfTheGame(rules.IRulesFactoryVisitor a_visitor)
+        {
+            m_rules.Accept(a_visitor);
         }
     }
 }

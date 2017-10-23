@@ -82,6 +82,30 @@ namespace BlackJack.view
             System.Console.Clear();
         }
 
+        public void VisitDealerFavoured(model.rules.DealerFavouredFactory factory)
+        {
+            Console.WriteLine("In this game the dealer is favoured, which means:");
+            Console.WriteLine("\t \t * American style start of the game where the Dealer's second card is hidden.");
+            Console.WriteLine("\t \t * Soft 17 rule for when the Dealer chooses to hit.");
+            Console.WriteLine("\t \t * Dealer wins on equal score.");
+        }
+
+        public void VisitPlayerFavoured(model.rules.PlayerFavouredFactory factory)
+        {
+            Console.WriteLine("In this game the player is favoured, which means:");
+            Console.WriteLine("\t \t * International style start of the game where the Dealer's second card is visible.");
+            Console.WriteLine("\t \t * Dealer chooses not to hit on 17 or over, regardless of Ace's in hand.");
+            Console.WriteLine("\t \t * Player wins on equal score.");
+        }
+
+        public void VisitMixAndMatch(model.rules.MixAndMatchFactory factory)
+        {
+            Console.WriteLine("In this game the rules are mixed, which means:");
+            Console.WriteLine("\t \t * American style start of the game where the Dealer's second card is hidden.");
+            Console.WriteLine("\t \t * Soft 17 rule for when the Dealer chooses to hit.");
+            Console.WriteLine("\t \t * Player wins on equal score.");
+        }
+
         private int GetInput()
         {
             return System.Console.In.Read();

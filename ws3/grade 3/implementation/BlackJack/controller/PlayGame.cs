@@ -22,6 +22,7 @@ namespace BlackJack.controller
         public bool Play()
         {
             m_view.DisplayWelcomeMessage();
+            this.m_game.GetRulesOfTheGame(this.m_view);
             this.DisplayHands();
 
             if (m_game.IsGameOver())

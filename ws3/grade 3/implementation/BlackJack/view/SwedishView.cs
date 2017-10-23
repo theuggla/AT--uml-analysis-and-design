@@ -94,6 +94,30 @@ namespace BlackJack.view
             }
         }
 
+        public void VisitDealerFavoured(model.rules.DealerFavouredFactory factory)
+        {
+            Console.WriteLine("Reglerna är till favör för Croupiern, vilket betyder:");
+            Console.WriteLine("\t \t * Amerikansk start på spelet, där Croupierns andra kort är dolt.");
+            Console.WriteLine("\t \t * Croupiern tar nytt kort vid 17 poäng om ett kort på handen är ett ess.");
+            Console.WriteLine("\t \t * Croupiern vinner vid lika ställning.");
+        }
+
+        public void VisitPlayerFavoured(model.rules.PlayerFavouredFactory factory)
+        {
+            Console.WriteLine("Reglerna är till favör för dig, vilket betyder:");
+            Console.WriteLine("\t \t * Internationell start på spelet, där Croupierns andra kort är synligt.");
+            Console.WriteLine("\t \t * Croupiern tar inte nytt kort vid 17 poäng, även om ett kort på handen är ett ess.");
+            Console.WriteLine("\t \t * Du vinner vid lika ställning.");
+        }
+
+        public void VisitMixAndMatch(model.rules.MixAndMatchFactory factory)
+        {
+            Console.WriteLine("Reglerna är till favör för Croupiern, vilket betyder:");
+            Console.WriteLine("\t \t * Amerikansk start på spelet, där Croupierns andra kort är dolt.");
+            Console.WriteLine("\t \t * Croupiern tar nytt kort vid 17 poäng om ett kort på handen är ett ess.");
+            Console.WriteLine("\t \t * Du vinner vid lika ställning.");
+        }
+
         private int GetInput()
         {
             return System.Console.In.Read();

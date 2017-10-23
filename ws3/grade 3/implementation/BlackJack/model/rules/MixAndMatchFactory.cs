@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BlackJack.model.rules
 {
-    class MixandMatchFactory : AbstractRulesFactory
+    class MixAndMatchFactory : AbstractRulesFactory
     {
         public override IHitStrategy GetHitRule()
         {
@@ -20,6 +20,11 @@ namespace BlackJack.model.rules
         public override IWinnerStrategy GetWinnerRule()
         {
             return new PlayerWinsOnEqualWinnerStrategy();
+        }
+
+        public override void Accept(IRulesFactoryVisitor visitor)
+        {
+            visitor.VisitMixAndMatch(this);
         }
     }
 }

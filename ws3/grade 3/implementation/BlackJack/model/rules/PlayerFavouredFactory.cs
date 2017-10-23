@@ -21,5 +21,10 @@ namespace BlackJack.model.rules
         {
             return new PlayerWinsOnEqualWinnerStrategy();
         }
+
+        public override void Accept(IRulesFactoryVisitor visitor)
+        {
+            visitor.VisitPlayerFavoured(this);
+        }
     }
 }

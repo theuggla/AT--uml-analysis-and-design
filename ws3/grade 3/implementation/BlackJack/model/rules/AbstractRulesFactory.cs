@@ -12,5 +12,7 @@ namespace BlackJack.model.rules
         public abstract INewGameStrategy GetNewGameRule();
 
         public abstract IWinnerStrategy GetWinnerRule();
+
+        public abstract void Accept(IRulesFactoryVisitor visitor);
     }
 }
