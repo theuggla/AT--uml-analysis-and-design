@@ -46,7 +46,17 @@ namespace MemberRegistry.controller
 		{
 			try
 			{
-				this._currentUser = _view.GetCurrentUser(this._ledger);
+				string password = "";
+				this._currentUser = _view.GetCurrentUserLoginCredentials(this._ledger, ref password);
+
+				if (this._currentUser.Password == password)
+				{
+					this._currentUser.IsLoggedIn = true;
+				}
+				else
+				{
+					throw new Exception();
+				}
 			}
 			catch (Exception)
 			{

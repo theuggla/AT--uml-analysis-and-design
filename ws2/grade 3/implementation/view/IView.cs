@@ -12,7 +12,7 @@ namespace MemberRegistry.view
 		void DisplayFailureMessage(string prompt);
         void DisplayMembers(IEnumerable<model.Member> members);
 		void DisplayBoats(IEnumerable<model.Boat> boats);
-		model.Member GetCurrentUser(model.MemberLedger ledger);
+		model.Member GetCurrentUserLoginCredentials(model.MemberLedger ledger, ref string password);
 		model.Member GetSelectedMember(model.MemberLedger ledger);
 		model.Boat GetSelectedBoat(model.Member member);
 		model.IMenuItem GetSelectedMenuItem<TMenuInterface>(string menuName, IEnumerable<model.IMenuItem> completeSelection);

@@ -60,21 +60,16 @@ namespace MemberRegistry.view
              return this._console.GetUserEnum<BoatType>("What is the type of the boat?");
         }
 
-        public model.Member GetCurrentUser(model.MemberLedger ledger)
+        public model.Member GetCurrentUserLoginCredentials(model.MemberLedger ledger, ref string password)
         {
             bool login = this._console.GetUserBoolean("Do you want to log in?");
 
             if (login == true)
             {
-                int id = this._console.GetUserInt("ID: ");
-                string password = this._console.GetUserString("Password: ");
+                model.Member member = this.GetSelectedMember(ledger);
+                password = this.GetMemberPassword();
 
-                model.Member member = ledger.GetMember(id);
-
-                if (member.Password == password)
-                {
-                    return member;
-                }
+                return member;
             }
 
             return null;
