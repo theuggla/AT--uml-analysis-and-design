@@ -4,11 +4,13 @@ using System.Collections.Generic;
 
 namespace MemberRegistry.model
 {
-    public class Member : validation.IValidatable
+    public class Member
     {
+        private model.Password _password;
+
         public string Name {get; set;}
         public int PersonalNumber {get; set;}
-        public string Password {get; set;}
+        
         public bool IsLoggedIn {get; set;}
         public int MemberID {get; set;}
         public List<Boat> Boats {get; set;}
@@ -16,7 +18,7 @@ namespace MemberRegistry.model
         public Member(string name, string password, int number, int id)
         {
             this.Name = name;
-            this.Password = password;
+            this.Password = new model.Password(password);
             this.PersonalNumber = number;
             this.MemberID = id;
             this.IsLoggedIn = false;
@@ -50,11 +52,12 @@ namespace MemberRegistry.model
         {
             int next = this.Boats.Count > 0 ? this.Boats[this.Boats.Count - 1].BoatID + 1 : 1;
 			return next;
-        } 
-
-        public void Validate(model.validation.IValidator validator)
-        {
-            validator.validate(this);
         }
+
+        public bool Validate(IValidator<Order> validator, out IEnumerable<string> brokenRules)
+    {
+        brokenRules = validator.BrokenRules(this);
+        return validator.IsValid(this);
+    }
     }
 }

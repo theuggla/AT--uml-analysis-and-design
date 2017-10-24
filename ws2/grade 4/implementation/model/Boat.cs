@@ -1,6 +1,6 @@
 namespace MemberRegistry.model
 {
-    public class Boat : validation.IValidatable
+    public class Boat
     {
         public int Length {get; set;}
         public BoatType Type {get; set;}
@@ -17,11 +17,6 @@ namespace MemberRegistry.model
         {
             this.Length = length;
             this.Type = type;
-        }
-
-        public void Validate(model.validation.IValidator validator)
-        {
-            validator.validate(this);
         }
     }
 }
