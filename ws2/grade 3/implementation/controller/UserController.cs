@@ -27,15 +27,15 @@ namespace MemberRegistry.controller
 
 			while (true)
 			{
-				controller.BaseCommand useCase;
+				commands.BaseCommand useCase;
 
 				if (this._currentUser != null && this._currentUser.IsLoggedIn)
 				{
-					useCase = (controller.BaseCommand) this._view.GetSelectedMenuItem<controller.ILoggedInCommand>("Logged In Menu", this._completeMenuSelection);
+					useCase = (commands.BaseCommand) this._view.GetSelectedMenuItem<commands.ILoggedInCommand>("Logged In Menu", this._completeMenuSelection);
 				}
 				else
 				{
-					useCase = (controller.BaseCommand) this._view.GetSelectedMenuItem<controller.ILoggedOutCommand>("Logged Out Menu", this._completeMenuSelection);
+					useCase = (commands.BaseCommand) this._view.GetSelectedMenuItem<commands.ILoggedOutCommand>("Logged Out Menu", this._completeMenuSelection);
 				}
 				
 				PlayOutUseCase(useCase);
@@ -64,7 +64,7 @@ namespace MemberRegistry.controller
 			}
 		}
 
-		private void PlayOutUseCase(controller.BaseCommand useCase)
+		private void PlayOutUseCase(commands.BaseCommand useCase)
 		{
 			try
 			{
