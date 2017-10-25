@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MemberRegistry.model
+namespace MemberRegistry.model.searchcriteria
 {
 	class StartsWithNCriteria : ISearchCriteria
 	{

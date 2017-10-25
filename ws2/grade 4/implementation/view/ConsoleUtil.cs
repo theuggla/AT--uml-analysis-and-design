@@ -11,6 +11,7 @@ namespace MemberRegistry.view
         {
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine($"*********{prompt}********");
             Console.WriteLine();
 

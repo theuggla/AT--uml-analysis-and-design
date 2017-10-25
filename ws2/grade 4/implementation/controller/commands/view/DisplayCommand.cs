@@ -2,9 +2,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace MemberRegistry.controller 
+namespace MemberRegistry.controller.commands 
 {
-    abstract class DisplayCommand : BaseCommand, ILoggedInCommand
+    abstract class DisplayCommand : BaseCommand
     {
         protected List<model.Member> _currentMemberList;
 

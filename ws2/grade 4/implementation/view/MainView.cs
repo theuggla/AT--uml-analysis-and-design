@@ -45,9 +45,9 @@ namespace MemberRegistry.view
             return this._console.GetUserString("What is the name of the member?");
         }
 
-        public int GetMemberPersonalNumber()
+        public string GetMemberPersonalNumber()
         {
-            return this._console.GetUserInt("What is the personal number of the member?", 0);
+            return this._console.GetUserString("What is the personal number of the member?");
         }
 
         public int GetBoatLength()
@@ -88,35 +88,38 @@ namespace MemberRegistry.view
             return member.GetBoat(id);
         }
 
-        public model.IMenuItem GetSelectedMenuItem<TMenuInterface>(string menuName, IEnumerable<model.IMenuItem> completeSelection)
+        public model.IMenuItem GetSelectedMenuItem(string menuName, IEnumerable<model.IMenuItem> menuItems)
         {
-            return this._menuView.GetSelectedMenuItem<TMenuInterface>(menuName, completeSelection);
+            return this._menuView.GetSelectedMenuItem(menuName, menuItems);
         }
         
         public void DisplayMembers(IEnumerable<model.Member> members) 
         {
             Console.Clear();
 
-            if (members.Count() == 0)
+            if (members.ToList().Count > 0)
             {
-                System.Console.WriteLine("No members in the system!");
-            }
+                bool verbose = this._console.GetUserBoolean("Do you want detailed information?");
+                string header = members.Count() > 1 ? "Member List" : "Member Info";
 
-            bool verbose = this._console.GetUserBoolean("Do you want detailed information?");
-            string header = members.Count() > 1 ? "Member List" : "Member Info";
+                System.Console.Clear();
+                System.Console.WriteLine($"**********~{header}~**********");
 
-            System.Console.Clear();
-            System.Console.WriteLine($"**********~{header}~**********");
+                foreach (model.Member member in members) {
+                    System.Console.WriteLine();
+                    this.DisplayMember(member, verbose);
+                    System.Console.WriteLine();
+                }
 
-            foreach (model.Member member in members) {
+                System.Console.WriteLine($"**********~{header}~**********");
                 System.Console.WriteLine();
-                this.DisplayMember(member, verbose);
-                System.Console.WriteLine();
+                this._console.PauseUntilProceedIsIndicated();
             }
-
-            System.Console.WriteLine($"**********~{header}~**********");
-            System.Console.WriteLine();
-            this._console.PauseUntilProceedIsIndicated();
+            else
+            {
+                this._console.DisplaySuccessMessage("No members in the system.");
+            }
+            
         }
 
         private void DisplayMember(model.Member member, bool verbose) 

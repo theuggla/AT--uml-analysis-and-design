@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MemberRegistry.controller 
+namespace MemberRegistry.controller.commands 
 {
     class DeleteBoatCommand : CRUDCommand
     {

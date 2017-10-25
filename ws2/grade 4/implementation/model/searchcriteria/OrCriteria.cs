@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MemberRegistry.model
+namespace MemberRegistry.model.searchcriteria
 {
 	class OrCriteria : ISearchCriteria
 	{

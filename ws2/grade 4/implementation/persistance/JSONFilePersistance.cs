@@ -24,7 +24,9 @@ namespace MemberRegistry.persistance
 
         public void SaveMemberList(List<model.Member> content)
         {
-            WriteTo(this._pathToFile, JsonConvert.SerializeObject(content, Formatting.Indented));
+            var settings = new JsonSerializerSettings() { ContractResolver = new CustomSetting() };
+            var json = JsonConvert.SerializeObject(content, settings);
+            WriteTo(this._pathToFile, json);
         }
         
         private string GetText(string file)

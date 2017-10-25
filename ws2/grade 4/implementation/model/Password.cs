@@ -12,14 +12,14 @@ namespace MemberRegistry.model
             this.ValidatePassword();
         }
 
-        public string GetPassword()
-        {
-            return this._password;
-        }
-
         public bool IsPasswordCorrect(string attemptedPassword)
         {
             return this._password == attemptedPassword;
+        }
+
+        public string GetPassword()
+        {
+            return this._password;
         }
 
         private void ValidatePassword()

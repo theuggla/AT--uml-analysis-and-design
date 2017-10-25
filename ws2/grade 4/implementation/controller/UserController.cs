@@ -10,10 +10,10 @@ namespace MemberRegistry.controller
 	{
 		private view.IView _view;
 		private model.MemberLedger _ledger;
-		private IEnumerable<model.IMenuItem> _completeMenuSelection;
+		private IEnumerable<commands.BaseCommand> _completeMenuSelection;
 		private model.Member _currentUser;
 
-		public UserController(view.IView mainView, model.MemberLedger ledger, IEnumerable<model.IMenuItem> completeMenuSelection)
+		public UserController(view.IView mainView, model.MemberLedger ledger, IEnumerable<commands.BaseCommand> completeMenuSelection)
 		{
 			this._view = mainView;
 			this._ledger = ledger;
@@ -27,16 +27,11 @@ namespace MemberRegistry.controller
 
 			while (true)
 			{
-				controller.BaseCommand useCase;
+				string menuName;
+				IEnumerable<commands.BaseCommand> menuItems;
 
-				if (this._currentUser != null && this._currentUser.IsLoggedIn)
-				{
-					useCase = (controller.BaseCommand) this._view.GetSelectedMenuItem<controller.ILoggedInCommand>("Logged In Menu", this._completeMenuSelection);
-				}
-				else
-				{
-					useCase = (controller.BaseCommand) this._view.GetSelectedMenuItem<controller.ILoggedOutCommand>("Logged Out Menu", this._completeMenuSelection);
-				}
+				this.GetCurrentMenu(out menuName, out menuItems);
+				commands.BaseCommand useCase = (commands.BaseCommand) this._view.GetSelectedMenuItem(menuName, menuItems);
 				
 				PlayOutUseCase(useCase);
 			}
@@ -49,33 +44,78 @@ namespace MemberRegistry.controller
 				string password = "";
 				this._currentUser = _view.GetCurrentUserLoginCredentials(this._ledger, ref password);
 
-				if (this._currentUser != null )
+				if (this._currentUser != null)
 				{
-					if (this._currentUser.Password == password)
-					{
-						this._currentUser.IsLoggedIn = true;
-					}
-					else
-					{
-						throw new Exception();
-					}
-
-				}
-				
+					this._ledger.LoginMember(this._currentUser, password);
+				}	
 			}
-			catch (Exception)
+			catch (IncorrectCredentialsException)
+			{
+				this._view.DisplayFailureMessage("Wrong ID or password.");
+			}
+			catch (NoSuchMemberException)
 			{
 				this._view.DisplayFailureMessage("Wrong ID or password.");
 			}
 		}
 
-		private void PlayOutUseCase(controller.BaseCommand useCase)
+		private void GetCurrentMenu(out string menuName, out IEnumerable<commands.BaseCommand> menuItems)
+		{
+			if (this._currentUser != null && this._currentUser.IsLoggedIn)
+				{
+					menuName = "Logged in menu";
+					menuItems = this._completeMenuSelection;
+				}
+				else
+				{
+					menuName = "Logged out menu";
+					menuItems = this._completeMenuSelection
+									.Where(command => !(command is commands.ILoggedInCommand))
+									.ToList();
+				}
+		}
+
+		private void PlayOutUseCase(commands.BaseCommand useCase)
 		{
 			try
 			{
+				if (useCase.GetType() == typeof(commands.ILoggedInCommand))
+				{
+					commands.ILoggedInCommand loggedInUseCase = (commands.ILoggedInCommand) useCase;
+					loggedInUseCase.EnsureUserIsLoggedIn(this._currentUser);
+				}
+				
 				useCase.ExecuteCommand();
 			}
-			catch (Exception e)
+			catch(NoSuchMemberException)
+			{
+				this._view.DisplayFailureMessage("Sorry, that member do not exist.");
+			}
+			catch(PasswordIsMissingException)
+			{
+				this._view.DisplayFailureMessage("Password has to contain some characters.");
+			}
+			catch(PasswordIsTooShortException)
+			{
+				this._view.DisplayFailureMessage("Password is too short.");
+			}
+			catch(InvalidBoatLengthException)
+			{
+				this._view.DisplayFailureMessage("Length of boat is invalid, has to be between 10 and 100.");
+			}
+			catch(InvalidBoatTypeException)
+			{
+				this._view.DisplayFailureMessage("Type of boat does not exist.");
+			}
+			catch(IncorrectCredentialsException)
+			{
+				this._view.DisplayFailureMessage("Member credentials are incorrect.");
+			}
+			catch(InvalidPersonalNumberException)
+			{
+				this._view.DisplayFailureMessage("Personal number is invalid.");
+			}
+			catch (Exception)
 			{
 				this._view.DisplayFailureMessage("Sorry, something went wrong. Perhaps try again?");
 			}

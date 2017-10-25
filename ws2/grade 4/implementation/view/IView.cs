@@ -15,10 +15,10 @@ namespace MemberRegistry.view
 		model.Member GetCurrentUserLoginCredentials(model.MemberLedger ledger, ref string password);
 		model.Member GetSelectedMember(model.MemberLedger ledger);
 		model.Boat GetSelectedBoat(model.Member member);
-		model.IMenuItem GetSelectedMenuItem<TMenuInterface>(string menuName, IEnumerable<model.IMenuItem> completeSelection);
+		model.IMenuItem GetSelectedMenuItem(string menuName, IEnumerable<model.IMenuItem> menuItems);
 		string GetMemberPassword();
 		string GetMemberName();
-		int GetMemberPersonalNumber();
+		string GetMemberPersonalNumber();
         int GetBoatLength();
         BoatType GetBoatType();
 	}

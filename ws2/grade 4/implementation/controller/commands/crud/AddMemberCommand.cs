@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MemberRegistry.controller 
+namespace MemberRegistry.controller.commands 
 {
     class AddMemberCommand : CRUDCommand
     {
@@ -13,7 +13,7 @@ namespace MemberRegistry.controller
         {
             string memberName = base.GetMemberName();
             string memberPassword = base.GetMemberPassword();
-            int personalNumber = base.GetMemberPersonalNumber();
+            string personalNumber = base.GetMemberPersonalNumber();
 
             _ledger.CreateMember(memberName, memberPassword, personalNumber);
         }

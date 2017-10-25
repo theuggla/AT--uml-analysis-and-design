@@ -1,10 +1,51 @@
+using System;
+
 namespace MemberRegistry.model
 {
     public class Boat
     {
-        public int Length {get; set;}
-        public BoatType Type {get; set;}
-        public int BoatID {get; set;}
+        private int _length;
+        private BoatType _type;
+
+        public int Length 
+        {
+            get
+            {
+                return this._length;
+            }
+            set
+            {
+                if (value > 9 && value < 100)
+                {
+                    this._length = value;
+                }
+                else
+                {
+                    throw new InvalidBoatLengthException();
+                }
+            }
+        }
+
+        public BoatType Type 
+        {
+            get
+            {
+                return  this._type;
+            } 
+            set
+            {
+                try 
+                {
+                    this._type = value;
+                }
+                catch (Exception)
+                {
+                    throw new InvalidBoatTypeException();
+                }
+            }
+        }
+
+        public int BoatID {get;set;}
 
         public Boat(BoatType type, int length, int boatID)
         {

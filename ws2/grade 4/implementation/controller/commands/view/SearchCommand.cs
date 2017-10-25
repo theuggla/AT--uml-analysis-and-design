@@ -2,23 +2,28 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace MemberRegistry.controller 
+namespace MemberRegistry.controller.commands 
 {
-    class SearchCommand : DisplayCommand, ILoggedOutCommand
+    class SearchCommand : DisplayCommand
     {
-        private IEnumerable<model.ISearchCriteria> _searchCriteriaList;
+        private IEnumerable<model.searchcriteria.ISearchCriteria> _searchCriteriaList;
 
-        public SearchCommand(string description, view.IView view, model.MemberLedger ledger, IEnumerable<model.ISearchCriteria> searchCriteriaList) 
+        public SearchCommand(string description, view.IView view, model.MemberLedger ledger, IEnumerable<model.searchcriteria.ISearchCriteria> searchCriteriaList) 
         : base(description, view, ledger)
         {
             this._searchCriteriaList = searchCriteriaList;
         }
 
         public override void ExecuteCommand() {
-            model.ISearchCriteria criteria = base.GetSearchCriteria(this._searchCriteriaList);
+            model.searchcriteria.ISearchCriteria criteria = GetSearchCriteria();
             base._currentMemberList = (List<model.Member>)_ledger.Search(criteria);
 
             base.DisplayMembers();
+        }
+
+        private model.searchcriteria.ISearchCriteria GetSearchCriteria()
+        {
+            return (model.searchcriteria.ISearchCriteria) this._view.GetSelectedMenuItem("Search Criteria", this._searchCriteriaList);
         }
     }
 }

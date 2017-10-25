@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MemberRegistry.controller 
+namespace MemberRegistry.controller.commands 
 {
     class LogoutUserCommand : BaseCommand, ILoggedInCommand
     {
@@ -11,7 +11,15 @@ namespace MemberRegistry.controller
 
         public override void ExecuteCommand() 
         {
-            _ledger.LogoutMember();
+            _ledger.LogoutMembers();
+        }
+
+        public void EnsureUserIsLoggedIn(model.Member member)
+        {
+            if (!member.IsLoggedIn)
+            {
+                throw new Exception();
+            }
         }
     }
 }

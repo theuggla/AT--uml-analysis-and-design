@@ -17,7 +17,7 @@ namespace MemberRegistry.model
 			this._members = LoadMemberList();
 		}
 
-		public void CreateMember(string name, string password, int personalNumber)
+		public void CreateMember(string name, string password, string personalNumber)
 		{
 			int newId = getNextMemberID();
 	
@@ -27,9 +27,17 @@ namespace MemberRegistry.model
 
 		public Member GetMember(int id)
 		{
-			return this._members
+			try
+			{
+				return this._members
 				.Where(x => x.MemberID == id)
 				.ToList()[0];
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				throw new NoSuchMemberException();
+			}
+			
 		}
 
 		public void DeleteMember(model.Member member)
@@ -38,10 +46,9 @@ namespace MemberRegistry.model
 				.Remove(member);
 		}
 
-		public void UpdateMember(model.Member member, string newName, int newPersonalNumber)
+		public void UpdateMember(model.Member member, string newName, string newPersonalNumber)
 		{
-			member.Name = newName;
-            member.PersonalNumber = newPersonalNumber;
+			member.UpdateMember(newName, newPersonalNumber);
 		}
 
         public IEnumerable<Member> GetMembers()
@@ -64,16 +71,21 @@ namespace MemberRegistry.model
 			member.UpdateBoat(boat, type, length);
 		}
 
-		public void LoginMember(model.Member member)
+		public void LoginMember(model.Member member, string attemptedPassword)
 		{
-			member.IsLoggedIn = true;
+			member.LoginMember(attemptedPassword);
 		}
 
-		public void LogoutMember()
+		public void LogoutMembers()
 		{
-			model.Member member = this.GetLoggedInMember();
-			
-			member.IsLoggedIn = false;
+			List<Member> loggedInMembers = this._members
+				.Where(member => member.IsLoggedIn)
+				.ToList();
+
+				foreach (Member member in loggedInMembers)
+				{
+					member.LogoutMember();
+				}
 		}
 		
 		public void SaveMemberList()
@@ -81,7 +93,7 @@ namespace MemberRegistry.model
 			this._persistance.SaveMemberList(this._members);
 		}
 
-		public IEnumerable<model.Member> Search(model.ISearchCriteria criteria)
+		public IEnumerable<model.Member> Search(model.searchcriteria.ISearchCriteria criteria)
 		{
 			return criteria.MeetCriteria(this._members);
 		}

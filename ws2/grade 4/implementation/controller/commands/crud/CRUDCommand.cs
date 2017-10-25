@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MemberRegistry.controller 
+namespace MemberRegistry.controller.commands 
 {
     abstract class CRUDCommand : DisplayCommand, ILoggedInCommand
     {
@@ -9,12 +9,20 @@ namespace MemberRegistry.controller
         : base(description, view, ledger)
         {}
 
+        public void EnsureUserIsLoggedIn(model.Member member)
+        {
+            if (!member.IsLoggedIn)
+            {
+                throw new Exception();
+            }
+        }
+
         protected string GetMemberName()
         {
             return this._view.GetMemberName();
         }
 
-        protected int GetMemberPersonalNumber()
+        protected string GetMemberPersonalNumber()
         {
             return this._view.GetMemberPersonalNumber();
         }

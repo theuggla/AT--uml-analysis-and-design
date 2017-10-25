@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace MemberRegistry.controller 
+namespace MemberRegistry.controller.commands 
 {
-    class ExitProgramCommand : BaseCommand, ILoggedOutCommand, ILoggedInCommand
+    class ExitProgramCommand : BaseCommand
     {
         public ExitProgramCommand(string description, view.IView view, model.MemberLedger ledger) 
         : base(description, view, ledger)

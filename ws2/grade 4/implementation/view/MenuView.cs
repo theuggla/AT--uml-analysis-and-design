@@ -14,20 +14,12 @@ namespace MemberRegistry.view
            this.console = console;
        }
 
-       public model.IMenuItem GetSelectedMenuItem<TMenuInterface>(string menuName, IEnumerable<model.IMenuItem> completeSelection)
+       public model.IMenuItem GetSelectedMenuItem(string menuName, IEnumerable<model.IMenuItem> menuItems)
        {
-           IEnumerable<model.IMenuItem> itemsToDisplay = this.GetMenuSubset<TMenuInterface>(completeSelection);
-           this.DisplayMenu(menuName, itemsToDisplay);
-           int choice = console.GetUserInt($"Select number from {menuName}: ", 1, itemsToDisplay.Count());
+           this.DisplayMenu(menuName, menuItems);
+           int choice = console.GetUserInt($"Select number from {menuName}: ", 1, menuItems.Count());
 
-           return itemsToDisplay.ElementAt(choice - 1);
-       }
-
-       private IEnumerable<model.IMenuItem> GetMenuSubset<TMenuInterface>(IEnumerable<model.IMenuItem> completeSelection)
-       {
-           return completeSelection
-           .OfType<TMenuInterface>()
-           .Cast<model.IMenuItem>();
+           return menuItems.ElementAt(choice - 1);
        }
 
        private void DisplayMenu(string menuName, IEnumerable<model.IMenuItem> itemsToDisplay)

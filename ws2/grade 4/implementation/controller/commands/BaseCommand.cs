@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace MemberRegistry.controller 
+namespace MemberRegistry.controller.commands 
 {
     abstract class BaseCommand : model.IMenuItem
     {
@@ -53,11 +53,6 @@ namespace MemberRegistry.controller
         protected model.Boat GetBoat()
         {
             return this._view.GetSelectedBoat(this._currentlySelectedMember);
-        }
-
-        protected model.ISearchCriteria GetSearchCriteria(IEnumerable<model.ISearchCriteria> criteriaList)
-        {
-            return (model.ISearchCriteria) this._view.GetSelectedMenuItem<model.ISearchCriteria>("Search Criteria", criteriaList);
         }
     }
 }

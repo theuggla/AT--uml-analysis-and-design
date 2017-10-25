@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MemberRegistry.controller 
+namespace MemberRegistry.controller.commands
 {
     class UpdateMemberCommand : CRUDCommand
     {
@@ -12,7 +12,7 @@ namespace MemberRegistry.controller
         public override void ExecuteCommand() {
             model.Member member = GetMember();
             string newName = GetMemberName();
-            int newPersonalNumber = GetMemberPersonalNumber();
+            string newPersonalNumber = GetMemberPersonalNumber();
             
             _ledger.UpdateMember(member, newName, newPersonalNumber);
         }
