@@ -20,9 +20,18 @@ namespace TicTacToe.Model
     public class Board
     {
         private List<Square> squares = new List<Square>();
+
         public Square GetSquare(string nameOfSquare)
         {
-            return squares.Where(x => x.Name == nameOfSquare).ElementAt(0);
+            try
+            {
+                return squares.Where(x => x.Name.Equals(nameOfSquare, StringComparison.InvariantCultureIgnoreCase)).ElementAt(0);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                throw new NoSuchSquareException("Tries to retrieve nonexsistant square.");
+            }
+            
         }
 
         public void NewBoard()

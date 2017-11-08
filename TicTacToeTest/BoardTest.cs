@@ -24,13 +24,15 @@ namespace TicTacToeTest
         [Fact]
         public void GetSquareShouldReturnSquareWithNameMatchingString()
         {
+            sut.NewBoard();
             Square square = sut.GetSquare("a1");
-            Assert.Equal(square.Name, "a1");
+            Assert.Equal(square.Name, "a1", true);
         }
 
          [Fact]
         public void GetSquareShouldReturnSameSquareIfCalledTwice()
         {
+            sut.NewBoard();
             Square square = sut.GetSquare("a1");
             Assert.False(square.IsPlayedOn());
             square.PlayOn();
