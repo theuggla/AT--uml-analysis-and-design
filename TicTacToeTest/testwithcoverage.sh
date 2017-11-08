@@ -11,7 +11,7 @@ dotnet minicover reset
 
 cd ..
 
-for project in TicTacToeTest/**/*.csproj; do dotnet test --no-build $project; done
+for project in TicTacToeTest/*.csproj; do dotnet test --no-build $project; done
 
 cd TicTacToeTest
 

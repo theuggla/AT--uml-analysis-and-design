@@ -6,7 +6,7 @@ namespace TicTacToe
     {
         static void Main(string[] args)
         {
-            throw new NotImplementedException();
+            View.ConsoleView view = new View.ConsoleView();
         }
     }
 }

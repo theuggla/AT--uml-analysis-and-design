@@ -10,5 +10,10 @@ namespace TicTacToe.View
         {
             Console.WriteLine(instructions);
         }
+
+        public void DisplayBoard()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
