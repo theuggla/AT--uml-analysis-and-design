@@ -6,20 +6,20 @@ namespace TicTacToeTest
 {
     public class SquareTest
     {
+        private Square sut = new Square("a1");
+
         [Fact]
         public void PlayOnShouldMarkSquareAsTaken()
         {
-            Square square = new Square("a1");
-            Assert.False(square.IsPlayedOn());
-            square.PlayOn();
-            Assert.True(square.IsPlayedOn());
+            Assert.False(sut.IsPlayedOn());
+            sut.PlayOn();
+            Assert.True(sut.IsPlayedOn());
         }
 
         [Fact]
-        public void NameShoulReturnNameOfSquare()
+        public void NameShouldReturnNameOfSquare()
         {
-            Square square = new Square("a1");
-            Assert.Equal(square.Name, "a1");
+            Assert.Equal(sut.Name, "a1");
         }
     }
 }

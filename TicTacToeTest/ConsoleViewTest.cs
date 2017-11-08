@@ -8,6 +8,8 @@ namespace TicTacToeTest
 {
     public class ConsoleViewTest
     {
+        private ConsoleView sut = new ConsoleView();
+
         [Fact]
         public void DisplayInstructionsShouldOutputCorrectString()
         {
@@ -15,7 +17,6 @@ namespace TicTacToeTest
             {
                 Console.SetOut(sw);
 
-                ConsoleView sut = new ConsoleView();
                 string instructions = "Please choose a square to play on.";
                 sut.DisplayInstructions(instructions);
         
@@ -31,7 +32,6 @@ namespace TicTacToeTest
             {
                 Console.SetOut(sw);
 
-                ConsoleView sut = new ConsoleView();
                 string board = "A1 | A2 | A3\nB1 | B2 | B3\nC1 | C2 | C3";
                 sut.DisplayBoard(board);
 
@@ -49,8 +49,6 @@ namespace TicTacToeTest
                 {
                     Console.SetOut(sw);
                     Console.SetIn(sr);
-
-                    ConsoleView sut = new ConsoleView();
             
                     string square = sut.GetSquareToPlayOn();
                     Assert.Equal("a1", square);
