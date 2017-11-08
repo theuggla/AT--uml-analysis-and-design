@@ -17,6 +17,15 @@ namespace TicTacToeTest
         }
 
         [Fact]
+        public void NewBoardShouldSetCollectionOfSquares()
+        {
+            Board sut = new Board();
+            Assert.True(sut.GetBoard().Count() == 0);
+            sut.NewBoard();
+            Assert.True(sut.GetBoard().Count() == 9);
+        }
+
+        [Fact]
         public void GetBoardShouldReturnCollectionOfSquares()
         {
             Board sut = new Board();

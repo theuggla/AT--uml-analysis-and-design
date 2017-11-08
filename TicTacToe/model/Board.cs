@@ -11,6 +11,11 @@ namespace TicTacToe.Model
             return new Square(nameOfSquare);
         }
 
+        public void NewBoard()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Square> GetBoard()
         {
             squares = new List<Square>();
