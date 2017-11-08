@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Moq;
 using Xunit;
 using TicTacToe.Model;
 
@@ -15,7 +16,8 @@ namespace TicTacToeTest
         {
             try
             {
-                Square square = sut.GetSquare("a1");
+                string invalidSquareName = "invalidsquarename";
+                Square square = sut.GetSquare(invalidSquareName);
                 Assert.True(false);
             }
             catch (NoSuchSquareException)
@@ -27,7 +29,8 @@ namespace TicTacToeTest
         {
             sut.NewBoard();
             Square square = sut.GetSquare("a1");
-            Assert.Equal(square.Name, "a1", true);
+            bool ignoreCase = true;
+            Assert.Equal(square.Name, "a1", ignoreCase);
         }
 
          [Fact]

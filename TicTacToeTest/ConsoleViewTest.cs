@@ -49,13 +49,13 @@ namespace TicTacToeTest
             {
                 using (var sr = new StringReader("a1"))
                 {
-                    var mockBoard = new Mock<Board>();
-                    mockBoard.Setup(board => board.GetSquare("a1")).Returns(new Square("a1"));
+                    var stubBoard = new Mock<Board>();
+                    stubBoard.Setup(board => board.GetSquare("a1")).Returns(new Square("a1"));
 
                     Console.SetOut(sw);
                     Console.SetIn(sr);
             
-                    Square square = sut.GetSquareToPlayOn(mockBoard.Object);
+                    Square square = sut.GetSquareToPlayOn(stubBoard.Object);
                     Assert.True(new Square("A1").Equals(square));
                 }
             }
