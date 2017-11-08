@@ -6,7 +6,7 @@ namespace TicTacToe.Model
     {
         public Square GetSquare(string nameOfSquare)
         {
-            return new Square("a1");
+            return new Square(nameOfSquare);
         }
     }
 }
