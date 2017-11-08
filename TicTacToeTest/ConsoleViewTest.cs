@@ -19,7 +19,7 @@ namespace TicTacToeTest
                 sut.DisplayInstructions();
         
                 string result = sw.ToString();
-                Assert.Equal("Please choose a square to play on.", result);
+                Assert.Equal("Please choose a square to play on.\n", result);
             }
         }
     }

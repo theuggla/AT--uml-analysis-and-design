@@ -1,4 +1,6 @@
 using System;
+using System.Text;
+using System.IO;
 
 namespace TicTacToe.View
 {
@@ -6,7 +8,7 @@ namespace TicTacToe.View
     {
         public void DisplayInstructions()
         {
-            
+            Console.WriteLine("Please choose a square to play on.");
         }
     }
 }
