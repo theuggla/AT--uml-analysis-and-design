@@ -46,5 +46,10 @@ namespace TicTacToe.Model
         {
             return squares;
         }
+
+        public bool IsEmpty()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
