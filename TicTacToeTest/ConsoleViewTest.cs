@@ -16,10 +16,11 @@ namespace TicTacToeTest
                 Console.SetOut(sw);
 
                 ConsoleView sut = new ConsoleView();
-                sut.DisplayInstructions();
+                string instructions = "Please choose a square to play on.";
+                sut.DisplayInstructions(instructions);
         
                 string result = sw.ToString();
-                Assert.Equal("Please choose a square to play on.\n", result);
+                Assert.Contains(instructions, result);
             }
         }
     }

@@ -6,9 +6,9 @@ namespace TicTacToe.View
 {
     public class ConsoleView
     {
-        public void DisplayInstructions()
+        public void DisplayInstructions(string instructions)
         {
-            Console.WriteLine("Please choose a square to play on.");
+            Console.WriteLine(instructions);
         }
     }
 }
