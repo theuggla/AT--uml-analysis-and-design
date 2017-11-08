@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace TicTacToe.Model
 {
@@ -7,6 +8,11 @@ namespace TicTacToe.Model
         public Square GetSquare(string nameOfSquare)
         {
             return new Square(nameOfSquare);
+        }
+
+        public IEnumerable<Square> GetBoard()
+        {
+            throw new NotImplementedException();
         }
     }
 }
