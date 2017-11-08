@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.IO;
+using System.Collections.Generic;
 using Xunit;
 using Moq;
 using TicTacToe.View;
@@ -42,6 +43,25 @@ namespace TicTacToeTest
             }
         }
 
+        public void DisplayBoardShouldDisplayBoardWhenNotEmpty()
+        {
+            using (var sw = new StringWriter())
+            {
+                Console.SetOut(sw);
+                var stubBoard = new Mock<Board>();
+                stubBoard.Setup(board => board.IsEmpty()).Returns(false);
+                List<Square> squares = GetFullCollectionOfSquares();
+                squares.Find(x => x.Name == "A1").PlayOn();
+                stubBoard.Setup(board => board.GetBoard()).Returns(squares);
+
+                string expected = "X |  |  \nB1 |  |  \n  |  |  ";
+                sut.DisplayBoard(board);
+
+                string actual = sw.ToString();
+                Assert.Contains(expected, actual);
+            }
+        }
+
         [Fact]
         public void GetSquareToPlayOnShouldReturnChosenSquare()
         {
@@ -79,6 +99,16 @@ namespace TicTacToeTest
                     Assert.Contains("Square does not exist!", result);
                 }
             }
+        }
+
+        private List<Square> GetFullCollectionOfSquares()
+        {
+            List<Square> squares = new List<Square>();
+            foreach (string squareValue in Enum.GetNames(typeof(SquareValue)))
+            {
+                squares.Add(new Square(squareValue));
+            }
+            return squares;
         }
     }
 }
