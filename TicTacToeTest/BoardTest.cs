@@ -17,6 +17,18 @@ namespace TicTacToeTest
             Assert.Equal(square.Name, "a1");
         }
 
+         [Fact]
+        public void GetSquareShouldReturnSameSquareIfCalledTwice()
+        {
+            Square square = sut.GetSquare("a1");
+            Assert.False(square.IsPlayedOn());
+            square.PlayOn();
+            Assert.True(square.IsPlayedOn());
+            Square square2 = sut.GetSquare("a1");
+            Assert.True(square2.IsPlayedOn());
+
+        }
+
         [Fact]
         public void GetBoardShouldReturnEmptyCollectionOfSquaresWhenNotInitialized()
         {
