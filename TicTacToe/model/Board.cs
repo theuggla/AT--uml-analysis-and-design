@@ -6,7 +6,7 @@ namespace TicTacToe.Model
     {
         public Square GetSquare(string nameOfSquare)
         {
-            throw new NotImplementedException();
+            return new Square("a1");
         }
     }
 }
