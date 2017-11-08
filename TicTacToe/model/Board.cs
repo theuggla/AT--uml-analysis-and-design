@@ -49,7 +49,7 @@ namespace TicTacToe.Model
 
         public bool IsEmpty()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
