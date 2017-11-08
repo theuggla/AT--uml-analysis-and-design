@@ -10,9 +10,4 @@ public class NoSuchSquareException : Exception
         : base(message)
     {
     }
-
-    public NoSuchSquareException(string message, Exception inner)
-        : base(message, inner)
-    {
-    }
 }

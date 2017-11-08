@@ -29,7 +29,7 @@ namespace TicTacToe.Model
             }
             catch (ArgumentOutOfRangeException)
             {
-                throw new NoSuchSquareException("Tries to retrieve nonexsistant square.");
+                throw new NoSuchSquareException("Tries to retrieve nonexsistent square.");
             }
             
         }
