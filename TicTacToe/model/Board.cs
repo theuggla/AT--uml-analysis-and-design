@@ -5,6 +5,7 @@ namespace TicTacToe.Model
 {
     public class Board
     {
+        private List<Square> squares;
         public Square GetSquare(string nameOfSquare)
         {
             return new Square(nameOfSquare);

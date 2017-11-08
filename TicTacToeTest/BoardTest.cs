@@ -32,6 +32,13 @@ namespace TicTacToeTest
             expected.Add(new Square("c3"));
 
             List<Square> actual = (List<Square>) sut.GetBoard();
+            expected.OrderBy(x => x.Name);
+            actual.OrderBy(x => x.Name);
+
+            if (expected.Count != actual.Count)
+            {
+                Assert.True(false);
+            }
 
             for (int i = 0; i < expected.Count; i++)
             {
@@ -40,7 +47,6 @@ namespace TicTacToeTest
                     Assert.True(false);
                 }
             }
-
         }
     }
 }

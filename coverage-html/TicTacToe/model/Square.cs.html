@@ -1,6 +1,7 @@
 <html>
 <body style="font-family: sans-serif;">
 <div style="white-space: pre;background-color: #EEF4ED;">using System;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Collections.Generic;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">namespace TicTacToe.Model</div>
 <div style="white-space: pre;background-color: #EEF4ED;">{</div>
@@ -22,6 +23,12 @@
 <div style="white-space: pre;background-color: #EEF4ED;">        public bool IsPlayedOn()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            return this.taken;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public bool Equals(Square x)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            if (Object.ReferenceEquals(x, this)) return true;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return x != null &amp;&amp; x.Name.Equals(this.Name);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">}</div>
