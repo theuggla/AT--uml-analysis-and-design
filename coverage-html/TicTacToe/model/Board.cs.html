@@ -23,7 +23,7 @@
 <div style="white-space: pre;background-color: #EEF4ED;">    {</div>
 <div style="white-space: pre;background-color: #D2EACE;">        private List&lt;Square&gt; squares = new List&lt;Square&gt;();</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public Square GetSquare(string nameOfSquare)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public virtual Square GetSquare(string nameOfSquare)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            try</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            {</div>
@@ -47,6 +47,11 @@
 <div style="white-space: pre;background-color: #EEF4ED;">        public IEnumerable&lt;Square&gt; GetBoard()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            return squares;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public bool IsEmpty()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return !squares.Exists(x =&gt; x.IsPlayedOn());</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">}</div>

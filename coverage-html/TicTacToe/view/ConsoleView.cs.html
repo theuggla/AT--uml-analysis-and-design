@@ -3,6 +3,7 @@
 <div style="white-space: pre;background-color: #EEF4ED;">using System;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">using System.Text;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">using System.IO;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using TicTacToe.Model;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">namespace TicTacToe.View</div>
 <div style="white-space: pre;background-color: #EEF4ED;">{</div>
@@ -18,9 +19,22 @@
 <div style="white-space: pre;background-color: #D2EACE;">            Console.WriteLine(board);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public string GetSquareToPlayOn()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public Square GetSquareToPlayOn(Board board)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
-<div style="white-space: pre;background-color: #D2EACE;">            string square = Console.ReadLine();</div>
+<div style="white-space: pre;background-color: #D2EACE;">            string squareValue = Console.ReadLine();</div>
+<div style="white-space: pre;background-color: #D2EACE;">            Square square = null;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            try</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                square = board.GetSquare(squareValue);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #D2EACE;">            catch (NoSuchSquareException)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                Console.WriteLine(&quot;Square does not exist!&quot;);</div>
+<div style="white-space: pre;background-color: #D2EACE;">                DisplayInstructions(&quot;Please pick an actual square: &quot;);</div>
+<div style="white-space: pre;background-color: #D2EACE;">                GetSquareToPlayOn(board);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #D2EACE;">            return square;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    }</div>

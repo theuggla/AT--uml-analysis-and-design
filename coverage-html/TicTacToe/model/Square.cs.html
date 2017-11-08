@@ -28,7 +28,7 @@
 <div style="white-space: pre;background-color: #EEF4ED;">        public bool Equals(Square x)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            if (Object.ReferenceEquals(x, this)) return true;</div>
-<div style="white-space: pre;background-color: #D2EACE;">            return x != null &amp;&amp; x.Name.Equals(this.Name);</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return x != null &amp;&amp; x.Name.Equals(this.Name, StringComparison.InvariantCultureIgnoreCase);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">}</div>
