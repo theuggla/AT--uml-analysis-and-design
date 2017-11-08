@@ -27,5 +27,11 @@ namespace TicTacToeTest
         {
             Assert.True(sut.Equals(new Square("a1")));
         }
+
+        [Fact]
+        public void EqualsShouldReturnTrueIfNameIsEqualIgnoringCase()
+        {
+            Assert.True(sut.Equals(new Square("A1")));
+        }
     }
 }

@@ -2,7 +2,9 @@ using System;
 using System.Text;
 using System.IO;
 using Xunit;
+using Moq;
 using TicTacToe.View;
+using TicTacToe.Model;
 
 namespace TicTacToeTest
 {
@@ -41,17 +43,20 @@ namespace TicTacToeTest
         }
 
         [Fact]
-        public void DisplayBoardShouldReturnChosenSquare()
+        public void GetSquareToPlayOnShouldReturnChosenSquare()
         {
             using (var sw = new StringWriter())
             {
                 using (var sr = new StringReader("a1"))
                 {
+                    var mockBoard = new Mock<Board>();
+                    mockBoard.Setup(board => board.GetSquare("a1")).Returns(new Square("a1"));
+
                     Console.SetOut(sw);
                     Console.SetIn(sr);
             
-                    string square = sut.GetSquareToPlayOn();
-                    Assert.Equal("a1", square);
+                    Square square = sut.GetSquareToPlayOn(mockBoard.Object);
+                    Assert.True(new Square("A1").Equals(square));
                 }
             }
         }

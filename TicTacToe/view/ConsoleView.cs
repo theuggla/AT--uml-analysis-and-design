@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.IO;
+using TicTacToe.Model;
 
 namespace TicTacToe.View
 {
@@ -16,10 +17,10 @@ namespace TicTacToe.View
             Console.WriteLine(board);
         }
 
-        public string GetSquareToPlayOn()
+        public Square GetSquareToPlayOn(Board board)
         {
-            string square = Console.ReadLine();
-            return square;
+            string squareValue = Console.ReadLine();
+            return board.GetSquare(squareValue);
         }
     }
 }

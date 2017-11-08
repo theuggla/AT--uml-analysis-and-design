@@ -21,7 +21,7 @@ namespace TicTacToe.Model
     {
         private List<Square> squares = new List<Square>();
 
-        public Square GetSquare(string nameOfSquare)
+        public virtual Square GetSquare(string nameOfSquare)
         {
             try
             {
