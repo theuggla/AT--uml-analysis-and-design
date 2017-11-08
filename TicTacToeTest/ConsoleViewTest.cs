@@ -32,11 +32,11 @@ namespace TicTacToeTest
                 Console.SetOut(sw);
 
                 ConsoleView sut = new ConsoleView();
-                sut.DisplayBoard();
+                string board = "A1 | A2 | A3\nB1 | B2 | B3\nC1 | C2 | C3";
+                sut.DisplayBoard(board);
 
-                string expected = "A1 | A2 | A3\nB1 | B2 | B3\nC1 | C2 | C3";
                 string actual = sw.ToString();
-                Assert.Contains(expected, actual);
+                Assert.Contains(board, actual);
             }
         }
     }
