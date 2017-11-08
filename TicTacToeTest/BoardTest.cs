@@ -26,7 +26,13 @@ namespace TicTacToeTest
         }
 
         [Fact]
-        public void GetBoardShouldReturnCollectionOfSquares()
+        public void GetBoardShouldReturnEmptyCollectionOfSquaresWhenNotInitialized()
+        {
+            Board sut = new Board();
+            Assert.True(sut.GetBoard().Count() == 0);
+        }
+
+        public void GetBoardShouldReturnFullCollectionOfSquaresWhenInitialized()
         {
             Board sut = new Board();
             List<Square> expected = new List<Square>();
@@ -40,6 +46,7 @@ namespace TicTacToeTest
             expected.Add(new Square("c2"));
             expected.Add(new Square("c3"));
 
+            sut.NewBoard();
             List<Square> actual = (List<Square>) sut.GetBoard();
             expected.OrderBy(x => x.Name);
             actual.OrderBy(x => x.Name);
