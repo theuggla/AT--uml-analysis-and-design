@@ -8,45 +8,33 @@ namespace TicTacToeTest
 {
     public class BoardTest
     {
+        private Board sut = new Board();
+
         [Fact]
         public void GetSquareShouldReturnSquareWithNameMatchingString()
         {
-            Board sut = new Board();
             Square square = sut.GetSquare("a1");
             Assert.Equal(square.Name, "a1");
         }
 
         [Fact]
+        public void GetBoardShouldReturnEmptyCollectionOfSquaresWhenNotInitialized()
+        {
+            Assert.True(sut.GetBoard().Count() == 0);
+        }
+
+        [Fact]
         public void NewBoardShouldSetCollectionOfSquares()
         {
-            Board sut = new Board();
             Assert.True(sut.GetBoard().Count() == 0);
             sut.NewBoard();
             Assert.True(sut.GetBoard().Count() == 9);
         }
 
-        [Fact]
-        public void GetBoardShouldReturnEmptyCollectionOfSquaresWhenNotInitialized()
-        {
-            Board sut = new Board();
-            Assert.True(sut.GetBoard().Count() == 0);
-        }
-
         public void GetBoardShouldReturnFullCollectionOfSquaresWhenInitialized()
         {
-            Board sut = new Board();
-            List<Square> expected = new List<Square>();
-            expected.Add(new Square("a1"));
-            expected.Add(new Square("a2"));
-            expected.Add(new Square("a3"));
-            expected.Add(new Square("b1"));
-            expected.Add(new Square("b2"));
-            expected.Add(new Square("b3"));
-            expected.Add(new Square("c1"));
-            expected.Add(new Square("c2"));
-            expected.Add(new Square("c3"));
-
             sut.NewBoard();
+            List<Square> expected = GetFullCollectionOfSquares();
             List<Square> actual = (List<Square>) sut.GetBoard();
             expected.OrderBy(x => x.Name);
             actual.OrderBy(x => x.Name);
@@ -63,6 +51,16 @@ namespace TicTacToeTest
                     Assert.True(false);
                 }
             }
+        }
+
+        private List<Square> GetFullCollectionOfSquares()
+        {
+            List<Square> squares = new List<Square>();
+            foreach (string squareValue in Enum.GetNames(typeof(SquareValue)))
+            {
+                squares.Add(new Square(squareValue));
+            }
+            return squares;
         }
     }
 }

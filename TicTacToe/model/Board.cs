@@ -3,6 +3,19 @@ using System.Collections.Generic;
 
 namespace TicTacToe.Model
 {
+    public enum SquareValue
+    {
+        A1,
+        A2,
+        A3,
+        B1,
+        B2,
+        B3,
+        C1,
+        C2,
+        C3
+    }
+
     public class Board
     {
         private List<Square> squares = new List<Square>();
@@ -13,15 +26,10 @@ namespace TicTacToe.Model
 
         public void NewBoard()
         {
-            squares.Add(new Square("a1"));
-            squares.Add(new Square("a2"));
-            squares.Add(new Square("a3"));
-            squares.Add(new Square("b1"));
-            squares.Add(new Square("b2"));
-            squares.Add(new Square("b3"));
-            squares.Add(new Square("c1"));
-            squares.Add(new Square("c2"));
-            squares.Add(new Square("c3"));
+            foreach (string squareValue in Enum.GetNames(typeof(SquareValue)))
+            {
+                squares.Add(new Square(squareValue));
+            }
         }
 
         public IEnumerable<Square> GetBoard()
