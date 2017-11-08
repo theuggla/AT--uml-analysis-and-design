@@ -21,5 +21,11 @@ namespace TicTacToeTest
         {
             Assert.Equal(sut.Name, "a1");
         }
+
+        [Fact]
+        public void EqualsShouldReturnTrueIfNameIsEqual()
+        {
+            Assert.True(sut.Equals(new Square("a1")));
+        }
     }
 }
