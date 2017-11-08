@@ -10,6 +10,17 @@ namespace TicTacToeTest
     {
         private Board sut = new Board();
 
+        public void GetSquareShouldThrowExceptionIfNoMatchingSquareExists()
+        {
+            try
+            {
+                Square square = sut.GetSquare("a1");
+                Assert.True(false);
+            }
+            catch (NoSuchSquareException)
+            {}
+        }
+
         [Fact]
         public void GetSquareShouldReturnSquareWithNameMatchingString()
         {
@@ -26,7 +37,6 @@ namespace TicTacToeTest
             Assert.True(square.IsPlayedOn());
             Square square2 = sut.GetSquare("a1");
             Assert.True(square2.IsPlayedOn());
-
         }
 
         [Fact]

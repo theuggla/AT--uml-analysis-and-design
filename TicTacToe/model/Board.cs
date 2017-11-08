@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace TicTacToe.Model
@@ -21,7 +22,7 @@ namespace TicTacToe.Model
         private List<Square> squares = new List<Square>();
         public Square GetSquare(string nameOfSquare)
         {
-            return new Square(nameOfSquare);
+            return squares.Where(x => x.Name == nameOfSquare).ElementAt(0);
         }
 
         public void NewBoard()
