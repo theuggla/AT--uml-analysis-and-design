@@ -15,5 +15,10 @@ namespace TicTacToe.View
         {
             Console.WriteLine(board);
         }
+
+        public string GetSquareToPlayOn()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

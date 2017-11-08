@@ -39,5 +39,24 @@ namespace TicTacToeTest
                 Assert.Contains(board, actual);
             }
         }
+
+        [Fact]
+        public void DisplayBoardShouldReturnChosenSquare()
+        {
+            using (var sw = new StringWriter())
+            {
+                using (var sr = new StringReader("a1"))
+                {
+                    Console.SetOut(sw);
+                    Console.SetIn(sr);
+
+                    ConsoleView sut = new ConsoleView();
+                    sut.GetSquareToPlayOn();
+            
+                    string square = sw.ToString();
+                    Assert.Equal("a1", square);
+                }
+            }
+        }
     }
 }
