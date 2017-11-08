@@ -26,7 +26,7 @@ namespace TicTacToe.Model
         public bool Equals(Square x)
         {
             if (Object.ReferenceEquals(x, this)) return true;
-            return x != null && x.Name.Equals(this.Name);
+            return x != null && x.Name.Equals(this.Name, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }
