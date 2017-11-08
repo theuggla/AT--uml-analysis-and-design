@@ -13,7 +13,7 @@ namespace TicTacToe.Model
 
         public IEnumerable<Square> GetBoard()
         {
-            List<Square> squares = new List<Square>();
+            squares = new List<Square>();
             squares.Add(new Square("a1"));
             squares.Add(new Square("a2"));
             squares.Add(new Square("a3"));
