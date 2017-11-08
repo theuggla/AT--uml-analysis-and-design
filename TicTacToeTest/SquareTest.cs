@@ -9,10 +9,17 @@ namespace TicTacToeTest
         [Fact]
         public void PlayOnShouldMarkSquareAsTaken()
         {
-            Square square = new Square();
+            Square square = new Square("a1");
             Assert.False(square.IsPlayedOn());
             square.PlayOn();
             Assert.True(square.IsPlayedOn());
+        }
+
+        [Fact]
+        public void NameShoulReturnNameOfSquare()
+        {
+            Square square = new Square("a1");
+            Assert.Equal(square.Name, "a1");
         }
     }
 }
