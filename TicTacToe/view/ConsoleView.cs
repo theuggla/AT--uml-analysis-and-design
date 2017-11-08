@@ -18,7 +18,8 @@ namespace TicTacToe.View
 
         public string GetSquareToPlayOn()
         {
-            throw new NotImplementedException();
+            string square = Console.ReadLine();
+            return square;
         }
     }
 }

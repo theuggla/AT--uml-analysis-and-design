@@ -51,9 +51,8 @@ namespace TicTacToeTest
                     Console.SetIn(sr);
 
                     ConsoleView sut = new ConsoleView();
-                    sut.GetSquareToPlayOn();
             
-                    string square = sw.ToString();
+                    string square = sut.GetSquareToPlayOn();
                     Assert.Equal("a1", square);
                 }
             }
