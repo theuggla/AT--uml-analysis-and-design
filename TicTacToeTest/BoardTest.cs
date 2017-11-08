@@ -87,6 +87,15 @@ namespace TicTacToeTest
             Assert.True(sut.IsEmpty());
         }
 
+        [Fact]
+        public void IsEmptyShouldReturnFalseIfASquareIsPlayedOn()
+        {
+            sut.NewBoard();
+            Square square = sut.GetSquare("a1");
+            square.PlayOn();
+            Assert.False(sut.IsEmpty());
+        }
+
         private List<Square> GetFullCollectionOfSquares()
         {
             List<Square> squares = new List<Square>();
