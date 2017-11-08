@@ -7,13 +7,9 @@ cd TicTacToeTest
 dotnet minicover instrument --workdir ../ --assemblies TicTacToeTest/**/*.dll --sources TicTacToe/**/*.cs 
 
 # Reset hits count in case minicover was run for this project
-dotnet minicover reset
+dotnet minicover reset --workdir ../
 
-cd ..
-
-for project in TicTacToeTest/*.csproj; do dotnet test --no-build $project; done
-
-cd TicTacToeTest
+for project in *.csproj; do dotnet test --no-build $project; done
 
 # Uninstrument assemblies
 dotnet minicover uninstrument --workdir ../
