@@ -33,7 +33,13 @@ namespace TicTacToeTest
 
             List<Square> actual = (List<Square>) sut.GetBoard();
 
-            Assert.True(actual.SequenceEqual(expected));
+            for (int i = 0; i < expected.Count; i++)
+            {
+                if (!(expected.ElementAt(i).Equals(actual.ElementAt(i))))
+                {
+                    Assert.True(false);
+                }
+            }
 
         }
     }
