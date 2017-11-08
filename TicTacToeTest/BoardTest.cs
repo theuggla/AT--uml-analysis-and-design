@@ -10,6 +10,7 @@ namespace TicTacToeTest
     {
         private Board sut = new Board();
 
+        [Fact]
         public void GetSquareShouldThrowExceptionIfNoMatchingSquareExists()
         {
             try
