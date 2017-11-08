@@ -49,7 +49,7 @@ namespace TicTacToe.Model
 
         public bool IsEmpty()
         {
-            return true;
+            return !squares.Exists(x => x.IsPlayedOn());
         }
     }
 }
