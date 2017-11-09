@@ -23,7 +23,7 @@ namespace TicTacToe.Model
             }
             
             this.taken = true;
-            this.Sign = PlayerSign.X;
+            this.Sign = sign;
         }
 
         public virtual bool IsPlayedOn()

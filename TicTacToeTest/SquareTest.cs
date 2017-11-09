@@ -53,7 +53,7 @@ namespace TicTacToeTest
             sut.PlayOn(PlayerSign.X);
             otherSquare.PlayOn(PlayerSign.O);
             PlayerSign signOne = sut.Sign;
-            PlayerSign signTwo = sut.Sign;
+            PlayerSign signTwo = otherSquare.Sign;
             Assert.False(signOne.Equals(signTwo));
         }
 
