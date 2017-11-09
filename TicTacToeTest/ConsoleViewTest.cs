@@ -80,6 +80,17 @@ namespace TicTacToeTest
         }
 
         [Fact]
+        public void GetDisplaySquareShouldReturnEmptySquareAsString()
+        {
+            var stubSquare = new Mock<Square>(SquareValue.A1);
+            stubSquare.Setup(square => square.IsPlayedOn()).Returns(false);
+
+            string expected = "|   |";
+            string actual = sut.GetDisplaySquare(stubSquare.Object);
+            Assert.Equal(expected, actual);
+        }
+
+        [Fact]
         public void GetSquareToPlayOnShouldReturnChosenSquare()
         {
             using (var sw = new StringWriter())
