@@ -17,6 +17,21 @@ namespace TicTacToeTest
         }
 
         [Fact]
+        public void PlayOnShouldThrowExceptionIfSquareAlreadyTaken()
+        {
+            Assert.False(sut.IsPlayedOn());
+            sut.PlayOn();
+
+            try
+            {
+                sut.PlayOn();
+                Assert.True(false, "Should not be able to play the same square twice");
+            }
+            catch (SquareAlreadyPlayedOnException)
+            {}
+        }
+
+        [Fact]
         public void NameShouldReturnNameOfSquare()
         {
             Assert.Equal(sut.Name, SquareValue.A1);
