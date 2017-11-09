@@ -28,7 +28,15 @@ namespace TicTacToe.View
 
         public string GetDisplaySquare(Square square)
         {
-            return "| X |";
+            if (square.IsPlayedOn())
+            {
+                return "| X |";
+            }
+            else
+            {
+                return "|   |";
+            }
+            
         }
 
         public Square GetSquareToPlayOn(Board board)
