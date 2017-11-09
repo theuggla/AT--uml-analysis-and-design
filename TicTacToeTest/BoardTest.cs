@@ -92,8 +92,20 @@ namespace TicTacToeTest
         {
             sut.NewBoard();
             Square square = sut.GetSquare("A1");
-            square.PlayOn(PlayerSign.X);;
+            square.PlayOn(PlayerSign.X);
             Assert.False(sut.IsEmpty());
+        }
+
+        [Fact]
+        public void IsFullShouldReturnTrueIfASquareIsPlayedOn()
+        {
+            sut.NewBoard();
+            foreach (Square square in sut.GetBoard())
+            {
+                square.PlayOn(PlayerSign.X);
+            }
+
+            Assert.True(sut.IsFull());
         }
 
         private List<Square> GetFullCollectionOfSquares()

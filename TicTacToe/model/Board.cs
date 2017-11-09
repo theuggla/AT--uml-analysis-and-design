@@ -54,5 +54,10 @@ namespace TicTacToe.Model
         {
             return !squares.Exists(x => x.IsPlayedOn());
         }
+
+        public virtual bool IsFull()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
