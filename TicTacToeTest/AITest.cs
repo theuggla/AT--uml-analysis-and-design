@@ -29,7 +29,7 @@ namespace TicTacToeTest
             var stubBoard = new Mock<Board>();
             stubBoard.Setup(board => board.IsEmpty()).Returns(false);
             List<Square> squares = GetFullCollectionOfSquares();
-            squares.First().PlayOn();
+            squares.First().PlayOn(PlayerSign.X);
             stubBoard.Setup(board => board.GetBoard()).Returns(squares);
 
             Square square = sut.GetSquareToPlayOn(stubBoard.Object);

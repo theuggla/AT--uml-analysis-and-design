@@ -12,7 +12,7 @@ namespace TicTacToeTest
         public void PlayOnShouldMarkSquareAsTaken()
         {
             Assert.False(sut.IsPlayedOn());
-            sut.PlayOn();
+            sut.PlayOn(PlayerSign.X);
             Assert.True(sut.IsPlayedOn());
         }
 
@@ -20,11 +20,11 @@ namespace TicTacToeTest
         public void PlayOnShouldThrowExceptionIfSquareAlreadyTaken()
         {
             Assert.False(sut.IsPlayedOn());
-            sut.PlayOn();
+            sut.PlayOn(PlayerSign.X);
 
             try
             {
-                sut.PlayOn();
+                sut.PlayOn(PlayerSign.X);
                 Assert.True(false, "Should not be able to play the same square twice");
             }
             catch (SquareAlreadyPlayedOnException)
@@ -42,8 +42,19 @@ namespace TicTacToeTest
         [Fact]
         public void SignShouldReturnSignIfSquareIsPlayedOn()
         {
-            sut.PlayOn();
+            sut.PlayOn(PlayerSign.X);
             Assert.False(sut.Sign.Equals(PlayerSign.None));
+        }
+
+        [Fact]
+        public void SignShouldReturnDifferentSignIfSquareIsPlayedOnByDifferentPlayer()
+        {
+            Square otherSquare = new Square(SquareValue.B2);
+            sut.PlayOn(PlayerSign.X);
+            otherSquare.PlayOn(PlayerSign.O);
+            PlayerSign signOne = sut.Sign;
+            PlayerSign signTwo = sut.Sign;
+            Assert.False(signOne.Equals(signTwo));
         }
 
 

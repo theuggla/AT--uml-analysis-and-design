@@ -39,7 +39,7 @@ namespace TicTacToeTest
             sut.NewBoard();
             Square square = sut.GetSquare("a1");
             Assert.False(square.IsPlayedOn());
-            square.PlayOn();
+            square.PlayOn(PlayerSign.X);;
             Assert.True(square.IsPlayedOn());
             Square square2 = sut.GetSquare("a1");
             Assert.True(square2.IsPlayedOn());
@@ -92,7 +92,7 @@ namespace TicTacToeTest
         {
             sut.NewBoard();
             Square square = sut.GetSquare("A1");
-            square.PlayOn();
+            square.PlayOn(PlayerSign.X);;
             Assert.False(sut.IsEmpty());
         }
 
