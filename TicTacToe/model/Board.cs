@@ -44,7 +44,7 @@ namespace TicTacToe.Model
             throw new NoSuchSquareException("Tries to retrieve nonexsistent square.");   
         }
 
-        public void NewBoard()
+        public virtual void NewBoard()
         {
             squares = new List<Square>();
 
