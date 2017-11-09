@@ -20,6 +20,7 @@ namespace TicTacToe.Controller
         public void PlayGame()
         {
             this.view.DisplayInstructions("Welcome to TicTacToe!");
+            this.view.DisplayBoard(this.board);
         }
     }
 }
