@@ -2,6 +2,8 @@
 <body style="font-family: sans-serif;">
 <div style="white-space: pre;background-color: #EEF4ED;">using System;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">using System.Text;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Linq;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Collections.Generic;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">using System.IO;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">using TicTacToe.Model;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
@@ -24,13 +26,38 @@
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            else</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            {</div>
-<div style="white-space: pre;background-color: #D2EACE;">                Console.WriteLine(&quot;X |  |  \n  |  |  \n  |  |  &quot;);</div>
+<div style="white-space: pre;background-color: #D2EACE;">                List&lt;Square&gt; squares = (List&lt;Square&gt;)board.GetBoard();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">                string row1 = GetDisplayRow(squares.ElementAt(0), squares.ElementAt(1), squares.ElementAt(2));</div>
+<div style="white-space: pre;background-color: #D2EACE;">                string row2 = GetDisplayRow(squares.ElementAt(3), squares.ElementAt(4), squares.ElementAt(5));</div>
+<div style="white-space: pre;background-color: #D2EACE;">                string row3 = GetDisplayRow(squares.ElementAt(6), squares.ElementAt(7), squares.ElementAt(8));</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">                Console.WriteLine($&quot;{row1}\n{row2}\n{row3}&quot;);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private string GetDisplayRow(params Square[] squares)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            string row = &quot;|&quot;;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            foreach (Square square in squares)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                row += GetDisplaySquare(square);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return row;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public string GetDisplaySquare(Square square)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
-<div style="white-space: pre;background-color: #D2EACE;">            return &quot;| X |&quot;;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            if (square.IsPlayedOn())</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                return &quot; X |&quot;;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            else</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                return &quot;   |&quot;;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            </div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public Square GetSquareToPlayOn(Board board)</div>
