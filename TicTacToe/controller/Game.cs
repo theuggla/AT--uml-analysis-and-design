@@ -21,6 +21,7 @@ namespace TicTacToe.Controller
         {
             this.view.DisplayInstructions("Welcome to TicTacToe!");
             this.view.DisplayBoard(this.board);
+            Square userSquare = this.view.GetSquareToPlayOn(this.board);
         }
     }
 }
