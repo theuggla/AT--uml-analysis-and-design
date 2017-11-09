@@ -14,8 +14,22 @@ namespace TicTacToeTest
         {
             AI sut = new AI();
             var stubBoard = new Mock<Board>();
+            stubBoard.Setup(board => board.IsEmpty()).Returns(true);
+            List<Square> squares = GetFullCollectionOfSquares();
+            stubBoard.Setup(board => board.GetBoard()).Returns(squares);
+
+            Square square = sut.GetSquareToPlayOn(stubBoard.Object);
+            Assert.False(square.IsPlayedOn());
+        }
+
+        [Fact]
+        public void GetSquareToPlayOnShouldReturnFirstUnplayedSquareFromBoardThatIsPlayedOn()
+        {
+            AI sut = new AI();
+            var stubBoard = new Mock<Board>();
             stubBoard.Setup(board => board.IsEmpty()).Returns(false);
             List<Square> squares = GetFullCollectionOfSquares();
+            squares.First().PlayOn();
             stubBoard.Setup(board => board.GetBoard()).Returns(squares);
 
             Square square = sut.GetSquareToPlayOn(stubBoard.Object);
