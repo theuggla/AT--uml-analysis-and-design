@@ -8,7 +8,7 @@ namespace TicTacToe.Model
     {
         public Square GetSquareToPlayOn(Board board)
         {
-            return board.GetBoard().First();
+            return board.GetBoard().First(x => x.IsPlayedOn() == false);
         }
     }
 }
