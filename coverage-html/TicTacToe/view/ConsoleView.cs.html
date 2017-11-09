@@ -13,12 +13,12 @@
 <div style="white-space: pre;background-color: #EEF4ED;">    {</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public const string emptyBoardString = &quot;A1 | A2 | A3\nB1 | B2 | B3\nC1 | C2 | C3&quot;;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public void DisplayInstructions(string instructions)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public virtual void DisplayInstructions(string instructions)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            Console.WriteLine(instructions);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public void DisplayBoard(Board board)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public virtual void DisplayBoard(Board board)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            if (board.IsEmpty())</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            {</div>
@@ -26,6 +26,7 @@
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            else</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                Console.Clear();</div>
 <div style="white-space: pre;background-color: #D2EACE;">                List&lt;Square&gt; squares = (List&lt;Square&gt;)board.GetBoard();</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #D2EACE;">                string row1 = GetDisplayRow(squares.ElementAt(0), squares.ElementAt(1), squares.ElementAt(2));</div>

@@ -1,0 +1,30 @@
+<html>
+<body style="font-family: sans-serif;">
+<div style="white-space: pre;background-color: #EEF4ED;">using System;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using TicTacToe.View;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using TicTacToe.Model;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">namespace TicTacToe.Controller</div>
+<div style="white-space: pre;background-color: #EEF4ED;">{</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    public class Game</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    {</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private AI ai;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private Board board;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private ConsoleView view;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">        public Game(ConsoleView view, Board board, AI ai)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.view = view;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.board = board;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.ai = ai;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public void PlayGame()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.view.DisplayInstructions(&quot;Welcome to TicTacToe!&quot;);</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.view.DisplayBoard(this.board);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">}</div>
+</body>
+</html>
