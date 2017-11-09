@@ -5,9 +5,9 @@ namespace TicTacToe.Model
 {
     public class AI
     {
-        public Square GetSquareToPlayOn()
+        public Square GetSquareToPlayOn(Board board)
         {
-            throw new NotImplementedException();
+            return new Square(SquareValue.A1);
         }
     }
 }
