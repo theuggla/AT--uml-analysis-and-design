@@ -57,7 +57,7 @@ namespace TicTacToe.Model
 
         public virtual bool IsFull()
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
