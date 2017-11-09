@@ -25,31 +25,27 @@
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public virtual Square GetSquare(string nameOfSquare)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
-<div style="white-space: pre;background-color: #EEF4ED;">            try</div>
-<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
-<div style="white-space: pre;background-color: #D2EACE;">                return squares.Where(x =&gt; x.Name.Equals(nameOfSquare, StringComparison.InvariantCultureIgnoreCase)).ElementAt(0);</div>
-<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
-<div style="white-space: pre;background-color: #D2EACE;">            catch (ArgumentOutOfRangeException)</div>
-<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
-<div style="white-space: pre;background-color: #D2EACE;">                throw new NoSuchSquareException(&quot;Tries to retrieve nonexsistent square.&quot;);</div>
-<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #D2EACE;">            Enum.TryParse(nameOfSquare, out SquareValue squareValue);</div>
+<div style="white-space: pre;background-color: #D2EACE;">            Square square = squares.Find(x =&gt; x.Name.Equals(squareValue)) ?? throw new NoSuchSquareException(&quot;Tries to retrieve nonexsistent square.&quot;);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            </div>
+<div style="white-space: pre;background-color: #D2EACE;">            return square;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            </div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public void NewBoard()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
-<div style="white-space: pre;background-color: #D2EACE;">            foreach (string squareValue in Enum.GetNames(typeof(SquareValue)))</div>
+<div style="white-space: pre;background-color: #D2EACE;">            foreach (SquareValue squareValue in Enum.GetValues(typeof(SquareValue)))</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            {</div>
 <div style="white-space: pre;background-color: #D2EACE;">                squares.Add(new Square(squareValue));</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public IEnumerable&lt;Square&gt; GetBoard()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public virtual IEnumerable&lt;Square&gt; GetBoard()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            return squares;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public bool IsEmpty()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public virtual bool IsEmpty()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            return !squares.Exists(x =&gt; x.IsPlayedOn());</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>

@@ -8,9 +8,9 @@
 <div style="white-space: pre;background-color: #EEF4ED;">    public class Square</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    {</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        private bool taken;</div>
-<div style="white-space: pre;background-color: #D2EACE;">        public string Name {get;}</div>
+<div style="white-space: pre;background-color: #D2EACE;">        public SquareValue Name {get;}</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #D2EACE;">        public Square(string name)</div>
+<div style="white-space: pre;background-color: #D2EACE;">        public Square(SquareValue name)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            this.Name = name;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
@@ -20,7 +20,7 @@
 <div style="white-space: pre;background-color: #D2EACE;">            this.taken = true;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public bool IsPlayedOn()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public virtual bool IsPlayedOn()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            return this.taken;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
@@ -28,7 +28,7 @@
 <div style="white-space: pre;background-color: #EEF4ED;">        public bool Equals(Square x)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            if (Object.ReferenceEquals(x, this)) return true;</div>
-<div style="white-space: pre;background-color: #D2EACE;">            return x != null &amp;&amp; x.Name.Equals(this.Name, StringComparison.InvariantCultureIgnoreCase);</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return x != null &amp;&amp; x.Name.Equals(this.Name);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">}</div>
