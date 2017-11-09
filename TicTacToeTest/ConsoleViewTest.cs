@@ -71,7 +71,7 @@ namespace TicTacToeTest
         [Fact]
         public void GetDisplaySquareShouldReturnTakenSquareAsString()
         {
-            var stubSquare = new Mock<Square>();
+            var stubSquare = new Mock<Square>("A1");
             stubSquare.Setup(square => square.IsPlayedOn()).Returns(true);
 
             string expected = "| X |";

@@ -18,7 +18,7 @@ namespace TicTacToe.Model
             this.taken = true;
         }
 
-        public bool IsPlayedOn()
+        public virtual bool IsPlayedOn()
         {
             return this.taken;
         }

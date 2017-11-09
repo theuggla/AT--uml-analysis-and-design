@@ -28,7 +28,7 @@ namespace TicTacToe.View
 
         public string GetDisplaySquare(Square square)
         {
-            throw new NotImplementedException();
+            return "| X |";
         }
 
         public Square GetSquareToPlayOn(Board board)
