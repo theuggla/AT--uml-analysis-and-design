@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using TicTacToe.View;
 using TicTacToe.Model;
 
@@ -27,7 +29,7 @@ namespace TicTacToe.Controller
 
         public bool IsGameOver()
         {
-            return false;
+            return this.board.IsFull();
         }
     }
 }
