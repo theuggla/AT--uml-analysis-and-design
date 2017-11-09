@@ -16,7 +16,7 @@ namespace TicTacToe.View
             Console.WriteLine(instructions);
         }
 
-        public void DisplayBoard(Board board)
+        public virtual void DisplayBoard(Board board)
         {
             if (board.IsEmpty())
             {
@@ -24,6 +24,7 @@ namespace TicTacToe.View
             }
             else
             {
+                Console.Clear();
                 List<Square> squares = (List<Square>)board.GetBoard();
 
                 string row1 = GetDisplayRow(squares.ElementAt(0), squares.ElementAt(1), squares.ElementAt(2));

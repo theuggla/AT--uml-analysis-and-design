@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Text;
 using Xunit;
 using Moq;
 using TicTacToe.Model;
@@ -28,6 +30,13 @@ namespace TicTacToeTest
         {
             sut.PlayGame();
             mockView.Verify(view => view.DisplayInstructions("Welcome to TicTacToe!"), Times.Once());
+        }
+
+        [Fact]
+        public void ShouldDisplayBoardAtLeastOnce()
+        {
+            sut.PlayGame();
+            mockView.Verify(view => view.DisplayBoard(It.IsAny<Board>()), Times.AtLeastOnce());
         }
     }
 }
