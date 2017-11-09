@@ -26,8 +26,8 @@ namespace TicTacToeTest
         [Fact]
         public void ShouldDisplayWelcomeInstructionsOnce()
         {
-            mockView.Verify(view => view.DisplayInstructions("Welcome to TicTacToe!"), Times.Once());
             sut.PlayGame();
+            mockView.Verify(view => view.DisplayInstructions("Welcome to TicTacToe!"), Times.Once());
         }
     }
 }

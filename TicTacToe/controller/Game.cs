@@ -19,7 +19,7 @@ namespace TicTacToe.Controller
 
         public void PlayGame()
         {
-            throw new NotImplementedException();
+            this.view.DisplayInstructions("Welcome to TicTacToe!");
         }
     }
 }
