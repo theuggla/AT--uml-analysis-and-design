@@ -12,6 +12,7 @@ namespace TicTacToe.Model
         public Square(SquareValue name)
         {
             this.Name = name;
+            this.Sign = "";
         }
 
         public void PlayOn()
