@@ -26,6 +26,7 @@ namespace TicTacToeTest
             mockSquare = new Mock<Square>(SquareValue.A1);
 
             mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquare.Object);
+            mockBoard.Setup(board => board.IsFull()).Returns(false);
 
             sut = new Game(mockView.Object, mockBoard.Object, mockAI.Object);
         }
@@ -56,6 +57,13 @@ namespace TicTacToeTest
         {
             sut.PlayGame();
             mockSquare.Verify(square => square.PlayOn(It.IsAny<PlayerSign>()), Times.AtLeastOnce());
+        }
+
+        [Fact]
+        public void IsGameOverShouldReturnFalseIfBoardIsNotFullAndThereIsNoWinner()
+        {
+            bool result = sut.IsGameOver();
+            Assert.False(result);
         }
     }
 }
