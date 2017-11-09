@@ -45,5 +45,13 @@ namespace TicTacToeTest
             sut.PlayGame();
             mockView.Verify(view => view.GetSquareToPlayOn(It.IsAny<Board>()), Times.AtLeastOnce());
         }
+
+        [Fact]
+        public void ShouldPlayOnThatSquare()
+        {
+            var mockSquare = new Mock<Square>(SquareValue.A1);
+            mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquare.Object);
+            Assert.True(mockSquare.Object.IsPlayedOn());
+        }
     }
 }

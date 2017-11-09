@@ -17,11 +17,12 @@ namespace TicTacToe.Controller
             this.ai = ai;
         }
 
-        public void PlayGame()
+        public Square PlayGame()
         {
             this.view.DisplayInstructions("Welcome to TicTacToe!");
             this.view.DisplayBoard(this.board);
             Square userSquare = this.view.GetSquareToPlayOn(this.board);
+            return userSquare;
         }
     }
 }
