@@ -11,3 +11,15 @@ public class NoSuchSquareException : Exception
     {
     }
 }
+
+public class SquareAlreadyPlayedOnException : Exception
+{
+    public SquareAlreadyPlayedOnException()
+    {
+    }
+
+    public SquareAlreadyPlayedOnException(string message)
+        : base(message)
+    {
+    }
+}
