@@ -57,7 +57,7 @@ namespace TicTacToe.Model
 
         public virtual bool IsFull()
         {
-            return true;
+            return squares.All(x => x.IsPlayedOn());
         }
     }
 }
