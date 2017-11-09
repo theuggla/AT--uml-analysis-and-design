@@ -59,7 +59,7 @@ namespace TicTacToe.View
             
         }
 
-        public Square GetSquareToPlayOn(Board board)
+        public virtual Square GetSquareToPlayOn(Board board)
         {
             string squareValue = Console.ReadLine();
             Square square = null;

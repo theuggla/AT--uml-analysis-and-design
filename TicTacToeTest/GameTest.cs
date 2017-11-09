@@ -38,5 +38,12 @@ namespace TicTacToeTest
             sut.PlayGame();
             mockView.Verify(view => view.DisplayBoard(It.IsAny<Board>()), Times.AtLeastOnce());
         }
+
+        [Fact]
+        public void ShouldAskUserForSquareToPlayLeastOnce()
+        {
+            sut.PlayGame();
+            mockView.Verify(view => view.GetSquareToPlayOn(It.IsAny<Board>()), Times.AtLeastOnce());
+        }
     }
 }
