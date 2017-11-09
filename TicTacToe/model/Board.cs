@@ -17,6 +17,13 @@ namespace TicTacToe.Model
         C3
     }
 
+    public enum PlayerSign
+    {
+        X,
+        O,
+        None
+    }
+
     public class Board
     {
         private List<Square> squares = new List<Square>();
