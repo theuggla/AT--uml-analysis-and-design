@@ -62,7 +62,7 @@ namespace TicTacToeTest
 
                 sut.DisplayBoard(stubBoard.Object);
 
-                string expected = "X |  |  \n  |  |  \n  |  |  ";
+                string expected = "| X |   |   |\n|   |   |   |\n|   |   |   |";
                 string actual = sw.ToString();
                 Assert.Contains(expected, actual);
             }
@@ -74,7 +74,7 @@ namespace TicTacToeTest
             var stubSquare = new Mock<Square>(SquareValue.A1);
             stubSquare.Setup(square => square.IsPlayedOn()).Returns(true);
 
-            string expected = "| X |";
+            string expected = " X |";
             string actual = sut.GetDisplaySquare(stubSquare.Object);
             Assert.Equal(expected, actual);
         }
@@ -85,7 +85,7 @@ namespace TicTacToeTest
             var stubSquare = new Mock<Square>(SquareValue.A1);
             stubSquare.Setup(square => square.IsPlayedOn()).Returns(false);
 
-            string expected = "|   |";
+            string expected = "   |";
             string actual = sut.GetDisplaySquare(stubSquare.Object);
             Assert.Equal(expected, actual);
         }
