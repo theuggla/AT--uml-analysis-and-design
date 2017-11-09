@@ -46,7 +46,7 @@ namespace TicTacToe.View
             return row;
         }
 
-        public string GetDisplaySquare(Square square)
+        private string GetDisplaySquare(Square square)
         {
             if (square.IsPlayedOn())
             {

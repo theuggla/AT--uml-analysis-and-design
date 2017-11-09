@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Linq;
 using Xunit;
 using Moq;
 using TicTacToe.Model;
@@ -44,6 +45,13 @@ namespace TicTacToeTest
         {
             sut.PlayGame();
             mockView.Verify(view => view.GetSquareToPlayOn(It.IsAny<Board>()), Times.AtLeastOnce());
+        }
+
+        [Fact]
+        public void ShouldPlayOnThatSquare()
+        {
+            sut.PlayGame();
+            Assert.Equal(mockBoard.Object.GetBoard().ToList().Exists(x => x.IsPlayedOn()), true);
         }
     }
 }
