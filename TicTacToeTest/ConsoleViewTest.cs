@@ -35,11 +35,14 @@ namespace TicTacToeTest
             {
                 Console.SetOut(sw);
 
-                string board = "A1 | A2 | A3\nB1 | B2 | B3\nC1 | C2 | C3";
-                sut.DisplayBoard(board);
+                var stubBoard = new Mock<Board>();
+                stubBoard.Setup(board => board.IsEmpty()).Returns(true);
+
+                string expected = "A1 | A2 | A3\nB1 | B2 | B3\nC1 | C2 | C3";
+                sut.DisplayBoard(stubBoard.Object);
 
                 string actual = sw.ToString();
-                Assert.Contains(board, actual);
+                Assert.Contains(expected, actual);
             }
         }
 
@@ -55,7 +58,7 @@ namespace TicTacToeTest
                 stubBoard.Setup(board => board.GetBoard()).Returns(squares);
 
                 string expected = "X |  |  \nB1 |  |  \n  |  |  ";
-                sut.DisplayBoard(board);
+                sut.DisplayBoard(stubBoard.Object);
 
                 string actual = sw.ToString();
                 Assert.Contains(expected, actual);

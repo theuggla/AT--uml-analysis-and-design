@@ -47,7 +47,7 @@ namespace TicTacToe.Model
             return squares;
         }
 
-        public bool IsEmpty()
+        public virtual bool IsEmpty()
         {
             return !squares.Exists(x => x.IsPlayedOn());
         }

@@ -12,9 +12,16 @@ namespace TicTacToe.View
             Console.WriteLine(instructions);
         }
 
-        public void DisplayBoard(string board)
+        public void DisplayBoard(Board board)
         {
-            Console.WriteLine(board);
+            if (board.IsEmpty())
+            {
+                Console.WriteLine("A1 | A2 | A3\nB1 | B2 | B3\nC1 | C2 | C3");
+            }
+            else
+            {
+                Console.WriteLine("X |  |  \nB1 |  |  \n  |  |  ");
+            }
         }
 
         public Square GetSquareToPlayOn(Board board)
