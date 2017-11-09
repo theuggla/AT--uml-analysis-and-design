@@ -28,7 +28,9 @@ namespace TicTacToeTest
                 Assert.True(false, "Should not be able to play the same square twice");
             }
             catch (SquareAlreadyPlayedOnException)
-            {}
+            {
+                Assert.True(true);
+            }
         }
 
         [Fact]

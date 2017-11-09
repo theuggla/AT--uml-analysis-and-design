@@ -15,6 +15,11 @@ namespace TicTacToe.Model
 
         public void PlayOn()
         {
+            if (this.IsPlayedOn())
+            {
+                throw new SquareAlreadyPlayedOnException("Trying to play on already taken square.");
+            }
+            
             this.taken = true;
         }
 
