@@ -42,7 +42,7 @@ namespace TicTacToe.Model
             }
         }
 
-        public IEnumerable<Square> GetBoard()
+        public virtual IEnumerable<Square> GetBoard()
         {
             return squares;
         }

@@ -18,12 +18,17 @@ namespace TicTacToe.View
         {
             if (board.IsEmpty())
             {
-                Console.WriteLine("A1 | A2 | A3\nB1 | B2 | B3\nC1 | C2 | C3");
+                Console.WriteLine(emptyBoardString);
             }
             else
             {
-                Console.WriteLine(emptyBoardString);
+                Console.WriteLine("X |  |  \n  |  |  \n  |  |  ");
             }
+        }
+
+        public string GetDisplaySquare(Square square)
+        {
+            throw new NotImplementedException();
         }
 
         public Square GetSquareToPlayOn(Board board)

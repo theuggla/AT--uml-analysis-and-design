@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.IO;
+using System.Linq;
 using System.Collections.Generic;
 using Xunit;
 using Moq;
@@ -46,23 +47,36 @@ namespace TicTacToeTest
             }
         }
 
+        [Fact]
         public void DisplayBoardShouldDisplayBoardWhenNotEmpty()
         {
             using (var sw = new StringWriter())
             {
                 Console.SetOut(sw);
                 var stubBoard = new Mock<Board>();
+
                 stubBoard.Setup(board => board.IsEmpty()).Returns(false);
                 List<Square> squares = GetFullCollectionOfSquares();
-                squares.Find(x => x.Name == "A1").PlayOn();
+                squares.First().PlayOn();
                 stubBoard.Setup(board => board.GetBoard()).Returns(squares);
 
-                string expected = "X |  |  \n  |  |  \n  |  |  ";
                 sut.DisplayBoard(stubBoard.Object);
 
+                string expected = "X |  |  \n  |  |  \n  |  |  ";
                 string actual = sw.ToString();
                 Assert.Contains(expected, actual);
             }
+        }
+
+        [Fact]
+        public void GetDisplaySquareShouldReturnTakenSquareAsString()
+        {
+            var stubSquare = new Mock<Square>();
+            stubSquare.Setup(square => square.IsPlayedOn()).Returns(true);
+
+            string expected = "| X |";
+            string actual = sut.GetDisplaySquare(stubSquare.Object);
+            Assert.Equal(expected, actual);
         }
 
         [Fact]
