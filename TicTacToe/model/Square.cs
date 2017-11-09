@@ -15,7 +15,7 @@ namespace TicTacToe.Model
             this.Sign = PlayerSign.None;
         }
 
-        public void PlayOn(PlayerSign sign)
+        public virtual void PlayOn(PlayerSign sign)
         {
             if (this.IsPlayedOn())
             {

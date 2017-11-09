@@ -15,12 +15,17 @@ namespace TicTacToeTest
         private Mock<ConsoleView> mockView;
         private Mock<Board> mockBoard;
         private Mock<AI> mockAI;
+        private Mock<Square> mockSquare;
+
 
         public GameTest()
         {
             mockView = new Mock<ConsoleView>();
             mockBoard = new Mock<Board>();
             mockAI = new Mock<AI>();
+            mockSquare = new Mock<Square>(SquareValue.A1);
+
+            mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquare.Object);
 
             sut = new Game(mockView.Object, mockBoard.Object, mockAI.Object);
         }
@@ -49,9 +54,8 @@ namespace TicTacToeTest
         [Fact]
         public void ShouldPlayOnThatSquare()
         {
-            var mockSquare = new Mock<Square>(SquareValue.A1);
-            mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquare.Object);
-            Assert.True(mockSquare.Object.IsPlayedOn());
+            sut.PlayGame();
+            mockSquare.Verify(square => square.PlayOn(It.IsAny<PlayerSign>()), Times.AtLeastOnce());
         }
     }
 }
