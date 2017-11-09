@@ -73,6 +73,7 @@ namespace TicTacToeTest
         {
             var stubSquare = new Mock<Square>(SquareValue.A1);
             stubSquare.Setup(square => square.IsPlayedOn()).Returns(true);
+            stubSquare.Setup(square => square.Sign).Returns(PlayerSign.X);
 
             string expected = " X |";
             string actual = sut.GetDisplaySquare(stubSquare.Object);

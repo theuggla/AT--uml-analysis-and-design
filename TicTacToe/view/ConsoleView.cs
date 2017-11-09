@@ -49,7 +49,7 @@ namespace TicTacToe.View
         {
             if (square.IsPlayedOn())
             {
-                return " X |";
+                return $" {square.Sign.ToString()} |";
             }
             else
             {
