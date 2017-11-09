@@ -80,6 +80,22 @@ namespace TicTacToeTest
         }
 
         [Fact]
+        public void GetDisplaySquareShouldReturnTakenSquareAsDifferentStringsDeependingOnPlayerSign()
+        {
+            var stubSquare = new Mock<Square>(SquareValue.A1);
+            stubSquare.Setup(square => square.IsPlayedOn()).Returns(true);
+            stubSquare.Setup(square => square.Sign).Returns(PlayerSign.X);
+
+            var otherStubSquare = new Mock<Square>(SquareValue.A1);
+            otherStubSquare.Setup(square => square.IsPlayedOn()).Returns(true);
+            otherStubSquare.Setup(square => square.Sign).Returns(PlayerSign.O);
+
+            string actualOne = sut.GetDisplaySquare(stubSquare.Object);
+            string actualTwo = sut.GetDisplaySquare(otherStubSquare.Object);
+            Assert.False(actualOne.Equals(actualTwo));
+        }
+
+        [Fact]
         public void GetDisplaySquareShouldReturnEmptySquareAsString()
         {
             var stubSquare = new Mock<Square>(SquareValue.A1);
