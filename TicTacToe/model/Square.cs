@@ -7,6 +7,7 @@ namespace TicTacToe.Model
     {
         private bool taken;
         public SquareValue Name {get;}
+        public string Sign {get;}
 
         public Square(SquareValue name)
         {

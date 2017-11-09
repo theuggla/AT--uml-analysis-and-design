@@ -33,6 +33,13 @@ namespace TicTacToeTest
             }
         }
 
+         [Fact]
+        public void SignShouldReturnEmptyStringIfSquareIsNotPlayedOn()
+        {
+            Assert.Equal(sut.Sign, "");
+        }
+
+
         [Fact]
         public void NameShouldReturnNameOfSquare()
         {
