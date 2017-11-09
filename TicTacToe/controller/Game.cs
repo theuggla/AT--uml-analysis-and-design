@@ -27,7 +27,7 @@ namespace TicTacToe.Controller
 
         public bool IsGameOver()
         {
-            throw new NotImplementedException();
+            return false;
         }
     }
 }
