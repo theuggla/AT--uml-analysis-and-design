@@ -7,6 +7,8 @@ namespace TicTacToe.View
 {
     public class ConsoleView
     {
+        public const string emptyBoardString = "A1 | A2 | A3\nB1 | B2 | B3\nC1 | C2 | C3";
+
         public void DisplayInstructions(string instructions)
         {
             Console.WriteLine(instructions);
@@ -20,7 +22,7 @@ namespace TicTacToe.View
             }
             else
             {
-                Console.WriteLine("X |  |  \nB1 |  |  \n  |  |  ");
+                Console.WriteLine(emptyBoardString);
             }
         }
 

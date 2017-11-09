@@ -38,9 +38,9 @@ namespace TicTacToeTest
                 var stubBoard = new Mock<Board>();
                 stubBoard.Setup(board => board.IsEmpty()).Returns(true);
 
-                string expected = "A1 | A2 | A3\nB1 | B2 | B3\nC1 | C2 | C3";
                 sut.DisplayBoard(stubBoard.Object);
 
+                string expected = ConsoleView.emptyBoardString;
                 string actual = sw.ToString();
                 Assert.Contains(expected, actual);
             }
@@ -57,7 +57,7 @@ namespace TicTacToeTest
                 squares.Find(x => x.Name == "A1").PlayOn();
                 stubBoard.Setup(board => board.GetBoard()).Returns(squares);
 
-                string expected = "X |  |  \nB1 |  |  \n  |  |  ";
+                string expected = "X |  |  \n  |  |  \n  |  |  ";
                 sut.DisplayBoard(stubBoard.Object);
 
                 string actual = sw.ToString();
