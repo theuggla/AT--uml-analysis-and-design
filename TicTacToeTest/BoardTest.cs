@@ -18,7 +18,7 @@ namespace TicTacToeTest
             {
                 string invalidSquareName = "invalidsquarename";
                 Square square = sut.GetSquare(invalidSquareName);
-                Assert.True(false, $"got {square.ToString()}");
+                Assert.True(false, $"got {square.Name.ToString()}");
             }
             catch (NoSuchSquareException)
             {}
@@ -27,7 +27,6 @@ namespace TicTacToeTest
         [Fact]
         public void GetSquareShouldReturnSquareWithNameMatchingString()
         {
-            sut.NewBoard();
             Square square = sut.GetSquare("a1");
             bool ignoreCase = true;
             Assert.Equal(square.Name.ToString(), "a1", ignoreCase);
@@ -36,7 +35,6 @@ namespace TicTacToeTest
         [Fact]
         public void GetSquareShouldReturnSameSquareIfCalledTwice()
         {
-            sut.NewBoard();
             Square square = sut.GetSquare("a1");
             Assert.False(square.IsPlayedOn());
             square.PlayOn(PlayerSign.X);;
@@ -46,22 +44,17 @@ namespace TicTacToeTest
         }
 
         [Fact]
-        public void GetBoardShouldReturnEmptyCollectionOfSquaresWhenNotInitialized()
+        public void NewBoardShouldSetNewCollectionOfSquares()
         {
-            Assert.True(sut.GetBoard().Count() == 0);
+            sut.GetBoard().First().PlayOn(PlayerSign.X);
+            Assert.False(sut.IsEmpty());
+            sut.NewBoard();
+            Assert.True(sut.IsEmpty());
         }
 
         [Fact]
-        public void NewBoardShouldSetCollectionOfSquares()
-        {
-            Assert.True(sut.GetBoard().Count() == 0);
-            sut.NewBoard();
-            Assert.True(sut.GetBoard().Count() == 9);
-        }
-
         public void GetBoardShouldReturnFullCollectionOfSquaresWhenInitialized()
         {
-            sut.NewBoard();
             List<Square> expected = GetFullCollectionOfSquares();
             List<Square> actual = (List<Square>) sut.GetBoard();
             expected.OrderBy(x => x.Name);
@@ -90,7 +83,6 @@ namespace TicTacToeTest
         [Fact]
         public void IsEmptyShouldReturnFalseIfASquareIsPlayedOn()
         {
-            sut.NewBoard();
             Square square = sut.GetSquare("A1");
             square.PlayOn(PlayerSign.X);
             Assert.False(sut.IsEmpty());
@@ -99,7 +91,6 @@ namespace TicTacToeTest
         [Fact]
         public void IsFullShouldReturnTrueIfASquareIsPlayedOn()
         {
-            sut.NewBoard();
             foreach (Square square in sut.GetBoard())
             {
                 square.PlayOn(PlayerSign.X);

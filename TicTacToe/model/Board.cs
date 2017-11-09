@@ -28,17 +28,26 @@ namespace TicTacToe.Model
     {
         private List<Square> squares = new List<Square>();
 
+        public Board()
+        {
+            NewBoard();
+        }
+
         public virtual Square GetSquare(string nameOfSquare)
         {
-            Enum.TryParse(nameOfSquare, out SquareValue squareValue);
-            Square square = squares.Find(x => x.Name.Equals(squareValue)) ?? throw new NoSuchSquareException("Tries to retrieve nonexsistent square.");
-            
-            return square;
-            
+            if (Enum.GetNames(typeof(SquareValue)).Contains(nameOfSquare.ToUpper()))
+            {
+                Enum.TryParse(nameOfSquare, out SquareValue squareValue);
+                return squares.Find(x => x.Name.Equals(squareValue));
+            }
+
+            throw new NoSuchSquareException("Tries to retrieve nonexsistent square.");   
         }
 
         public void NewBoard()
         {
+            squares = new List<Square>();
+
             foreach (SquareValue squareValue in Enum.GetValues(typeof(SquareValue)))
             {
                 squares.Add(new Square(squareValue));
