@@ -1,6 +1,8 @@
 <html>
 <body style="font-family: sans-serif;">
 <div style="white-space: pre;background-color: #EEF4ED;">using System;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Collections.Generic;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">using System.Linq;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">using TicTacToe.View;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">using TicTacToe.Model;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
@@ -23,6 +25,13 @@
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            this.view.DisplayInstructions(&quot;Welcome to TicTacToe!&quot;);</div>
 <div style="white-space: pre;background-color: #D2EACE;">            this.view.DisplayBoard(this.board);</div>
+<div style="white-space: pre;background-color: #D2EACE;">            Square userSquare = this.view.GetSquareToPlayOn(this.board);</div>
+<div style="white-space: pre;background-color: #D2EACE;">            userSquare.PlayOn(PlayerSign.X);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public bool IsGameOver()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return this.board.IsFull();</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">}</div>

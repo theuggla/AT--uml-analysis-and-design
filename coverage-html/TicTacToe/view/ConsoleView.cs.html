@@ -48,7 +48,7 @@
 <div style="white-space: pre;background-color: #D2EACE;">            return row;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public string GetDisplaySquare(Square square)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private string GetDisplaySquare(Square square)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            if (square.IsPlayedOn())</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            {</div>
@@ -61,7 +61,7 @@
 <div style="white-space: pre;background-color: #EEF4ED;">            </div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public Square GetSquareToPlayOn(Board board)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public virtual Square GetSquareToPlayOn(Board board)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            string squareValue = Console.ReadLine();</div>
 <div style="white-space: pre;background-color: #D2EACE;">            Square square = null;</div>
