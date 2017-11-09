@@ -9,13 +9,15 @@
 <div style="white-space: pre;background-color: #EEF4ED;">    {</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        private bool taken;</div>
 <div style="white-space: pre;background-color: #D2EACE;">        public SquareValue Name {get;}</div>
+<div style="white-space: pre;background-color: #D2EACE;">        public virtual PlayerSign Sign {get; private set;}</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #D2EACE;">        public Square(SquareValue name)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            this.Name = name;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.Sign = PlayerSign.None;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public void PlayOn()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public void PlayOn(PlayerSign sign)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            if (this.IsPlayedOn())</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            {</div>
@@ -23,6 +25,7 @@
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            </div>
 <div style="white-space: pre;background-color: #D2EACE;">            this.taken = true;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.Sign = sign;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public virtual bool IsPlayedOn()</div>

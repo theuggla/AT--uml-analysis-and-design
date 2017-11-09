@@ -19,6 +19,13 @@
 <div style="white-space: pre;background-color: #EEF4ED;">        C3</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    public enum PlayerSign</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    {</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        X,</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        O,</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        None</div>
+<div style="white-space: pre;background-color: #EEF4ED;">    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    public class Board</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    {</div>
 <div style="white-space: pre;background-color: #D2EACE;">        private List&lt;Square&gt; squares = new List&lt;Square&gt;();</div>
@@ -48,6 +55,11 @@
 <div style="white-space: pre;background-color: #EEF4ED;">        public virtual bool IsEmpty()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            return !squares.Exists(x =&gt; x.IsPlayedOn());</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public virtual bool IsFull()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return squares.All(x =&gt; x.IsPlayedOn());</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">}</div>
