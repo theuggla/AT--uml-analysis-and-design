@@ -6,7 +6,7 @@ namespace TicTacToeTest
 {
     public class SquareTest
     {
-        private Square sut = new Square("a1");
+        private Square sut = new Square(SquareValue.A1);
 
         [Fact]
         public void PlayOnShouldMarkSquareAsTaken()
@@ -19,19 +19,13 @@ namespace TicTacToeTest
         [Fact]
         public void NameShouldReturnNameOfSquare()
         {
-            Assert.Equal(sut.Name, "a1");
+            Assert.Equal(sut.Name, SquareValue.A1);
         }
 
         [Fact]
         public void EqualsShouldReturnTrueIfNameIsEqual()
         {
-            Assert.True(sut.Equals(new Square("a1")));
-        }
-
-        [Fact]
-        public void EqualsShouldReturnTrueIfNameIsEqualIgnoringCase()
-        {
-            Assert.True(sut.Equals(new Square("A1")));
+            Assert.True(sut.Equals(new Square(SquareValue.A1)));
         }
     }
 }

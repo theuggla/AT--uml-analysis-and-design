@@ -6,9 +6,9 @@ namespace TicTacToe.Model
     public class Square
     {
         private bool taken;
-        public string Name {get;}
+        public SquareValue Name {get;}
 
-        public Square(string name)
+        public Square(SquareValue name)
         {
             this.Name = name;
         }
@@ -26,7 +26,7 @@ namespace TicTacToe.Model
         public bool Equals(Square x)
         {
             if (Object.ReferenceEquals(x, this)) return true;
-            return x != null && x.Name.Equals(this.Name, StringComparison.InvariantCultureIgnoreCase);
+            return x != null && x.Name.Equals(this.Name);
         }
     }
 }

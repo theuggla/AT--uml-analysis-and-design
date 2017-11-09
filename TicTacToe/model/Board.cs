@@ -23,20 +23,16 @@ namespace TicTacToe.Model
 
         public virtual Square GetSquare(string nameOfSquare)
         {
-            try
-            {
-                return squares.Where(x => x.Name.Equals(nameOfSquare, StringComparison.InvariantCultureIgnoreCase)).ElementAt(0);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                throw new NoSuchSquareException("Tries to retrieve nonexsistent square.");
-            }
+            Enum.TryParse(nameOfSquare, out SquareValue squareValue);
+            Square square = squares.Find(x => x.Name.Equals(squareValue)) ?? throw new NoSuchSquareException("Tries to retrieve nonexsistent square.");
+            
+            return square;
             
         }
 
         public void NewBoard()
         {
-            foreach (string squareValue in Enum.GetNames(typeof(SquareValue)))
+            foreach (SquareValue squareValue in Enum.GetValues(typeof(SquareValue)))
             {
                 squares.Add(new Square(squareValue));
             }

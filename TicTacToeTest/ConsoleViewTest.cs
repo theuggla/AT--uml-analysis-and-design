@@ -71,7 +71,7 @@ namespace TicTacToeTest
         [Fact]
         public void GetDisplaySquareShouldReturnTakenSquareAsString()
         {
-            var stubSquare = new Mock<Square>("A1");
+            var stubSquare = new Mock<Square>(SquareValue.A1);
             stubSquare.Setup(square => square.IsPlayedOn()).Returns(true);
 
             string expected = "| X |";
@@ -87,13 +87,13 @@ namespace TicTacToeTest
                 using (var sr = new StringReader("a1"))
                 {
                     var stubBoard = new Mock<Board>();
-                    stubBoard.Setup(board => board.GetSquare("a1")).Returns(new Square("a1"));
+                    stubBoard.Setup(board => board.GetSquare("a1")).Returns(new Square(SquareValue.A1));
 
                     Console.SetOut(sw);
                     Console.SetIn(sr);
             
                     Square square = sut.GetSquareToPlayOn(stubBoard.Object);
-                    Assert.True(new Square("A1").Equals(square));
+                    Assert.True(new Square(SquareValue.A1).Equals(square));
                 }
             }
         }
@@ -121,7 +121,7 @@ namespace TicTacToeTest
         private List<Square> GetFullCollectionOfSquares()
         {
             List<Square> squares = new List<Square>();
-            foreach (string squareValue in Enum.GetNames(typeof(SquareValue)))
+            foreach (SquareValue squareValue in Enum.GetValues(typeof(SquareValue)))
             {
                 squares.Add(new Square(squareValue));
             }

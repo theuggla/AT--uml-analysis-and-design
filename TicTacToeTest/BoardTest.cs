@@ -18,7 +18,7 @@ namespace TicTacToeTest
             {
                 string invalidSquareName = "invalidsquarename";
                 Square square = sut.GetSquare(invalidSquareName);
-                Assert.True(false);
+                Assert.True(false, $"got {square.ToString()}");
             }
             catch (NoSuchSquareException)
             {}
@@ -30,10 +30,10 @@ namespace TicTacToeTest
             sut.NewBoard();
             Square square = sut.GetSquare("a1");
             bool ignoreCase = true;
-            Assert.Equal(square.Name, "a1", ignoreCase);
+            Assert.Equal(square.Name.ToString(), "a1", ignoreCase);
         }
 
-         [Fact]
+        [Fact]
         public void GetSquareShouldReturnSameSquareIfCalledTwice()
         {
             sut.NewBoard();
@@ -91,7 +91,7 @@ namespace TicTacToeTest
         public void IsEmptyShouldReturnFalseIfASquareIsPlayedOn()
         {
             sut.NewBoard();
-            Square square = sut.GetSquare("a1");
+            Square square = sut.GetSquare("A1");
             square.PlayOn();
             Assert.False(sut.IsEmpty());
         }
@@ -99,7 +99,7 @@ namespace TicTacToeTest
         private List<Square> GetFullCollectionOfSquares()
         {
             List<Square> squares = new List<Square>();
-            foreach (string squareValue in Enum.GetNames(typeof(SquareValue)))
+            foreach (SquareValue squareValue in Enum.GetValues(typeof(SquareValue)))
             {
                 squares.Add(new Square(squareValue));
             }
