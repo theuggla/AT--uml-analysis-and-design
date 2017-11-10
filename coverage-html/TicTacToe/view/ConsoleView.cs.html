@@ -74,14 +74,14 @@
 <div style="white-space: pre;background-color: #EEF4ED;">                {</div>
 <div style="white-space: pre;background-color: #D2EACE;">                    Console.WriteLine(&quot;Square is already taken!&quot;);</div>
 <div style="white-space: pre;background-color: #D2EACE;">                    DisplayInstructions(&quot;Please pick another square: &quot;);</div>
-<div style="white-space: pre;background-color: #D2EACE;">                    GetSquareToPlayOn(board);</div>
+<div style="white-space: pre;background-color: #D2EACE;">                    square = GetSquareToPlayOn(board);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">                }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
 <div style="white-space: pre;background-color: #D2EACE;">            catch (NoSuchSquareException)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            {</div>
 <div style="white-space: pre;background-color: #D2EACE;">                Console.WriteLine(&quot;Square does not exist!&quot;);</div>
 <div style="white-space: pre;background-color: #D2EACE;">                DisplayInstructions(&quot;Please pick an actual square: &quot;);</div>
-<div style="white-space: pre;background-color: #D2EACE;">                GetSquareToPlayOn(board);</div>
+<div style="white-space: pre;background-color: #D2EACE;">                square = GetSquareToPlayOn(board);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #D2EACE;">            return square;</div>

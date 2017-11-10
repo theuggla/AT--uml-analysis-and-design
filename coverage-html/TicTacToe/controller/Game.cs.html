@@ -37,12 +37,19 @@
 <div style="white-space: pre;background-color: #D2EACE;">                if (IsGameOver(ref winner)) break;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">                 </div>
 <div style="white-space: pre;background-color: #D2EACE;">                Square AISquare = this.ai.GetSquareToPlayOn(this.board);</div>
-<div style="white-space: pre;background-color: #D2EACE;">                AISquare.PlayOn(PlayerSign.O);</div>
+<div style="white-space: pre;background-color: #D2EACE;">                AISquare.PlayOn(PlayerSign.O);this.view.DisplayBoard(this.board);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #D2EACE;">            } while (!IsGameOver(ref winner));</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #D2EACE;">            if (winner.Equals(PlayerSign.None)) this.view.DisplayInstructions(&quot;It&#39;s a draw!&quot;);</div>
-<div style="white-space: pre;background-color: #D2EACE;">            else this.view.DisplayInstructions($&quot;Player {winner.ToString()} won!&quot;);</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.view.DisplayBoard(this.board);</div>
+<div style="white-space: pre;background-color: #D2EACE;">            if (!winner.Equals(PlayerSign.None)) </div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                this.view.DisplayInstructions($&quot;Player {winner.ToString()} won!&quot;);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            else </div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                this.view.DisplayInstructions(&quot;It&#39;s a draw!&quot;);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        private bool IsGameOver(ref PlayerSign winner)</div>
@@ -57,6 +64,8 @@
 <div style="white-space: pre;background-color: #D2EACE;">                    break;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">                }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            if (!isWon) winner = PlayerSign.None;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #D2EACE;">            return isWon || this.board.IsFull();</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
