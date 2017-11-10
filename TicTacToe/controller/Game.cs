@@ -22,13 +22,17 @@ namespace TicTacToe.Controller
         public void PlayGame()
         {
             this.view.DisplayInstructions("Welcome to TicTacToe!");
-            this.view.DisplayBoard(this.board);
-            Square userSquare = this.view.GetSquareToPlayOn(this.board);
-            userSquare.PlayOn(PlayerSign.X);
-            Square AISquare = this.ai.GetSquareToPlayOn(this.board);
-            AISquare.PlayOn(PlayerSign.O);
-            Square userSquareTwo = this.view.GetSquareToPlayOn(this.board);
-            userSquare.PlayOn(PlayerSign.X);
+            
+            do
+            {
+                this.view.DisplayBoard(this.board);
+                Square userSquare = this.view.GetSquareToPlayOn(this.board);
+                userSquare.PlayOn(PlayerSign.X);
+                Square AISquare = this.ai.GetSquareToPlayOn(this.board);
+                AISquare.PlayOn(PlayerSign.O);
+                
+            } while (!IsGameOver());
+
         }
 
         public bool IsGameOver()
