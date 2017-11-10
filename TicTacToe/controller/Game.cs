@@ -25,6 +25,7 @@ namespace TicTacToe.Controller
             this.view.DisplayBoard(this.board);
             Square userSquare = this.view.GetSquareToPlayOn(this.board);
             userSquare.PlayOn(PlayerSign.X);
+            Square AISquare = this.ai.GetSquareToPlayOn(this.board);
         }
 
         public bool IsGameOver()

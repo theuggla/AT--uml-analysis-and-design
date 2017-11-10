@@ -70,7 +70,7 @@ namespace TicTacToeTest
         public void ShouldAskAIForSquareIfGameIsNotOver()
         {
             sut.PlayGame();
-            mockSquareAI.Verify(square => square.PlayOn(It.IsAny<PlayerSign>()), Times.AtLeastOnce());
+            mockAI.Verify(ai => ai.GetSquareToPlayOn(It.IsAny<Board>()), Times.AtLeastOnce());
         }
 
         [Fact]
