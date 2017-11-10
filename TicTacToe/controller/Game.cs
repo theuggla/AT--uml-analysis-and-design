@@ -26,6 +26,7 @@ namespace TicTacToe.Controller
             do
             {
                 this.view.DisplayBoard(this.board);
+                this.view.DisplayInstructions("Please choose a square to play on: ");
                 Square userSquare = this.view.GetSquareToPlayOn(this.board);
                 userSquare.PlayOn(PlayerSign.X);
 

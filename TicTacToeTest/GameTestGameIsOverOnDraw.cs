@@ -23,5 +23,12 @@ namespace TicTacToeTest
             bool result = sut.IsGameOver();
             Assert.True(result);
         }
+
+        [Fact]
+        public void ShouldDisplayDrawMessage()
+        {
+            sut.PlayGame();
+            mockView.Verify(view => view.DisplayInstructions("It's a draw!"), Times.Once());
+        }
     }
 }
