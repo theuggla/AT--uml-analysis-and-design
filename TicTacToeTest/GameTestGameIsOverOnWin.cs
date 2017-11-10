@@ -17,31 +17,52 @@ namespace TicTacToeTest
         private Mock<ConsoleView> mockView;
         private Mock<Board> mockBoard;
         private Mock<AI> mockAI;
-        private Mock<Square> mockSquare;
+        private Mock<Square> mockSquareOnePlayer;
+        private Mock<Square> mockSquareTwoPlayer;
+
+        private Mock<Square> mockSquareOneAI;
+        private Mock<Square> mockSquareTwoAI;
 
         public GameTestGameIsOverOnWin()
         {
             mockView = new Mock<ConsoleView>();
             mockBoard = new Mock<Board>();
             mockAI = new Mock<AI>();
-            mockSquare = new Mock<Square>(SquareValue.A1);
+            mockSquareOnePlayer = new Mock<Square>(SquareValue.C1);
+            mockSquareTwoPlayer = new Mock<Square>(SquareValue.C2);
+            mockSquareOneAI = new Mock<Square>(SquareValue.C3);
+            mockSquareTwoAI = new Mock<Square>(SquareValue.A2);
 
             List<Square> wonBoard = GetFullCollectionOfSquares();
-            wonBoard.ElementAt(1).PlayOn(PlayerSign.X);
+            wonBoard.ElementAt(0).PlayOn(PlayerSign.X);
             wonBoard.ElementAt(2).PlayOn(PlayerSign.O);
-            wonBoard.ElementAt(0).PlayOn(PlayerSign.O);
             wonBoard.ElementAt(3).PlayOn(PlayerSign.X);
             wonBoard.ElementAt(4).PlayOn(PlayerSign.X);
             wonBoard.ElementAt(5).PlayOn(PlayerSign.X);
 
             List<int[]> winningRows = GetWinningRows();
 
-            mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquare.Object);
+           mockView.SetupSequence(view => view.GetSquareToPlayOn(It.IsAny<Board>()))
+            .Returns(mockSquareOnePlayer.Object)
+            .Returns(mockSquareTwoPlayer.Object);
+
+            mockAI.SetupSequence(AI => AI.GetSquareToPlayOn(It.IsAny<Board>()))
+            .Returns(mockSquareOneAI.Object)
+            .Returns(mockSquareTwoAI.Object);
+
             mockBoard.Setup(board => board.IsFull()).Returns(false);
             mockBoard.Setup(board => board.GetBoard()).Returns(wonBoard);
             mockBoard.Setup(board => board.WinningRows()).Returns(winningRows);
 
             sut = new Game(mockView.Object, mockBoard.Object, mockAI.Object);
+        }
+
+        [Fact]
+        public void ShouldStopAskingForSquaresWhenGameIsOver()
+        {
+            sut.PlayGame();
+            mockView.Verify(view => view.GetSquareToPlayOn(It.IsAny<Board>()), Times.Once());
+            mockAI.Verify(ai => ai.GetSquareToPlayOn(It.IsAny<Board>()), Times.Never());
         }
 
         [Fact]
