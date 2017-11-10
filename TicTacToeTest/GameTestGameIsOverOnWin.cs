@@ -1,6 +1,8 @@
 using System;
 using System.IO;
 using System.Text;
+using System.Linq;
+using System.Collections.Generic;
 using Xunit;
 using Moq;
 using TicTacToe.Model;
@@ -9,7 +11,7 @@ using TicTacToe.Controller;
 
 namespace TicTacToeTest
 {
-    public class GameTest
+    public class GameTestGameIsOverOnWin
     {
         private Game sut;
         private Mock<ConsoleView> mockView;
@@ -17,53 +19,40 @@ namespace TicTacToeTest
         private Mock<AI> mockAI;
         private Mock<Square> mockSquare;
 
-
-        public GameTest()
+        public GameTestGameIsOverOnWin()
         {
             mockView = new Mock<ConsoleView>();
             mockBoard = new Mock<Board>();
             mockAI = new Mock<AI>();
             mockSquare = new Mock<Square>(SquareValue.A1);
 
+            List<Square> wonBoard = GetFullCollectionOfSquares();
+            wonBoard.ElementAt(0).PlayOn(PlayerSign.X);
+            wonBoard.ElementAt(1).PlayOn(PlayerSign.X);
+            wonBoard.ElementAt(2).PlayOn(PlayerSign.X);
+
             mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquare.Object);
             mockBoard.Setup(board => board.IsFull()).Returns(false);
+            mockBoard.Setup(board => board.GetBoard()).Returns(wonBoard);
 
             sut = new Game(mockView.Object, mockBoard.Object, mockAI.Object);
         }
 
         [Fact]
-        public void ShouldDisplayWelcomeInstructionsOnce()
+        public void IsGameOverShouldReturnTrueIfPlayerHasWon()
         {
-            sut.PlayGame();
+            bool result = sut.IsGameOver();
             mockView.Verify(view => view.DisplayInstructions("Welcome to TicTacToe!"), Times.Once());
         }
 
-        [Fact]
-        public void ShouldDisplayBoardAtLeastOnce()
+        private List<Square> GetFullCollectionOfSquares()
         {
-            sut.PlayGame();
-            mockView.Verify(view => view.DisplayBoard(It.IsAny<Board>()), Times.AtLeastOnce());
-        }
-
-        [Fact]
-        public void ShouldAskUserForSquareToPlayLeastOnce()
-        {
-            sut.PlayGame();
-            mockView.Verify(view => view.GetSquareToPlayOn(It.IsAny<Board>()), Times.AtLeastOnce());
-        }
-
-        [Fact]
-        public void ShouldPlayOnThatSquare()
-        {
-            sut.PlayGame();
-            mockSquare.Verify(square => square.PlayOn(It.IsAny<PlayerSign>()), Times.AtLeastOnce());
-        }
-
-        [Fact]
-        public void IsGameOverShouldReturnFalseIfBoardIsNotFull()
-        {
-            bool result = sut.IsGameOver();
-            Assert.False(result);
+            List<Square> squares = new List<Square>();
+            foreach (SquareValue squareValue in Enum.GetValues(typeof(SquareValue)))
+            {
+                squares.Add(new Square(squareValue));
+            }
+            return squares;
         }
     }
 }
