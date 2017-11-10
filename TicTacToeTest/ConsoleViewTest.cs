@@ -95,7 +95,11 @@ namespace TicTacToeTest
                 using (var sr = new StringReader("a1"))
                 {
                     var mockBoard = new Mock<Board>();
-                    mockBoard.Setup(board => board.GetSquare("a1")).Throws(new NoSuchSquareException());
+                    var mockSquare = new Mock<Square>(SquareValue.A1);
+
+                    mockBoard.SetupSequence(board => board.GetSquare(It.IsAny<string>()))
+                    .Throws(new NoSuchSquareException())
+                    .Returns(mockSquare.Object);
 
                     Console.SetOut(sw);
                     Console.SetIn(sr);
@@ -115,9 +119,15 @@ namespace TicTacToeTest
                 using (var sr = new StringReader("a1"))
                 {
                     var mockBoard = new Mock<Board>();
-                    var mockSquare = new Mock<Square>(SquareValue.A1);
-                    mockSquare.Setup(sq => sq.IsPlayedOn()).Returns(true);
-                    mockBoard.Setup(board => board.GetSquare("a1")).Returns(mockSquare.Object);
+                    var takenMockSquare = new Mock<Square>(SquareValue.A1);
+                    var notTakenMockSquare = new Mock<Square>(SquareValue.A2);
+                    
+                    takenMockSquare.Setup(sq => sq.IsPlayedOn()).Returns(true);
+                    notTakenMockSquare.Setup(sq => sq.IsPlayedOn()).Returns(false);
+                    
+                    mockBoard.SetupSequence(board => board.GetSquare(It.IsAny<string>()))
+                    .Returns(takenMockSquare.Object)
+                    .Returns(notTakenMockSquare.Object);
 
                     Console.SetOut(sw);
                     Console.SetIn(sr);

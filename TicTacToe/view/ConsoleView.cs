@@ -67,6 +67,13 @@ namespace TicTacToe.View
             try
             {
                 square = board.GetSquare(squareValue);
+
+                if (square.IsPlayedOn())
+                {
+                    Console.WriteLine("Square is already taken!");
+                    DisplayInstructions("Please pick another square: ");
+                    GetSquareToPlayOn(board);
+                }
             }
             catch (NoSuchSquareException)
             {
