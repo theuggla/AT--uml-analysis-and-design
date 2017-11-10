@@ -37,6 +37,7 @@ namespace TicTacToe.Controller
 
             } while (!IsGameOver());
 
+            this.view.DisplayInstructions("It's a draw!");
         }
 
         public bool IsGameOver()
