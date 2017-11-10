@@ -29,7 +29,9 @@ namespace TicTacToe.Controller
 
         public bool IsGameOver()
         {
-            return this.board.IsFull();
+            List<Square> boardAsList = this.board.GetBoard().ToList();
+            return this.board.IsFull()
+            || boardAsList.ElementAt(0).IsPlayedOn() && boardAsList.ElementAt(0).Sign.Equals(boardAsList.ElementAt(1).Sign) && boardAsList.ElementAt(0).Sign.Equals(boardAsList.ElementAt(2).Sign);
         }
     }
 }

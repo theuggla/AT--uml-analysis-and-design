@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using Moq;
@@ -9,7 +10,7 @@ using TicTacToe.Controller;
 
 namespace TicTacToeTest
 {
-    public class GameTest
+    public class GameTestGameIsNotOver
     {
         private Game sut;
         private Mock<ConsoleView> mockView;
@@ -18,7 +19,7 @@ namespace TicTacToeTest
         private Mock<Square> mockSquare;
 
 
-        public GameTest()
+        public GameTestGameIsNotOver()
         {
             mockView = new Mock<ConsoleView>();
             mockBoard = new Mock<Board>();
@@ -27,6 +28,7 @@ namespace TicTacToeTest
 
             mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquare.Object);
             mockBoard.Setup(board => board.IsFull()).Returns(false);
+            mockBoard.Setup(board => board.GetBoard()).Returns(GetFullCollectionOfSquares());
 
             sut = new Game(mockView.Object, mockBoard.Object, mockAI.Object);
         }
@@ -64,6 +66,16 @@ namespace TicTacToeTest
         {
             bool result = sut.IsGameOver();
             Assert.False(result);
+        }
+
+        private List<Square> GetFullCollectionOfSquares()
+        {
+            List<Square> squares = new List<Square>();
+            foreach (SquareValue squareValue in Enum.GetValues(typeof(SquareValue)))
+            {
+                squares.Add(new Square(squareValue));
+            }
+            return squares;
         }
     }
 }

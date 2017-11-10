@@ -42,7 +42,7 @@ namespace TicTacToeTest
         public void IsGameOverShouldReturnTrueIfPlayerHasWon()
         {
             bool result = sut.IsGameOver();
-            mockView.Verify(view => view.DisplayInstructions("Welcome to TicTacToe!"), Times.Once());
+            Assert.True(result);
         }
 
         private List<Square> GetFullCollectionOfSquares()
