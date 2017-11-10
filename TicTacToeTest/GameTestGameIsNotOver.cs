@@ -16,19 +16,21 @@ namespace TicTacToeTest
         private Mock<ConsoleView> mockView;
         private Mock<Board> mockBoard;
         private Mock<AI> mockAI;
-        private Mock<Square> mockSquare;
-
+        private Mock<Square> mockSquarePlayer;
+        private Mock<Square> mockSquareAI;
 
         public GameTestGameIsNotOver()
         {
             mockView = new Mock<ConsoleView>();
             mockBoard = new Mock<Board>();
             mockAI = new Mock<AI>();
-            mockSquare = new Mock<Square>(SquareValue.A1);
+            mockSquarePlayer = new Mock<Square>(SquareValue.A1);
+            mockSquareAI = new Mock<Square>(SquareValue.A2);
 
             List<int[]> winningRows = GetWinningRows();
 
-            mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquare.Object);
+            mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquarePlayer.Object);
+            mockAI.Setup(AI => AI.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquareAI.Object);
             mockBoard.Setup(board => board.IsFull()).Returns(false);
             mockBoard.Setup(board => board.GetBoard()).Returns(GetFullCollectionOfSquares());
             mockBoard.Setup(board => board.WinningRows()).Returns(winningRows);
@@ -61,7 +63,14 @@ namespace TicTacToeTest
         public void ShouldPlayOnThatSquare()
         {
             sut.PlayGame();
-            mockSquare.Verify(square => square.PlayOn(It.IsAny<PlayerSign>()), Times.AtLeastOnce());
+            mockSquarePlayer.Verify(square => square.PlayOn(It.IsAny<PlayerSign>()), Times.AtLeastOnce());
+        }
+
+        [Fact]
+        public void ShouldAskAIForSquareIfGameIsNotOver()
+        {
+            sut.PlayGame();
+            mockSquareAI.Verify(square => square.PlayOn(It.IsAny<PlayerSign>()), Times.AtLeastOnce());
         }
 
         [Fact]
