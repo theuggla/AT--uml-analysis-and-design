@@ -29,10 +29,17 @@
 <div style="white-space: pre;background-color: #EEF4ED;">    public class Board</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    {</div>
 <div style="white-space: pre;background-color: #D2EACE;">        private List&lt;Square&gt; squares = new List&lt;Square&gt;();</div>
+<div style="white-space: pre;background-color: #D2EACE;">        private List&lt;int[]&gt; winningRows = new List&lt;int[]&gt;();</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #D2EACE;">        public Board()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
-<div style="white-space: pre;background-color: #D2EACE;">            NewBoard();</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.NewBoard();</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.SetWinningRows();</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public virtual List&lt;int[]&gt; WinningRows()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #EACECC;">            return this.winningRows;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public virtual Square GetSquare(string nameOfSquare)</div>
@@ -69,6 +76,18 @@
 <div style="white-space: pre;background-color: #EEF4ED;">        public virtual bool IsFull()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            return squares.All(x =&gt; x.IsPlayedOn());</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        public virtual void SetWinningRows()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.winningRows.Add(new int[] {0, 1, 2});</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.winningRows.Add(new int[] {3, 4, 5});</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.winningRows.Add(new int[] {6, 7, 8});</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.winningRows.Add(new int[] {0, 3, 6});</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.winningRows.Add(new int[] {1, 4, 7});</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.winningRows.Add(new int[] {2, 5, 8});</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.winningRows.Add(new int[] {0, 4, 8});</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.winningRows.Add(new int[] {6, 4, 2});</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">}</div>

@@ -31,7 +31,30 @@
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public bool IsGameOver()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
-<div style="white-space: pre;background-color: #D2EACE;">            return this.board.IsFull();</div>
+<div style="white-space: pre;background-color: #D2EACE;">            List&lt;Square&gt; boardAsList = this.board.GetBoard().ToList();</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return this.board.IsFull()</div>
+<div style="white-space: pre;background-color: #D2EACE;">            || this.board.WinningRows().Any(row =&gt; IsRowWon(row));</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private bool IsRowWon(int[] row)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            bool rowIsEqual = false;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            if (this.board.GetBoard().ElementAt(row[0]).IsPlayedOn())</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                rowIsEqual = true;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">                foreach (int squarePos in row)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">                {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                    if (!this.board.GetBoard().ElementAt(row[0]).Sign.Equals(this.board.GetBoard().ElementAt(squarePos).Sign))</div>
+<div style="white-space: pre;background-color: #EEF4ED;">                    {</div>
+<div style="white-space: pre;background-color: #EACECC;">                        rowIsEqual = false;</div>
+<div style="white-space: pre;background-color: #EACECC;">                        break;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">                    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">                }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return rowIsEqual;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">    }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">}</div>
