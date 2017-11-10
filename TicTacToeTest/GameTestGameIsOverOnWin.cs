@@ -27,9 +27,12 @@ namespace TicTacToeTest
             mockSquare = new Mock<Square>(SquareValue.A1);
 
             List<Square> wonBoard = GetFullCollectionOfSquares();
-            wonBoard.ElementAt(0).PlayOn(PlayerSign.X);
             wonBoard.ElementAt(1).PlayOn(PlayerSign.X);
-            wonBoard.ElementAt(2).PlayOn(PlayerSign.X);
+            wonBoard.ElementAt(2).PlayOn(PlayerSign.O);
+            wonBoard.ElementAt(0).PlayOn(PlayerSign.O);
+            wonBoard.ElementAt(3).PlayOn(PlayerSign.X);
+            wonBoard.ElementAt(4).PlayOn(PlayerSign.X);
+            wonBoard.ElementAt(5).PlayOn(PlayerSign.X);
 
             List<int[]> winningRows = GetWinningRows();
 
