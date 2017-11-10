@@ -35,12 +35,19 @@ namespace TicTacToe.Controller
                 if (IsGameOver(ref winner)) break;
                  
                 Square AISquare = this.ai.GetSquareToPlayOn(this.board);
-                AISquare.PlayOn(PlayerSign.O);
+                AISquare.PlayOn(PlayerSign.O);this.view.DisplayBoard(this.board);
 
             } while (!IsGameOver(ref winner));
 
-            if (winner.Equals(PlayerSign.None)) this.view.DisplayInstructions("It's a draw!");
-            else this.view.DisplayInstructions($"Player {winner.ToString()} won!");
+            this.view.DisplayBoard(this.board);
+            if (!winner.Equals(PlayerSign.None)) 
+            {
+                this.view.DisplayInstructions($"Player {winner.ToString()} won!");
+            }
+            else 
+            {
+                this.view.DisplayInstructions("It's a draw!");
+            }
         }
 
         private bool IsGameOver(ref PlayerSign winner)
@@ -55,6 +62,8 @@ namespace TicTacToe.Controller
                     break;
                 }
             }
+
+            if (!isWon) winner = PlayerSign.None;
 
             return isWon || this.board.IsFull();
         }

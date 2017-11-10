@@ -72,14 +72,14 @@ namespace TicTacToe.View
                 {
                     Console.WriteLine("Square is already taken!");
                     DisplayInstructions("Please pick another square: ");
-                    GetSquareToPlayOn(board);
+                    square = GetSquareToPlayOn(board);
                 }
             }
             catch (NoSuchSquareException)
             {
                 Console.WriteLine("Square does not exist!");
                 DisplayInstructions("Please pick an actual square: ");
-                GetSquareToPlayOn(board);
+                square = GetSquareToPlayOn(board);
             }
 
             return square;
