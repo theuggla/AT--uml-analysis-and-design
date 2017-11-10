@@ -60,7 +60,7 @@ namespace TicTacToeTest
         }
 
         [Fact]
-        public void ShouldPlayOnThatSquare()
+        public void ShouldPlayOnThatPlayerSquare()
         {
             sut.PlayGame();
             mockSquarePlayer.Verify(square => square.PlayOn(It.IsAny<PlayerSign>()), Times.AtLeastOnce());
@@ -71,6 +71,13 @@ namespace TicTacToeTest
         {
             sut.PlayGame();
             mockAI.Verify(ai => ai.GetSquareToPlayOn(It.IsAny<Board>()), Times.AtLeastOnce());
+        }
+
+        [Fact]
+        public void ShouldPlayOnThatAISquare()
+        {
+            sut.PlayGame();
+            mockSquareAI.Verify(square => square.PlayOn(It.IsAny<PlayerSign>()), Times.AtLeastOnce());
         }
 
         [Fact]
