@@ -21,6 +21,8 @@ namespace TicTacToe.Controller
 
         public void PlayGame()
         {
+            PlayerSign winner = PlayerSign.None;
+
             this.view.DisplayInstructions("Welcome to TicTacToe!");
             
             do
@@ -30,25 +32,34 @@ namespace TicTacToe.Controller
                 Square userSquare = this.view.GetSquareToPlayOn(this.board);
                 userSquare.PlayOn(PlayerSign.X);
 
-                if (IsGameOver()) break;
+                if (IsGameOver(ref winner)) break;
                  
                 Square AISquare = this.ai.GetSquareToPlayOn(this.board);
                 AISquare.PlayOn(PlayerSign.O);
 
-            } while (!IsGameOver());
+            } while (!IsGameOver(ref winner));
 
-            if (this.board.IsFull()) this.view.DisplayInstructions("It's a draw!");
-            else this.view.DisplayInstructions("Player X won!");
+            if (winner.Equals(PlayerSign.None)) this.view.DisplayInstructions("It's a draw!");
+            else this.view.DisplayInstructions($"Player {winner.ToString()} won!");
         }
 
-        private bool IsGameOver()
+        private bool IsGameOver(ref PlayerSign winner)
         {
-            List<Square> boardAsList = this.board.GetBoard().ToList();
-            return this.board.IsFull()
-            || this.board.WinningRows().Any(row => IsRowWon(row));
+            bool isWon = false;
+
+            foreach (int[] row in this.board.WinningRows())
+            {
+                if (IsRowWon(row, ref winner))
+                {
+                    isWon = true;
+                    break;
+                }
+            }
+
+            return isWon || this.board.IsFull();
         }
 
-        private bool IsRowWon(int[] row)
+        private bool IsRowWon(int[] row, ref PlayerSign winner)
         {
             bool rowIsEqual = false;
 
@@ -61,8 +72,11 @@ namespace TicTacToe.Controller
                     if (!this.board.GetBoard().ElementAt(row[0]).Sign.Equals(this.board.GetBoard().ElementAt(squarePos).Sign))
                     {
                         rowIsEqual = false;
+                        winner = PlayerSign.None;
                         break;
                     }
+
+                    winner = this.board.GetBoard().ElementAt(row[0]).Sign;
                 }
             }
 
