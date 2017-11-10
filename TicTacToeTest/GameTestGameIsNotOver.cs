@@ -69,12 +69,5 @@ namespace TicTacToeTest
             sut.PlayGame();
             mockSquareOneAI.Verify(square => square.PlayOn(It.IsAny<PlayerSign>()), Times.AtLeastOnce());
         }
-
-        [Fact]
-        public void IsGameOverShouldReturnFalseIfBoardIsNotFull()
-        {
-            bool result = sut.IsGameOver();
-            Assert.False(result);
-        }
     }
 }

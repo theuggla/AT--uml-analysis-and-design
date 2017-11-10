@@ -40,7 +40,7 @@ namespace TicTacToe.Controller
             this.view.DisplayInstructions("It's a draw!");
         }
 
-        public bool IsGameOver()
+        private bool IsGameOver()
         {
             List<Square> boardAsList = this.board.GetBoard().ToList();
             return this.board.IsFull()

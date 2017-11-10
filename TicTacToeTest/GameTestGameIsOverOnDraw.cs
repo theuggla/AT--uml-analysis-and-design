@@ -18,13 +18,6 @@ namespace TicTacToeTest
         }
 
         [Fact]
-        public void IsGameOverShouldReturnTrueIfBoardIsFull()
-        {
-            bool result = sut.IsGameOver();
-            Assert.True(result);
-        }
-
-        [Fact]
         public void ShouldDisplayDrawMessage()
         {
             sut.PlayGame();

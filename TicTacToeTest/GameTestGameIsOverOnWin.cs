@@ -41,12 +41,5 @@ namespace TicTacToeTest
             mockView.Verify(view => view.GetSquareToPlayOn(It.IsAny<Board>()), Times.Once());
             mockAI.Verify(ai => ai.GetSquareToPlayOn(It.IsAny<Board>()), Times.Never());
         }
-
-        [Fact]
-        public void IsGameOverShouldReturnTrueIfPlayerHasWon()
-        {
-            bool result = sut.IsGameOver();
-            Assert.True(result);
-        }
     }
 }
