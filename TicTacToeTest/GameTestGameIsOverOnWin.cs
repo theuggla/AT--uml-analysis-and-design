@@ -41,5 +41,12 @@ namespace TicTacToeTest
             mockView.Verify(view => view.GetSquareToPlayOn(It.IsAny<Board>()), Times.Once());
             mockAI.Verify(ai => ai.GetSquareToPlayOn(It.IsAny<Board>()), Times.Never());
         }
+
+        [Fact]
+        public void ShouldDisplayWinnerMessage()
+        {
+            sut.PlayGame();
+            mockView.Verify(view => view.DisplayInstructions($"Player X won!"), Times.Once());
+        }
     }
 }
