@@ -37,7 +37,8 @@ namespace TicTacToe.Controller
 
             } while (!IsGameOver());
 
-            this.view.DisplayInstructions("It's a draw!");
+            if (this.board.IsFull()) this.view.DisplayInstructions("It's a draw!");
+            else this.view.DisplayInstructions("Player X won!");
         }
 
         private bool IsGameOver()
