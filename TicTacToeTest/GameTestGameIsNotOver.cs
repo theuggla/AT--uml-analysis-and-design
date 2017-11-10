@@ -43,6 +43,7 @@ namespace TicTacToeTest
 
             mockBoard.SetupSequence(board => board.IsFull())
             .Returns(false)
+            .Returns(false)
             .Returns(true);
 
             mockBoard.Setup(board => board.GetBoard()).Returns(GetFullCollectionOfSquares());

@@ -28,9 +28,12 @@ namespace TicTacToe.Controller
                 this.view.DisplayBoard(this.board);
                 Square userSquare = this.view.GetSquareToPlayOn(this.board);
                 userSquare.PlayOn(PlayerSign.X);
+
+                if (IsGameOver()) break;
+                 
                 Square AISquare = this.ai.GetSquareToPlayOn(this.board);
                 AISquare.PlayOn(PlayerSign.O);
-                
+
             } while (!IsGameOver());
 
         }
