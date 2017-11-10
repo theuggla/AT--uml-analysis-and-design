@@ -39,15 +39,15 @@
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public virtual List&lt;int[]&gt; WinningRows()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
-<div style="white-space: pre;background-color: #EACECC;">            return this.winningRows;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return this.winningRows;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public virtual Square GetSquare(string nameOfSquare)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            if (Enum.GetNames(typeof(SquareValue)).Contains(nameOfSquare.ToUpper()))</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            {</div>
-<div style="white-space: pre;background-color: #D2EACE;">                Enum.TryParse(nameOfSquare, out SquareValue squareValue);</div>
-<div style="white-space: pre;background-color: #D2EACE;">                return squares.Find(x =&gt; x.Name.Equals(squareValue));</div>
+<div style="white-space: pre;background-color: #D2EACE;">                SquareValue squareValue = (SquareValue) Enum.Parse(typeof(SquareValue), nameOfSquare, true);     </div>
+<div style="white-space: pre;background-color: #D2EACE;">                return this.squares.Find(x =&gt; x.Name.Equals(squareValue));</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #D2EACE;">            throw new NoSuchSquareException(&quot;Tries to retrieve nonexsistent square.&quot;);   </div>
@@ -55,11 +55,11 @@
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public virtual void NewBoard()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
-<div style="white-space: pre;background-color: #D2EACE;">            squares = new List&lt;Square&gt;();</div>
+<div style="white-space: pre;background-color: #D2EACE;">            this.squares = new List&lt;Square&gt;();</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #D2EACE;">            foreach (SquareValue squareValue in Enum.GetValues(typeof(SquareValue)))</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            {</div>
-<div style="white-space: pre;background-color: #D2EACE;">                squares.Add(new Square(squareValue));</div>
+<div style="white-space: pre;background-color: #D2EACE;">                this.squares.Add(new Square(squareValue));</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>

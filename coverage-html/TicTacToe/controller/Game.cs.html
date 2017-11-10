@@ -24,9 +24,20 @@
 <div style="white-space: pre;background-color: #EEF4ED;">        public void PlayGame()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            this.view.DisplayInstructions(&quot;Welcome to TicTacToe!&quot;);</div>
-<div style="white-space: pre;background-color: #D2EACE;">            this.view.DisplayBoard(this.board);</div>
-<div style="white-space: pre;background-color: #D2EACE;">            Square userSquare = this.view.GetSquareToPlayOn(this.board);</div>
-<div style="white-space: pre;background-color: #D2EACE;">            userSquare.PlayOn(PlayerSign.X);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            </div>
+<div style="white-space: pre;background-color: #EEF4ED;">            do</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                this.view.DisplayBoard(this.board);</div>
+<div style="white-space: pre;background-color: #D2EACE;">                Square userSquare = this.view.GetSquareToPlayOn(this.board);</div>
+<div style="white-space: pre;background-color: #D2EACE;">                userSquare.PlayOn(PlayerSign.X);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">                if (IsGameOver()) break;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">                 </div>
+<div style="white-space: pre;background-color: #D2EACE;">                Square AISquare = this.ai.GetSquareToPlayOn(this.board);</div>
+<div style="white-space: pre;background-color: #D2EACE;">                AISquare.PlayOn(PlayerSign.O);</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            } while (!IsGameOver());</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public bool IsGameOver()</div>
