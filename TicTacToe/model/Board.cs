@@ -44,8 +44,8 @@ namespace TicTacToe.Model
         {
             if (Enum.GetNames(typeof(SquareValue)).Contains(nameOfSquare.ToUpper()))
             {
-                Enum.TryParse(nameOfSquare, out SquareValue squareValue);
-                return squares.Find(x => x.Name.Equals(squareValue));
+                SquareValue squareValue = (SquareValue) Enum.Parse(typeof(SquareValue), nameOfSquare, true);     
+                return this.squares.Find(x => x.Name.Equals(squareValue));
             }
 
             throw new NoSuchSquareException("Tries to retrieve nonexsistent square.");   
@@ -53,11 +53,11 @@ namespace TicTacToe.Model
 
         public virtual void NewBoard()
         {
-            squares = new List<Square>();
+            this.squares = new List<Square>();
 
             foreach (SquareValue squareValue in Enum.GetValues(typeof(SquareValue)))
             {
-                squares.Add(new Square(squareValue));
+                this.squares.Add(new Square(squareValue));
             }
         }
 

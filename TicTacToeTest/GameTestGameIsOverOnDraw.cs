@@ -9,26 +9,12 @@ using TicTacToe.Controller;
 
 namespace TicTacToeTest
 {
-    public class GameTestGameIsOver
+    public class GameIsOverOnDraw: GameTest
     {
-        private Game sut;
-        private Mock<ConsoleView> mockView;
-        private Mock<Board> mockBoard;
-        private Mock<AI> mockAI;
-        private Mock<Square> mockSquare;
-
-
-        public GameTestGameIsOver()
+        public override void Setup()
         {
-            mockView = new Mock<ConsoleView>();
-            mockBoard = new Mock<Board>();
-            mockAI = new Mock<AI>();
-            mockSquare = new Mock<Square>(SquareValue.A1);
-
-            mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquare.Object);
+            mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquareOnePlayer.Object);
             mockBoard.Setup(board => board.IsFull()).Returns(true);
-
-            sut = new Game(mockView.Object, mockBoard.Object, mockAI.Object);
         }
 
         [Fact]
