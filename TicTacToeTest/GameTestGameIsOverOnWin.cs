@@ -31,9 +31,12 @@ namespace TicTacToeTest
             wonBoard.ElementAt(1).PlayOn(PlayerSign.X);
             wonBoard.ElementAt(2).PlayOn(PlayerSign.X);
 
+            List<int[]> winningRows = GetWinningRows();
+
             mockView.Setup(view => view.GetSquareToPlayOn(It.IsAny<Board>())).Returns(mockSquare.Object);
             mockBoard.Setup(board => board.IsFull()).Returns(false);
             mockBoard.Setup(board => board.GetBoard()).Returns(wonBoard);
+            mockBoard.Setup(board => board.WinningRows()).Returns(winningRows);
 
             sut = new Game(mockView.Object, mockBoard.Object, mockAI.Object);
         }
@@ -53,6 +56,20 @@ namespace TicTacToeTest
                 squares.Add(new Square(squareValue));
             }
             return squares;
+        }
+
+        private List<int[]> GetWinningRows()
+        {
+            List<int[]> winningRows = new List<int[]>();
+            winningRows.Add(new int[] {0, 1, 2});
+            winningRows.Add(new int[] {3, 4, 5});
+            winningRows.Add(new int[] {6, 7, 8});
+            winningRows.Add(new int[] {0, 3, 6});
+            winningRows.Add(new int[] {1, 4, 7});
+            winningRows.Add(new int[] {2, 5, 8});
+            winningRows.Add(new int[] {0, 4, 8});
+            winningRows.Add(new int[] {6, 4, 2});
+            return winningRows;
         }
     }
 }

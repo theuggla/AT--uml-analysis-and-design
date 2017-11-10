@@ -31,7 +31,28 @@ namespace TicTacToe.Controller
         {
             List<Square> boardAsList = this.board.GetBoard().ToList();
             return this.board.IsFull()
-            || boardAsList.ElementAt(0).IsPlayedOn() && boardAsList.ElementAt(0).Sign.Equals(boardAsList.ElementAt(1).Sign) && boardAsList.ElementAt(0).Sign.Equals(boardAsList.ElementAt(2).Sign);
+            || this.board.WinningRows().Any(row => IsRowWon(row));
+        }
+
+        private bool IsRowWon(int[] row)
+        {
+            bool rowIsEqual = false;
+
+            if (this.board.GetBoard().ElementAt(row[0]).IsPlayedOn())
+            {
+                rowIsEqual = true;
+
+                foreach (int squarePos in row)
+                {
+                    if (!this.board.GetBoard().ElementAt(row[0]).Sign.Equals(this.board.GetBoard().ElementAt(squarePos).Sign))
+                    {
+                        rowIsEqual = false;
+                        break;
+                    }
+                }
+            }
+
+            return rowIsEqual;
         }
     }
 }

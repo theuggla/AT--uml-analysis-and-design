@@ -27,10 +27,17 @@ namespace TicTacToe.Model
     public class Board
     {
         private List<Square> squares = new List<Square>();
+        private List<int[]> winningRows = new List<int[]>();
 
         public Board()
         {
-            NewBoard();
+            this.NewBoard();
+            this.SetWinningRows();
+        }
+
+        public virtual List<int[]> WinningRows()
+        {
+            return this.winningRows;
         }
 
         public virtual Square GetSquare(string nameOfSquare)
@@ -67,6 +74,18 @@ namespace TicTacToe.Model
         public virtual bool IsFull()
         {
             return squares.All(x => x.IsPlayedOn());
+        }
+
+        public virtual void SetWinningRows()
+        {
+            this.winningRows.Add(new int[] {0, 1, 2});
+            this.winningRows.Add(new int[] {3, 4, 5});
+            this.winningRows.Add(new int[] {6, 7, 8});
+            this.winningRows.Add(new int[] {0, 3, 6});
+            this.winningRows.Add(new int[] {1, 4, 7});
+            this.winningRows.Add(new int[] {2, 5, 8});
+            this.winningRows.Add(new int[] {0, 4, 8});
+            this.winningRows.Add(new int[] {6, 4, 2});
         }
     }
 }
