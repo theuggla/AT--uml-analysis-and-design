@@ -107,6 +107,28 @@ namespace TicTacToeTest
             }
         }
 
+        [Fact]
+        public void GetSquareToPlayOnShouldPrintErrorMessageIfSquareIsAlreadyPlayedOn()
+        {
+            using (var sw = new StringWriter())
+            {
+                using (var sr = new StringReader("a1"))
+                {
+                    var mockBoard = new Mock<Board>();
+                    var mockSquare = new Mock<Square>(SquareValue.A1);
+                    mockSquare.Setup(sq => sq.IsPlayedOn()).Returns(true);
+                    mockBoard.Setup(board => board.GetSquare("a1")).Returns(mockSquare.Object);
+
+                    Console.SetOut(sw);
+                    Console.SetIn(sr);
+            
+                    Square square = sut.GetSquareToPlayOn(mockBoard.Object);
+                    string result = sw.ToString();
+                    Assert.Contains("Square is already taken!", result);
+                }
+            }
+        }
+
         private List<Square> GetFullCollectionOfSquares()
         {
             List<Square> squares = new List<Square>();
