@@ -23,6 +23,8 @@
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        public void PlayGame()</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
+<div style="white-space: pre;background-color: #D2EACE;">            PlayerSign winner = PlayerSign.None;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
 <div style="white-space: pre;background-color: #D2EACE;">            this.view.DisplayInstructions(&quot;Welcome to TicTacToe!&quot;);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            </div>
 <div style="white-space: pre;background-color: #EEF4ED;">            do</div>
@@ -32,23 +34,34 @@
 <div style="white-space: pre;background-color: #D2EACE;">                Square userSquare = this.view.GetSquareToPlayOn(this.board);</div>
 <div style="white-space: pre;background-color: #D2EACE;">                userSquare.PlayOn(PlayerSign.X);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #D2EACE;">                if (IsGameOver()) break;</div>
+<div style="white-space: pre;background-color: #D2EACE;">                if (IsGameOver(ref winner)) break;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">                 </div>
 <div style="white-space: pre;background-color: #D2EACE;">                Square AISquare = this.ai.GetSquareToPlayOn(this.board);</div>
 <div style="white-space: pre;background-color: #D2EACE;">                AISquare.PlayOn(PlayerSign.O);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #D2EACE;">            } while (!IsGameOver());</div>
+<div style="white-space: pre;background-color: #D2EACE;">            } while (!IsGameOver(ref winner));</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            if (winner.Equals(PlayerSign.None)) this.view.DisplayInstructions(&quot;It&#39;s a draw!&quot;);</div>
+<div style="white-space: pre;background-color: #D2EACE;">            else this.view.DisplayInstructions($&quot;Player {winner.ToString()} won!&quot;);</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        public bool IsGameOver()</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private bool IsGameOver(ref PlayerSign winner)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
-<div style="white-space: pre;background-color: #D2EACE;">            List&lt;Square&gt; boardAsList = this.board.GetBoard().ToList();</div>
-<div style="white-space: pre;background-color: #D2EACE;">            return this.board.IsFull()</div>
-<div style="white-space: pre;background-color: #D2EACE;">            || this.board.WinningRows().Any(row =&gt; IsRowWon(row));</div>
+<div style="white-space: pre;background-color: #D2EACE;">            bool isWon = false;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            foreach (int[] row in this.board.WinningRows())</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                if (IsRowWon(row, ref winner))</div>
+<div style="white-space: pre;background-color: #EEF4ED;">                {</div>
+<div style="white-space: pre;background-color: #D2EACE;">                    isWon = true;</div>
+<div style="white-space: pre;background-color: #D2EACE;">                    break;</div>
+<div style="white-space: pre;background-color: #EEF4ED;">                }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">            }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">            return isWon || this.board.IsFull();</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
-<div style="white-space: pre;background-color: #EEF4ED;">        private bool IsRowWon(int[] row)</div>
+<div style="white-space: pre;background-color: #EEF4ED;">        private bool IsRowWon(int[] row, ref PlayerSign winner)</div>
 <div style="white-space: pre;background-color: #EEF4ED;">        {</div>
 <div style="white-space: pre;background-color: #D2EACE;">            bool rowIsEqual = false;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
@@ -61,8 +74,11 @@
 <div style="white-space: pre;background-color: #D2EACE;">                    if (!this.board.GetBoard().ElementAt(row[0]).Sign.Equals(this.board.GetBoard().ElementAt(squarePos).Sign))</div>
 <div style="white-space: pre;background-color: #EEF4ED;">                    {</div>
 <div style="white-space: pre;background-color: #D2EACE;">                        rowIsEqual = false;</div>
+<div style="white-space: pre;background-color: #D2EACE;">                        winner = PlayerSign.None;</div>
 <div style="white-space: pre;background-color: #D2EACE;">                        break;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">                    }</div>
+<div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
+<div style="white-space: pre;background-color: #D2EACE;">                    winner = this.board.GetBoard().ElementAt(row[0]).Sign;</div>
 <div style="white-space: pre;background-color: #EEF4ED;">                }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">            }</div>
 <div style="white-space: pre;background-color: #EEF4ED;">&nbsp;</div>
