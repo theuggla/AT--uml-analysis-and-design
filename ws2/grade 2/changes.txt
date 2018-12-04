@@ -1,6 +1,0 @@
-
-* I renamed the command classes with the suffix -command to make them into nouns.
-
-* I clarified the structure of the code by breaking it out into smaller, private methods, instead of having to add unneccessary commentary to explain it.
-
-* I re-did the class diagram to reflect the changes, as well as spacing it out more to make the division into packages more clear.
