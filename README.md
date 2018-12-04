@@ -1,2 +1,2 @@
-# tic-tac-toe-tdd-exercise
-A small program to exercise TDD.
+# Adventures in C# and TDD
+A small program written in C# to exercise TDD.
