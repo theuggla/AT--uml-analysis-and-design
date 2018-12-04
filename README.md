@@ -1,1 +1,2 @@
-exercises for object-oriented analysis and design with UML
+# Andventures in UML
+Excercises for object-oriented analysis and design with UML.
