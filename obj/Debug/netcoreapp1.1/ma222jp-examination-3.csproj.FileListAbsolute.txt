@@ -1,0 +1,8 @@
+/media/molly/DATA/code/1dv024/exams/ma222jp-examination-3/bin/Debug/netcoreapp1.1/ma222jp-examination-3.deps.json
+/media/molly/DATA/code/1dv024/exams/ma222jp-examination-3/bin/Debug/netcoreapp1.1/ma222jp-examination-3.runtimeconfig.json
+/media/molly/DATA/code/1dv024/exams/ma222jp-examination-3/bin/Debug/netcoreapp1.1/ma222jp-examination-3.runtimeconfig.dev.json
+/media/molly/DATA/code/1dv024/exams/ma222jp-examination-3/bin/Debug/netcoreapp1.1/ma222jp-examination-3.dll
+/media/molly/DATA/code/1dv024/exams/ma222jp-examination-3/bin/Debug/netcoreapp1.1/ma222jp-examination-3.pdb
+/media/molly/DATA/code/1dv024/exams/ma222jp-examination-3/obj/Debug/netcoreapp1.1/ma222jp-examination-3.AssemblyInfo.cs
+/media/molly/DATA/code/1dv024/exams/ma222jp-examination-3/obj/Debug/netcoreapp1.1/ma222jp-examination-3.dll
+/media/molly/DATA/code/1dv024/exams/ma222jp-examination-3/obj/Debug/netcoreapp1.1/ma222jp-examination-3.pdb
