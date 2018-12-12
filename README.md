@@ -1,6 +1,6 @@
 # Adventures in C#
 
-Small C# excercises on different pranches concerning object oriented patterns, UML and patterns and TDD.
+Small C# excercises on different branches concerning object oriented patterns, UML and patterns and TDD.
 
 **analysis-and-design-patterns:** Excercises for object-oriented analysis and design with UML, and some programming patterns written in C#.
 
