@@ -2,6 +2,8 @@
 
 Small C# excercises on different branches concerning object oriented patterns, UML and patterns and TDD.
 
+### Branches
+
 **analysis-and-design-patterns:** Excercises for object-oriented analysis and design with UML, and some programming patterns written in C#.
 
 **tdd-tic-tac-toe:** A small tic tac toe program written to exercise TDD.
